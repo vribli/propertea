@@ -18,5 +18,7 @@ Our project consists of these sub-applications:
 ~~Other groups coding this project, go away please~~. :unamused::unamused:
 
 _Team NACHOS_ :taco: :taco:
+
 Johnson, Vincent, Tanay, Alice, Josephine, Raymond
+
 👩🏻‍💻👩🏻‍💻👨🏻‍💻👨🏻‍💻👨🏽‍💻👨🏻‍💻
