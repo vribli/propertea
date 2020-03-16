@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -6,11 +7,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/compiled.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         html,body{
             height: 100%;
@@ -21,7 +18,6 @@
             width: 100%;
         }
          tr, td {
-            height:100%;
             vertical-align: top;
             pad:5px;
         }
@@ -32,26 +28,19 @@
             text-align: center;
             vertical-align: middle;
         }
+        .checked {
+          color: orange;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-    <div class="view overlay zoom">
-        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(131).jpg" class="img-fluid " alt="smaple image">
-        <div class="mask flex-center">
-            <p class="white-text">Zoom effect</p>
-        </div>
-    </div>
-    <div class="view overlay">
-        <img src="https://mdbootstrap.com/img/Photos/Others/forest-sm.jpg" class="img-fluid " alt="smaple image">
-        <div class="mask flex-center rgba-green-slight">
-            <p class="white-text">Super light overlay</p>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" >
         <a class="navbar-brand mr-sm-6" href="/">
             <img src="{% static "logo.png" %}" height=30px />
             <a class="navbar-brand" href="/">Propertea </a>
@@ -110,41 +99,54 @@
                     <li class="nav-item">
                         <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
                     </li>
-
             </form>
-
             </ul>
-
         </div>
-
-
     </nav>
 
     <nav class="navbar navbar-light bg-light fixed-bottom">
         <a href="/"></a>
         <a>© 2020 Propertea</a>
     </nav>
-    <table>
+
+    <table class="">
         <tr>
             <td width = 50%>
-                <div class="d-flex flex-column">
-                    {% for r in res %}
-                    <div class="p-2">
-                        <h3> {{ r.BUILDING }} ☆</h3>
+            <div class="overflow-auto">
+            <table class="table table-striped">
+              <tbody>
+              {% for r in res %}
+                  <tr>
+                      <td>
+                        <h3> {{ r.BUILDING }} <span class="fa fa-star btn btn btn-link checked "></span> </h3>
                         <a> {{r.ADDRESS}} </a>
-                        <br/><br/>
-                    </div>
-                    {% endfor %}
-                </div>
+                      </td>
+                    <td>
+                        <a href="http://google.com/search?q={{ r.BUILDING }}" class="btn btn-secondary btn-lg active btn btn-info" role="button" aria-pressed="true">Spill the Tea</a>
+                    </td>
+                   </tr>
+
+              {% endfor %}
+
+              </tbody>
+            </table>
+            </div>
             </td>
-            <td width = 50%>
+            <td width = 50% class="border">
                 <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{res.0.LATITUDE}},{{res.0.LONGITUDE}}!colour:red&popupWidth=200" height=100% width=100% scrolling="no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
             </td>
         </tr>
     </table>
-
-
-
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          <br/><br/><br/><br/><br/><br/>
+      </ul>
+    </nav>
 
 
 
