@@ -13,3 +13,4 @@ def index(request):
         return render(request, "search/index.html", context)
     except KeyError:
         return HttpResponse("Access through home, please")
+
