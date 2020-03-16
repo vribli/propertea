@@ -32,7 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'search.apps.SearchConfig',
-    'home.apps.HomeConfig',
+    'results.apps.ResultsConfig',
+    'propertyinfo.apps.PropertyinfoConfig',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
