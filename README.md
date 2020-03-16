@@ -15,7 +15,6 @@ Our project consists of these sub-applications:
 * `PropertyInformation`
 * `LoginManagement`
 
-hihi
 
 ~~Other groups coding this project, go away please~~. :unamused::unamused:
 
