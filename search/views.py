@@ -4,3 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     return render(request, "search/index.html")
+
+def bydistrict(request):
+    return render(request, "search/bydistrict.html")
