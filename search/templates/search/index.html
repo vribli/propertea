@@ -34,15 +34,15 @@
         }
         .fixed_header{
             width: 100%;
-            table-layout: fixed;
+            table-layout: auto;
             border-collapse: collapse;
         }
 
         .fixed_header tbody{
-          display: inherit;
+          display: block;
           width: 100%;
           overflow: auto;
-          height: 100%;
+          height: 700%;
         }
 
 
@@ -140,7 +140,7 @@
                   {% for r in res %}
                       <tr>
                           <td>
-                            <h3> {{ r.BUILDING }} <span class="fa fa-star btn btn btn-link checked "></span> </h3>
+                            <h3> {{ r.BUILDING }} <span class="fa fa-star btn btn btn-link "></span> </h3>
                             <a> {{r.ADDRESS}} </a>
                           </td>
                           <td>
