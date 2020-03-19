@@ -25,11 +25,11 @@
     <nav class="navbar navbar-light fixed-top">
         <a></a>
         <form action="/users" class="form-inline">
-           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
         </form>
     </nav>
     <nav class="navbar navbar-light bg-light fixed-bottom">
-        <a href="bydistrict/">Select property from district instead</a>
+        <a href="/">Select property by search instead</a>
         <a>© 2020 Propertea</a>
     </nav>
 
@@ -39,14 +39,14 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12">
-                            <img src="{% static  "biglogo.png" %}" width=45% />
+                            <img src="{% static  "sgmap.png" %}" width=45% />
                         </div>
                         <div class="col-sm-3"></div>
                         <div class="col-sm-6">
                             <form action ="/search" method = "get">
                                 <div class="form-group">
                                     <label for="keyword"></label>
-                                    <input type="text" class="form-control" name = "keyword" id="keyword" placeholder="Enter property name, address or postal code">
+                                    <input type="text" class="form-control" name = "keyword" id="keyword" placeholder="Enter district name">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </form>

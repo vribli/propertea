@@ -4,13 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Propertea - {{ keyword }}</title>
+        <link rel="icon" href="{% static  "favicon.ico" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/compiled.min.css" rel="stylesheet">
     <style>
         html,body{
             height: 100%;
@@ -32,6 +29,20 @@
             text-align: center;
             vertical-align: middle;
         }
+        .fixed_header{
+            width: 100%;
+            table-layout: auto;
+            border-collapse: collapse;
+        }
+
+        .fixed_header tbody{
+          display: block;
+          width: 100%;
+          overflow: auto;
+          height: 700%;
+        }
+
+
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -39,113 +50,113 @@
 </head>
 
 <body>
-    <div class="view overlay zoom">
-        <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(131).jpg" class="img-fluid " alt="smaple image">
-        <div class="mask flex-center">
-            <p class="white-text">Zoom effect</p>
-        </div>
-    </div>
-    <div class="view overlay">
-        <img src="https://mdbootstrap.com/img/Photos/Others/forest-sm.jpg" class="img-fluid " alt="smaple image">
-        <div class="mask flex-center rgba-green-slight">
-            <p class="white-text">Super light overlay</p>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand mr-sm-6" href="/">
-            <img src="{% static "logo.png" %}" height=30px />
-            <a class="navbar-brand" href="/">Propertea </a>
-        </a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <form class="form-inline my-2 my-lg-0" action ="/search" method = "get">
-
-                    <li class="nav-item">
-                        <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id = "keyword" aria-label="Search" size=75%>
-
-                    </li>
-
-                    <li class="nav-item">
-                        <div id="navbarNavDropdown">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Sort by
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Most relevant</a>
-                                    <a class="dropdown-item" href="#">Lowest price</a>
-                                    <a class="dropdown-item" href="#">Smallest size</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div id="navbarNavDropdown">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Apply filter
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Public</a>
-                                    <a class="dropdown-item" href="#">Public-private hybrid</a>
-                                    <a class="dropdown-item" href="#">Private</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
-
-                    </li>
-            </ul>
-            </form>
-            <form action="/users">
-                <ul class="navbar-nav mr-auto" >
-                    <li class="nav-item">
-                        <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                    </li>
-
-            </form>
-
-            </ul>
-
-        </div>
 
 
-    </nav>
+
+
 
     <nav class="navbar navbar-light bg-light fixed-bottom">
         <a href="/"></a>
         <a>© 2020 Propertea</a>
     </nav>
-    <table>
-        <tr>
-            <td width = 50%>
-                <div class="d-flex flex-column">
-                    {% for r in res %}
-                    <div class="p-2">
-                        <h3> {{ r.BUILDING }} ☆</h3>
-                        <a> {{r.ADDRESS}} </a>
-                        <br/><br/>
-                    </div>
-                    {% endfor %}
+
+
+    <table class="fixed_header" >
+    <thead>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand mr-sm-6" href="/">
+                <img src="{% static "logo.png" %}" height=30px />
+                <a class="navbar-brand" href="/">Propertea </a>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <form class="form-inline my-2 my-lg-0" action ="/search" method = "get">
+
+                        <li class="nav-item">
+                            <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id = "keyword" aria-label="Search" size=75%>
+
+                        </li>
+
+                        <li class="nav-item">
+                            <div id="navbarNavDropdown">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Sort by
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Most relevant</a>
+                                        <a class="dropdown-item" href="#">Lowest price</a>
+                                        <a class="dropdown-item" href="#">Smallest size</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div id="navbarNavDropdown">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Apply filter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Public</a>
+                                        <a class="dropdown-item" href="#">Public-private hybrid</a>
+                                        <a class="dropdown-item" href="#">Private</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
+
+                        </li>
+                </ul>
+                </form>
+                <form action="/users" >
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
+                        </li>
+                </form>
+                </ul>
+            </div>
+        </nav>
+    </thead>
+    <div class="table-responsive-sm">
+        <tbody class="table table-hover" >
+            <tr>
+                <td width = 50%>
+                <div>
+                <table class="table table-striped">
+                  <tbody>
+                  {% for r in res %}
+                      <tr>
+                          <td>
+                            <h3> {{ r.BUILDING }} <span class="fa fa-star btn btn btn-link "></span> </h3>
+                            <a> {{r.ADDRESS}} </a>
+                          </td>
+                          <td>
+                            <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}" class="btn btn-secondary btn-lg active btn btn-info" role="button" aria-pressed="true">Spill the Tea</a>
+                          </td>
+                       </tr>
+                  {% endfor %}
+
+                  </tbody>
+                </table>
                 </div>
-            </td>
-            <td width = 50%>
-                <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{res.0.LATITUDE}},{{res.0.LONGITUDE}}!colour:red&popupWidth=200" height=100% width=100% scrolling="no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-            </td>
-        </tr>
+                </td>
+                <td width = 50% class="border">
+                    <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{res.0.LATITUDE}},{{res.0.LONGITUDE}}!colour:red&popupWidth=200" height=100% width=100% scrolling="no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                </td>
+            </tr>
+        </tbody>
+    </div>
     </table>
-
-
-
-
 
 
 </body>
