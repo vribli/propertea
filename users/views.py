@@ -16,9 +16,11 @@ def index(request):
 
 
 def login_view(request):
+    print(request)
     username = request.POST["username"]
     password = request.POST["password"]
     user = authenticate(request, username=username, password=password)
+    print(request.user.is_authenticated)
     if user is not None:
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
