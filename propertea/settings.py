@@ -25,7 +25,7 @@ SECRET_KEY = '%b5g9g9l)k@_g)6lj#-19*eh9+-4ja4dy^!ceks+vxo=%m@tuf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vribli.pythonanywhere.com']
 
 
 # Application definition
