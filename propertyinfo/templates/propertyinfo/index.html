@@ -48,11 +48,16 @@
 </head>
 
 <body>
-<a>
-    {{ name }}
-    {{ postal }}
 
-</a>
+<table>
+{% for name, count in info_dict.items %}
+<tr>
+<td>{{ name }}</td> 
+<td>{{ count }}</td>
+</tr>
+{% endfor %}
+    
+</table>
 
 </body>
 
