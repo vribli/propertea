@@ -117,12 +117,17 @@
                         </li>
                 </ul>
                 </form>
-                <form action="/users" >
+                {% if user.is_authenticated %}
+                    <a>Welcome, {{ user.username }}</a>
+                {% else %}
+               <form action="/users" >
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
                         </li>
                 </form>
+                {% endif %}
+
                 </ul>
             </div>
         </nav>
