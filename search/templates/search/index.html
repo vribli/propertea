@@ -4,13 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Propertea - {{ keyword }}</title>
+        <link rel="icon" href="{% static  "favicon.ico" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/compiled.min.css" rel="stylesheet">
     <style>
         html,body{
             height: 100%;
@@ -144,7 +141,7 @@
                             <a> {{r.ADDRESS}} </a>
                           </td>
                           <td>
-                            <a href="http://google.com/search?q={{ r.BUILDING }}" class="btn btn-secondary btn-lg active btn btn-info" role="button" aria-pressed="true">Spill the Tea</a>
+                            <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}" class="btn btn-secondary btn-lg active btn btn-info" role="button" aria-pressed="true">Spill the Tea</a>
                           </td>
                        </tr>
                   {% endfor %}
