@@ -13,7 +13,7 @@ Our project consists of these sub-applications:
 * `Search`
 * `Listing`
 * `PropertyInformation`
-* `LoginManagement`
+* `Users`
 
 
 ~~Other groups coding this project, go away please~~. :unamused::unamused:
