@@ -23,14 +23,14 @@
           display: block;
           -ms-flex-align: center;
           align-items: center;
-          padding-top: 100px;
+          padding-top: 20px;
           padding-bottom: 40px;
           background-color: #f5f5f5;
         }
 
         .form-signin {
           width: 100%;
-          max-width: 500px;
+          max-width: 70%;
           padding: 15px;
           margin: auto;
         }
@@ -61,6 +61,19 @@
             margin: auto;
             margin-left: -40px;
         }
+        .fake-ul {
+            display: block;
+            padding-left: 15px;
+            list-style-type: disc;
+        }
+        .fake-li {
+            display: list-item;
+        }
+        #id_username, #id_email, #id_password1, #id_password2, #id_first_name, #id_last_name {
+            width: 350px;
+            border: 2px grey;
+            padding: 5px;
+        }
     </style>
     <!-- Favicons need to make our own yeah-->
     <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -72,13 +85,13 @@
     <meta name="theme-color" content="#563d7c">
 </head>
 <body class="text-center">
-    <form class="form-signin" action="{% url 'login' %}" method="post">
+    <form class="form-signin" method="post">
         {% csrf_token %}
         <img src="{% static "logo.png" %}" height=72px />
         <br>
         <br>
-        <h1>Propertea Log-in</h1>
-        <medium style="color: grey"> Log in to see your favourite <i>propertea-s</i>!</medium>
+        <h1>Create Account</h1>
+        <medium style="color: grey"> We're excited to have you here! Sign up to be able to save your favourite <i>propertea</i>-s!</medium>
         <br>
         {% if messages %}
             <br>
@@ -88,7 +101,7 @@
                         {% for message in messages %}
                             <div class="alert alert-{{ message.tags }} alert-dismissible center-block" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> {{ message }}
+                                <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> Please review and meet requirements stated.
                             </div>
                         {% endfor %}
                     {% endif %}
@@ -96,19 +109,46 @@
             </div>
         {% endif %}
         <br>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" class="form-control" placeholder="Username" required="" autofocus="" width="200" name="username">
-        <br>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" width="200" name="password">
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+        <div class = "container">
+        {% for field in form %}
+            <p>
+                <div class="row">
+                <div class="col col-lg-3" align = "right">
+                {{ field.label_tag }}
+                </div>
+                <div class = "col-lg-auto" >
+                {{ field }}
+                </div>
+                {% if field.help_text %}
+                    <div class = "row-col-lg-auto" align = "left">
+                    <small style="color: grey">{{ field.help_text }}</small>
+                    </div>
+                {% endif %}
+                </div>
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </p>
+        {% endfor %}
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+{#        <label for="inputEmail" class="sr-only">Email address</label>#}
+{#        <input type="email" class="form-control" placeholder="Email" required="" autofocus="" width="200" name="email">#}
+{#        <br>#}
+{#        <label for="inputFirstName" class="sr-only">First Name</label>#}
+{#        <input type="text" class="form-control" placeholder="First Name" required="" autofocus="" width="200" name="firstname">#}
+{#        <br>#}
+{#        <label for="inputLastName" class="sr-only">Last Name</label>#}
+{#        <input type="text" class="form-control" placeholder="Last Name" required="" autofocus="" width="200" name="lastname">#}
+{#        <br>#}
+{#        <label for="inputUsername" class="sr-only">Username</label>#}
+{#        <input type="text" class="form-control" placeholder="Username" required="" autofocus="" width="200" name="username">#}
+{#        <br>#}
+{#        <label for="inputPassword" class="sr-only">Password</label>#}
+{#        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" width="200" name="password">#}
+{#        <br>#}
         <br>
-        <button class="btn btn-lg btn-secondary btn-block" onclick="location.href='{% url 'createaccount' %}'">Create Account</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
         <p class="mt-5 mb-3 text-muted">© Team NACHOS 2020</p>
     </form>
 </body>
