@@ -133,3 +133,5 @@ STATICFILES_DIRS = [
 MESSAGE_TAGS = {
     messages.ERROR: 'alert alert-danger',
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

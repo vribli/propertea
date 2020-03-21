@@ -85,55 +85,18 @@
     <meta name="theme-color" content="#563d7c">
 </head>
 <body class="text-center">
-    <form class="form-signin" method="post">
-        {% csrf_token %}
-        <img src="{% static "logo.png" %}" height=72px />
-        <br>
-        <br>
-        <h1>Create Account</h1>
-        <medium style="color: grey"> We're excited to have you here! Sign up to be able to save your favourite <i>propertea</i>-s!</medium>
-        <br>
-        {% if messages %}
-            <br>
-            <div>
-                <ul class="messages">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }} alert-dismissible center-block" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> Please review and meet requirements stated.
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                </ul>
-            </div>
-        {% endif %}
-        <br>
-        <div class = "container">
-        {% for field in form %}
-            <p>
-                <div class="row">
-                <div class="col col-lg-3" align = "right">
-                {{ field.label_tag }}
-                </div>
-                <div class = "col-lg-auto" >
-                {{ field }}
-                </div>
-                {% if field.help_text %}
-                    <div class = "row-col-lg-auto" align = "left">
-                    <small style="color: grey">{{ field.help_text }}</small>
-                    </div>
-                {% endif %}
-                </div>
-                {% for error in field.errors %}
-                    <p style="color: red">{{ error }}</p>
-                {% endfor %}
-            </p>
-        {% endfor %}
-        </div>
-        <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
-        <p class="mt-5 mb-3 text-muted">© Team NACHOS 2020</p>
-    </form>
+    <img src="{% static "logo.png" %}" height=72px />
+    <br>
+    <br>
+    <h1>Create Account</h1>
+    <medium style="color: grey"> We're excited to have you here! Sign up to be able to save your favourite <i>propertea</i>-s!</medium>
+    <br>
+    <br>
+    <br>
+    <medium> We've sent an <b>activation email</b> to your email address.</medium>
+    <h6> Please activate your account to continue!</h6>
+    <medium style="color: grey"> <br> Remember to check your spam folder in case :)</medium>
+    <br>
+    <p class="mt-5 mb-3 text-muted">© Team NACHOS 2020</p>
 </body>
 </html>
