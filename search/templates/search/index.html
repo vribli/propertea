@@ -111,8 +111,12 @@
                         <form class="form-inline my-2 my-lg-0" action ="/search" method = "get">
 
                             <li class="nav-item">
-                                <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id = "keyword" aria-label="Search" size=75%>
-
+                                <div>
+                                    <label for="keyword"></label>
+                                    <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id="keyword" aria-label="Search" size=75%>
+                                    <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
+                                    <input type="hidden" name="filterby" id="filterby" value="nil">
+                                </div>
                             </li>
 
                             <li class="nav-item">
@@ -164,7 +168,7 @@
             <div class="Wrapper">
                 <div class="RightContent">
                     <div>
-                        <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{res.0.LATITUDE}},{{res.0.LONGITUDE}}!colour:red&popupWidth=200" height=100% width=100% scrolling="no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                        <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{res.0.LATITUDE}},{{res.0.LONGITUDE}}!colour:red&popupWidth=200" height=690px width=100% scrolling="no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
                     </div>
                 </div>
                 <div class="LeftContent">
