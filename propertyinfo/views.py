@@ -2,7 +2,6 @@ from django.shortcuts import render
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.offline import plot
-import os
 
 # Create your views here.
 def index(request):
@@ -11,7 +10,7 @@ def index(request):
         postal = request.GET['postal']
         
         #add in colab code here, uncomment plot afterwards
-        MRT_DataFrame = pd.DataFrame(pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + "\MRT_Passenger_Volume.csv"))
+        MRT_DataFrame = pd.DataFrame(pd.read_csv("propertea/static/MRT_Passenger_Volume.csv"))
         Final_Data = MRT_DataFrame[MRT_DataFrame['PT_CODE']=='BP1'][MRT_DataFrame['DAY_TYPE']=='WEEKDAY'].sort_values('TIME_PER_HOUR')
         time = [24 if x == 0 else x for x in Final_Data['TIME_PER_HOUR'].tolist()]
 
