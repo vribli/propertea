@@ -116,29 +116,29 @@
                             </li>
 
                             <li class="nav-item">
-                                <div id="navbarNavDropdown">
+                                <div id="SortByDropdown">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Sort by
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Most relevant</a>
-                                            <a class="dropdown-item" href="#">Lowest price</a>
-                                            <a class="dropdown-item" href="#">Smallest size</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nil">Most relevant</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=lowestprice&filterby=nil">Lowest price</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=smallestsize&filterby=nil">Smallest size</a>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <div id="navbarNavDropdown">
+                                <div id="ApplyFilterDropdown">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Apply filter
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Public</a>
-                                            <a class="dropdown-item" href="#">Public-private hybrid</a>
-                                            <a class="dropdown-item" href="#">Private</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=public">Public</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=publicprivate">Public-private hybrid</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=private">Private</a>
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@
                           <tr>
                               <td>
                                 <h3> {{ r.BUILDING }} <span class="fa fa-star btn btn btn-link "></span> </h3>
-                                <a> {{r.ADDRESS}} </a>
+                                <a> {{r.ADDRESS}} </a><a> {{r.POSTAL}} </a>
                               </td>
                               <td>
                                 <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}" class="btn btn-secondary btn-lg active btn btn-info" role="button" aria-pressed="true">Spill the Tea</a>
@@ -191,5 +191,30 @@
                 </nav>
         </div>
     </div>
+
+    <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('clicked')">
+
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+    </script>
+
 
 </body>
