@@ -12,7 +12,11 @@ def index(request):
 
         res = requests.get("https://developers.onemap.sg/commonapi/search?returnGeom=Y&getAddrDetails=Y&pageNum=1", params = {'searchVal' : keyword}).json()
 
-        restest = [i for i in res.get('results') if not (i['POSTAL'] == 'NIL')]
+        resfiltered = [i for i in res.get('results') if not (i['POSTAL'] == 'NIL')]
+
+        for i in resfiltered:
+            if i['BUILDING'] == 'NIL':
+                i['BUILDING'] = i['ADDRESS']
 
         if sortby == "mostrelevant":
             pass
@@ -33,7 +37,7 @@ def index(request):
 
         context = {
             'keyword' : keyword,
-            'res' : restest
+            'res' : resfiltered
         }
         return render(request, "search/index.html", context)
     except KeyError:
