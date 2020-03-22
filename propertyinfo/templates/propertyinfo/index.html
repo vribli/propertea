@@ -104,7 +104,7 @@
 <script>
     $(document).ready(function(){
         squarefoot.load("sqftmain", {
-            task: "project", name: "{{ name }}", type: "r", subtype: "abc", summary: "1", pricechart: "1",
+            task: "project", name: " {{ name }}", type: "r", subtype: "abc", summary: "1", pricechart: "1",
             rangechart: "1", map: "1", amenities: "1,1,500,ckl"
             //transaction: "1", rental: "1",
         });
@@ -113,8 +113,8 @@
 </script>
 <iframe id="sqftmain" style="background-color:#fcfcfc" frameborder="0" width="100%"></iframe>
 
-<div class="col-md-12">{{plot|safe}}</div>
-
+<div class="col-md-12">{{mrt_lrt_plot|safe}}</div>
+<div class="col-md-12">{{bus_plot|safe}}</div>
 
 </body>
 
