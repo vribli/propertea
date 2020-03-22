@@ -146,9 +146,8 @@
                                             Apply filter
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=public">Public</a>
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=publicprivate">Public-private hybrid</a>
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=private">Private</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nonlanded">Non-Landed Residential</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=landed">Landed Residential</a>
                                         </div>
                                     </div>
                                 </div>
@@ -186,6 +185,7 @@
                                 <a> {{r.ADDRESS}} </a>
                                   <br><a> S({{r.POSTAL}}) </a>
                                   <br><a> Block {{r.BLK_NO}}</a>
+                                  <br><a> Property Type: {{r.TYPE}}</a>
                               </td>
                               <td>
                                 <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}" class="btn btn-secondary btn-lg active btn btn-info" role="button" aria-pressed="true">Spill the Tea</a>
