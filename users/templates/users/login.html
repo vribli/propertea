@@ -109,6 +109,10 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <br>
         <button class="btn btn-lg btn-secondary btn-block" onclick="location.href='{% url 'createaccount' %}'">Create Account</button>
+        <br>
+        <p>
+            <a href="{% url 'password_reset' %}">Forgot your password?</a>
+        </p>
         <p class="mt-5 mb-3 text-muted">© Team NACHOS 2020</p>
     </form>
 </body>
