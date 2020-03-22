@@ -37,7 +37,7 @@ def index(request):
         fig = go.Figure()
         fig.layout = go.Layout(
             title = go.layout.Title(
-                text = "{}".format(MRT_LRT_Station.sort_values(by='Distance').iloc[0]['Name']),        
+                text = "[Nearest MRT Station] {}".format(MRT_LRT_Station.sort_values(by='Distance').iloc[0]['Name']),        
             ),
 
             xaxis = go.layout.XAxis(
@@ -57,13 +57,13 @@ def index(request):
             x = MRT_LRT_Time,
             y = MRT_LRT_Plotting_Data['TOTAL_TAP_IN_VOLUME'].tolist(),
             name = 'Total Tap In Volume',
-            marker_color = 'red',)
+            marker_color = '#4287f5',)
         )
         fig.add_trace(go.Bar(
             x = MRT_LRT_Time,
             y = MRT_LRT_Plotting_Data['TOTAL_TAP_OUT_VOLUME'].tolist(),
             name = 'Total Tap Out Volume',
-            marker_color = 'orange')
+            marker_color = 'LightSkyBlue')
         )
         fig.update_layout(barmode='group', xaxis_tickangle=-45)
         mrt_lrt_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
@@ -88,7 +88,7 @@ def index(request):
         fig = go.Figure()
         fig.layout = go.Layout(
             title=go.layout.Title(
-                text = "{}  {}".format(Bus_Stop_Name.upper(), Bus_Stop_Number),
+                text = "[Nearest Bus Stop] {}  {}".format(Bus_Stop_Name.upper(), Bus_Stop_Number),
                 yanchor = 'bottom'
             ),
 
@@ -110,14 +110,14 @@ def index(request):
             x = Bus_Time,
             y = Bus_Stop_Data['TOTAL_TAP_IN_VOLUME'].tolist(),
             name = 'Total Tap In Volume',
-            marker_color = 'red',)
+            marker_color = '#4287f5',)
         )
 
         fig.add_trace(go.Bar(
             x = Bus_Time,
             y = Bus_Stop_Data['TOTAL_TAP_OUT_VOLUME'].tolist(),
             name = 'Total Tap Out Volume',
-            marker_color = 'orange')
+            marker_color = 'LightSkyBlue')
         )
 
         fig.update_layout(barmode = 'group', xaxis_tickangle = -45)
