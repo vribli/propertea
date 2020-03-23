@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import requests
+from bs4 import BeautifulSoup
 
 # Create your views here.
 def index(request):
-    try:
+    if True:
         keyword = request.GET['keyword']
-        sortby = request.GET['sortby']
+        #sortby = request.GET['sortby']
         filterby = request.GET['filterby']
 
 
@@ -17,29 +18,39 @@ def index(request):
         for i in resfiltered:
             if i['BUILDING'] == 'NIL':
                 i['BUILDING'] = i['ADDRESS']
+            # Python program to scrape website
+            # and save quotes from website
+            name = i['BUILDING'].replace(" ", "-")
+            URL = "https://www.squarefoot.com.sg/trends-and-analysis/residential?p={}".format(name)
+            URLL = "https://www.squarefoot.com.sg/trends-and-analysis/landed?p={}".format(name)
 
-        if sortby == "mostrelevant":
-            pass
-        elif sortby == "lowestprice":
-            pass
-        elif sortby == "smallestsize":
-            pass
+            try:
+                r = requests.get(URL)
+                info_raw = BeautifulSoup(r.content).find('table', {"class": "minimalist", "width": "95%"}).text.replace("\n\n", "").replace("#", "").replace("*", "").split("\n")
+                ptype = "Non-Landed Residential"
+            except:
+                try:
+                    r = requests.get(URLL)
+                    info_raw = BeautifulSoup(r.content).find('table',{"class": "minimalist", "width": "95%"}).text.replace("\n\n", "").replace("#", "").replace("*", "").split("\n")
+                    ptype = "Landed Residential"
+                except:
+                    ptype = None
+
+            i['TYPE'] = ptype
 
 
-        if filterby == "public":
-            pass
-        elif filterby == "publicprivate":
-            pass
-        elif filterby == "private":
-            pass
+        if filterby == "nonlanded":
+            resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Non-Landed Residential")]
+        elif filterby == "landed":
+            resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Landed Residential")]
         else:
-            pass
+            resfiltered2 = [i for i in resfiltered if not (i['TYPE'] == None)]
 
         context = {
             'keyword' : keyword,
-            'res' : resfiltered
+            'res' : resfiltered2
         }
         return render(request, "search/index.html", context)
-    except KeyError:
-        return HttpResponse("Access through home, please")
+    #except KeyError:
+    #    return HttpResponse("Access through home, please")
 
