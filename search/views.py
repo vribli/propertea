@@ -21,7 +21,6 @@ def index(request):
             # Python program to scrape website
             # and save quotes from website
             name = i['BUILDING'].replace(" ", "-")
-            # URL = "https://www.squarefoot.com.sg/trends-and-analysis/residential?p=the-prominence"
             URL = "https://www.squarefoot.com.sg/trends-and-analysis/residential?p={}".format(name)
             URLL = "https://www.squarefoot.com.sg/trends-and-analysis/landed?p={}".format(name)
 
@@ -38,13 +37,6 @@ def index(request):
                     ptype = None
 
             i['TYPE'] = ptype
-
-        #if sortby == "mostrelevant":
-        #    pass
-        #elif sortby == "lowestprice":
-        #    pass
-        #elif sortby == "smallestsize":
-        #    pass
 
 
         if filterby == "nonlanded":
