@@ -132,6 +132,7 @@
                                     <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id="keyword" aria-label="Search" size=75%>
                                     <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
                                     <input type="hidden" name="filterby" id="filterby" value="nil">
+                                    <input type="hidden" name="district" id="district" value="nil">
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -141,9 +142,9 @@
                                             Apply filter
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nil">All Residences</a>
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nonlanded">Non-Landed Residential</a>
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=landed">Landed Residential</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nil&district=nil">All Residences</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nonlanded&district=nil">Non-Landed Residential</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=landed&district=nil">Landed Residential</a>
                                         </div>
                                     </div>
                                 </div>
@@ -178,12 +179,12 @@
                       {% for r in res %}
                           <tr>
                               <td>
-                                <h3> {{ r.BUILDING }} <span class="fa fa-star btn btn btn-link "></span> </h3>
+                                <h3> {{ r.BUILDING }} </h3>
                                 <a> {{r.ADDRESS}} </a>
                                   <br><a> Property Type: {{r.TYPE}}</a>
                               </td>
                               <td class ="right">
-                                <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}" class="btn btn-secondary btn-lg active btn btn-info" role="button" aria-pressed="true">Spill the Tea</a>
+                                <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}" class="btn btn-secondary btn-lg active btn btn-info btn-rounded" role="button" aria-pressed="true">Spill the Tea</a>
                               </td>
                            </tr>
                       {% endfor %}
