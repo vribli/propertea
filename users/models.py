@@ -18,3 +18,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class FavouriteProperty(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    name = models.TextField(max_length=100)
