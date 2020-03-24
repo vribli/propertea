@@ -7,7 +7,6 @@
     <title>Propertea - {{ keyword }}</title>
         <link rel="icon" href="{% static  "favicon.ico" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
     <style>
         html, body {
@@ -178,7 +177,15 @@
                       {% for r in res %}
                           <tr>
                               <td>
-                                <h3> {{ r.BUILDING }} <span class="fa fa-star btn btn btn-link "></span> </h3>
+                                  <form class= "form-inline" action='/search/favourites' method = post>
+                                      {% csrf_token %}
+                                      <input type="hidden" name="propertyname" id="propertyname" value="{{ r.BUILDING }}"/>
+                                      <h3> {{ r.BUILDING }} </h3>
+                                      <button class="btn" type="submit">
+                                          <a style="color: orange; font-size: large">★</a>
+                                      </button>
+                                      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                  </form>
                                 <a> {{r.ADDRESS}} </a>
                                   <br><a> Property Type: {{r.TYPE}}</a>
                               </td>

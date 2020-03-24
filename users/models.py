@@ -21,5 +21,5 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class FavouriteProperty(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.TextField(max_length=100)
