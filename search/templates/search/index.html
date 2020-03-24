@@ -8,40 +8,99 @@
         <link rel="icon" href="{% static  "favicon.ico" %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+    <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
     <style>
-        html,body{
+        html, body {
             height: 100%;
             width: 100%;
+            font-family: 'Karla', sans-serif;
+        }
+
+        h3 {
+            font-weight: 600;
         }
         table {
-            height: 90%;
+            height: 0%;
             width: 100%;
         }
          tr, td {
-            height:100%;
             vertical-align: top;
             pad:5px;
         }
 
-        .center {
+        *
+        {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, .Container
+        {
             height: 100%;
+        }
+
+        .Container:before
+        {
+            content: '';
+            height: 100%;
+            float: left;
+        }
+
+        .Header
+        {
+            margin-bottom: 10px;
+        }
+        .Footer
+        {
+            margin-top: 10px;
+        }
+        .Content
+        {
+            position: relative;
+            z-index: 1;
+        }
+            .Content:after
+            {
+                content: '';
+                clear: both;
+                display: block;
+            }
+
+        .Wrapper
+        {
+            position: absolute;
             width: 100%;
+            height: 100%;
+        }
+            .Wrapper > div
+            {
+                height: 100%;
+            }
+
+        .LeftContent
+        {
+            overflow: auto;
+        }
+
+        .RightContent
+        {
+            float: right;
+            margin-left: 10px;
+            width: 50%;
+            height: 1000%;
+        }
+        .right {
+            text-align: right;
+            vertical-align: center;
+        }
+
+        .center {
+            width: 100%;
+            height: 100%;
             text-align: center;
-            vertical-align: middle;
-        }
-        .fixed_header{
-            width: 100%;
-            table-layout: auto;
-            border-collapse: collapse;
-        }
+            vertical-align: center;
 
-        .fixed_header tbody{
-          display: block;
-          width: 100%;
-          overflow: auto;
-          height: 700%;
         }
-
 
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -51,114 +110,102 @@
 
 <body>
 
+    <div class="Container">
+        <div class="Header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand mr-sm-6" href="/">
+                    <img src="{% static "logo.png" %}" height=30px />
+                    <a class="navbar-brand" href="/">Propertea </a>
+                </a>
 
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-
-
-    <nav class="navbar navbar-light bg-light fixed-bottom">
-        <a href="/"></a>
-        <a>© 2020 Propertea</a>
-    </nav>
-
-
-    <table class="fixed_header" >
-    <thead>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand mr-sm-6" href="/">
-                <img src="{% static "logo.png" %}" height=30px />
-                <a class="navbar-brand" href="/">Propertea </a>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <form class="form-inline my-2 my-lg-0" action ="/search" method = "get">
-
-                        <li class="nav-item">
-                            <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id = "keyword" aria-label="Search" size=75%>
-
-                        </li>
-
-                        <li class="nav-item">
-                            <div id="navbarNavDropdown">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Sort by
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Most relevant</a>
-                                        <a class="dropdown-item" href="#">Lowest price</a>
-                                        <a class="dropdown-item" href="#">Smallest size</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <div id="navbarNavDropdown">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Apply filter
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Public</a>
-                                        <a class="dropdown-item" href="#">Public-private hybrid</a>
-                                        <a class="dropdown-item" href="#">Private</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
-
-                        </li>
-                </ul>
-                </form>
-                <form action="/users" >
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                        </li>
-                </form>
-                </ul>
-            </div>
-        </nav>
-    </thead>
-    <div class="table-responsive-sm">
-        <tbody class="table table-hover" >
-            <tr>
-                <td width = 50%>
-                <div>
-                <table class="table table-striped">
-                  <tbody>
-                  {% for r in res %}
-                      <tr>
-                          <td>
-                            <h3> {{ r.BUILDING }} <span class="fa fa-star btn btn btn-link "></span> </h3>
-                            <a> {{r.ADDRESS}} </a>
-                          </td>
-                          <td>
-                            <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}" class="btn btn-secondary btn-lg active btn btn-info" role="button" aria-pressed="true">Spill the Tea</a>
-                          </td>
-                       </tr>
-                  {% endfor %}
+                        <form class="form-inline my-2 my-lg-0" action ="/search" method = "get">
 
-                  </tbody>
-                </table>
+                            <li class="nav-item">
+                                <div>
+                                    <label for="keyword"></label>
+                                    <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id="keyword" aria-label="Search" size=75%>
+                                    <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
+                                    <input type="hidden" name="filterby" id="filterby" value="nil">
+                                    <input type="hidden" name="district" id="district" value="nil">
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div id="ApplyFilterDropdown">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Apply filter
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nil&district=nil">All Residences</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nonlanded&district=nil">Non-Landed Residential</a>
+                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=landed&district=nil">Landed Residential</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
+
+                            </li>
+                    </ul>
+                    </form>
+                    <form action="/users" >
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
+                            </li>
+                    </form>
+                    </ul>
                 </div>
-                </td>
-                <td width = 50% class="border">
-                    <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{res.0.LATITUDE}},{{res.0.LONGITUDE}}!colour:red&popupWidth=200" height=100% width=100% scrolling="no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-                </td>
-            </tr>
-        </tbody>
+            </nav>
+        </div>
+        <div class="Content">
+            <div class="Wrapper">
+                <div class="RightContent">
+                    <div>
+                        <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{res.0.LATITUDE}},{{res.0.LONGITUDE}}!colour:red&popupWidth=200" height=690px width=100% scrolling="no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                    </div>
+                </div>
+                <div class="LeftContent">
+                {% if res %}
+                    <table class="table table-striped table table-hover">
+                      {% for r in res %}
+                          <tr>
+                              <td>
+                                <h3> {{ r.BUILDING }} </h3>
+                                <a> {{r.ADDRESS}} </a>
+                                  <br><a> Property Type: {{r.TYPE}}</a>
+                              </td>
+                              <td class ="right">
+                                <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}" class="btn btn-secondary btn-lg active btn btn-info btn-rounded" role="button" aria-pressed="true">Spill the Tea</a>
+                              </td>
+                           </tr>
+                      {% endfor %}
+                    </table>
+                {% else %}
+                    <div class = "center">
+                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    <h3>No search results :(</h3>
+                    <a>Please refine your search!</a>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="Footer">
+                <nav class="navbar navbar-light bg-light fixed-bottom">
+                    <a href="/"></a>
+                    <a>© 2020 Propertea</a>
+                </nav>
+        </div>
     </div>
-    </table>
 
 
 </body>
-
-</html>
