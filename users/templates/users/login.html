@@ -111,6 +111,7 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
+        <input type="hidden" name="next" value="{{ request.path }}">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <br>
         <button class="btn btn-lg btn-secondary btn-block" onclick="location.href='{% url 'createaccount' %}'">Create Account</button>

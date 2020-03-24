@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.defaultfilters import striptags
 from django.template.loader import render_to_string
@@ -16,9 +17,8 @@ from .forms import SignUpForm
 from .tokens import account_activation_token
 
 
+@login_required(login_url='/users/login')
 def index(request):
-    if not request.user.is_authenticated:
-        return render(request, "users/login.html", {"message": None})
     context = {
         "user": request.user
     }
@@ -26,21 +26,31 @@ def index(request):
 
 
 def login_view(request):
-    username = request.POST["username"]
-    password = request.POST["password"]
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+    if request.POST:
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            next_url = request.POST.get('next', '/')
+            if next_url != "/users/login":
+                return HttpResponseRedirect(next_url)
+            else:
+                context = {
+                    "user": request.user
+                }
+                return render(request, "users/user.html", context)
+        else:
+            messages.error(request, "Invalid Credentials")
+            return render(request, "users/login.html")
     else:
-        messages.error(request, "Invalid Credentials")
         return render(request, "users/login.html")
 
 
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged Out.")
-    return render(request, "users/login.html")
+    return HttpResponseRedirect("/users/login")
 
 
 def createaccount_view(request):
@@ -101,3 +111,8 @@ def activate(request, uidb64, token):
 
 def activation_sent_view(request):
     return render(request, 'users/activation_sent.html')
+
+
+def redirect_view(request):
+    response = redirect('/redirect-success/')
+    return response
