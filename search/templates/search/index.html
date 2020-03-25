@@ -129,7 +129,11 @@
                             <li class="nav-item">
                                 <div>
                                     <label for="keyword"></label>
-                                    <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id="keyword" aria-label="Search" size=75%>
+                                    {% if keyword == "nil" %}
+                                        <input class="form-control mr-sm-2" type="search" name = "keyword" id="keyword" aria-label="Search" size=75%>
+                                    {% else %}
+                                        <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id="keyword" aria-label="Search" size=75%>
+                                    {% endif %}
                                     <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
                                     <input type="hidden" name="filterby" id="filterby" value="nil">
                                     <input type="hidden" name="district" id="district" value="nil">
