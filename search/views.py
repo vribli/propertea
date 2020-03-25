@@ -1,11 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 import requests
 from bs4 import BeautifulSoup
 from pandas import *
 
 
 # Create your views here.
+from users.models import FavouriteProperty
+
+
 def index(request):
     if True:
         keyword = request.GET['keyword']
@@ -63,3 +67,19 @@ def index(request):
     #except KeyError:
     #    return HttpResponse("Access through home, please")
 
+
+@login_required(login_url="/users/login")
+def favourites_view(request):
+    if request.POST:
+        user = request.user
+        if user is not None:
+            propertyname=request.POST['propertyname']
+            new_favourite = FavouriteProperty.objects.create(name=propertyname, user=user)
+            new_favourite.save()
+            next_url = request.POST.get('next', '/')
+            if next_url != "/users/login":
+                return HttpResponseRedirect(next_url)
+        else:
+            HttpResponseRedirect(request)
+    else:
+        return HttpResponseRedirect(request)
