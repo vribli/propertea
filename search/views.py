@@ -57,11 +57,15 @@ def index(request):
             resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Landed Residential")]
         else:
             resfiltered2 = [i for i in resfiltered if not (i['TYPE'] == None)]
-
+        favourite =[]
+        if request.user.is_authenticated:
+            favourite = [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
+        print(favourite)
         context = {
             'keyword' : keyword,
             'res' : resfiltered2,
-            'district': district
+            'district': district,
+            'favourite' : favourite,
         }
         return render(request, "search/index.html", context)
     #except KeyError:
@@ -74,8 +78,14 @@ def favourites_view(request):
         user = request.user
         if user is not None:
             propertyname=request.POST['propertyname']
-            new_favourite = FavouriteProperty.objects.create(name=propertyname, user=user)
-            new_favourite.save()
+            favourite = []
+            if request.user.is_authenticated:
+                favourite = [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
+            if propertyname in favourite:
+                FavouriteProperty.objects.get(name=propertyname, user=user).delete()
+            else:
+                new_favourite = FavouriteProperty.objects.create(name=propertyname, user=user)
+                new_favourite.save()
             next_url = request.POST.get('next', '/')
             if next_url != "/users/login":
                 return HttpResponseRedirect(next_url)

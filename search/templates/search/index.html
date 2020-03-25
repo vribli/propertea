@@ -177,13 +177,20 @@
                       {% for r in res %}
                           <tr>
                               <td>
+
                                   <form class= "form-inline" action='/search/favourites' method = post>
                                       {% csrf_token %}
                                       <input type="hidden" name="propertyname" id="propertyname" value="{{ r.BUILDING }}"/>
                                       <h3> {{ r.BUILDING }} </h3>
+                                      {% if r.BUILDING in favourite %}
                                       <button class="btn" type="submit">
                                           <a style="color: orange; font-size: large">★</a>
                                       </button>
+                                      {% else %}
+                                      <button class="btn" type="submit">
+                                          <a style="color: orange; font-size: large">☆</a>
+                                      </button>
+                                      {% endif %}
                                       <input type="hidden" name="next" value="{{ request.get_full_path }}">
                                   </form>
                                 <a> {{r.ADDRESS}} </a>
