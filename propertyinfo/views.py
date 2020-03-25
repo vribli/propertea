@@ -15,8 +15,6 @@ def index(request):
         #code to get nearest property coordinate begins here
         URL = "https://developers.onemap.sg/commonapi/search?searchVal={} {}&returnGeom=Y&getAddrDetails=Y&pageNum=1".format(name, postal)
         info = requests.get(URL).json()
-        print(URL)
-        print(info)
         X = float(info['results'][0]['X'])
         Y = float(info['results'][0]['Y'])
         #code to get nearest property coordinate ends here
@@ -25,10 +23,11 @@ def index(request):
         MRT_LRT_Station = pd.DataFrame(pd.read_csv("propertea/static/MRT_LRT_Station_Data.csv"))
         MRT_LRT_X_diff = np.subtract(np.array(MRT_LRT_Station['X']), X)
         MRT_LRT_Y_diff = np.subtract(np.array(MRT_LRT_Station['Y']), Y)
-        MRT_LRT_Station['Distance'] = np.sqrt(np.square(MRT_LRT_X_diff)+np.square(MRT_LRT_Y_diff))
-        MRT_LRT_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/MRT_LRT_Passenger_Volume.csv"))
-        # // add in the correct PT CODE after dataset is fixed
-        MRT_LRT_Plotting_Data = MRT_LRT_Transport_Volume[MRT_LRT_Transport_Volume['PT_CODE']=='BP1'][MRT_LRT_Transport_Volume['DAY_TYPE']=='WEEKDAY'].sort_values('TIME_PER_HOUR')
+        MRT_LRT_Station['DISTANCE'] = np.sqrt(np.square(MRT_LRT_X_diff)+np.square(MRT_LRT_Y_diff))
+        MRT_LRT_Station_Name = MRT_LRT_Station.sort_values(by='DISTANCE').iloc[0]['NAME']
+        MRT_LRT_Station_Number = MRT_LRT_Station.sort_values(by='DISTANCE').iloc[0]['NUMBER']
+        MRT_LRT_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/MRT_LRT_Transport_Volume.csv"))
+        MRT_LRT_Plotting_Data = MRT_LRT_Transport_Volume[MRT_LRT_Transport_Volume['PT_CODE']==MRT_LRT_Station_Number].sort_values('TIME_PER_HOUR')
         #code for extracting closest MRT and passenger volume ends here
 
         MRT_LRT_Time = [24 if x == 0 else x for x in MRT_LRT_Plotting_Data['TIME_PER_HOUR'].tolist()]
@@ -37,7 +36,7 @@ def index(request):
         fig = go.Figure()
         fig.layout = go.Layout(
             title = go.layout.Title(
-                text = "[Nearest MRT Station] {}".format(MRT_LRT_Station.sort_values(by='Distance').iloc[0]['Name']),        
+                text = "[Nearest MRT/LRT Station] {}  {}".format(MRT_LRT_Station_Name, MRT_LRT_Station_Number),        
             ),
 
             xaxis = go.layout.XAxis(
@@ -77,7 +76,7 @@ def index(request):
         Bus_Stop_Number = int(Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NUMBER'])
         Bus_Stop_Name = Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NAME']
         Bus_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/Bus_Transport_Volume.csv"))
-        Bus_Stop_Plotting_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE']==Bus_Stop_Number][Bus_Transport_Volume['DAY_TYPE']=='WEEKDAY'].sort_values('TIME_PER_HOUR')
+        Bus_Stop_Plotting_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE']==Bus_Stop_Number].sort_values('TIME_PER_HOUR')
         #code for extracting closest bus and passenger volume ends here
 
         Bus_Time = [24 if x == 0 else x for x in Bus_Stop_Plotting_Data['TIME_PER_HOUR'].tolist()]
