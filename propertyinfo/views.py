@@ -73,16 +73,14 @@ def index(request):
         Bus_Stop = pd.DataFrame(pd.read_csv("propertea/static/Bus_Stop_Data.csv"))
         Bus_X_diff = np.subtract(np.array(Bus_Stop['X']), X)
         Bus_Y_diff = np.subtract(np.array(Bus_Stop['Y']), Y)
-        Bus_Stop['Distance'] = np.sqrt(np.square(Bus_X_diff)+np.square(Bus_Y_diff))
-        Bus_Stop_Number = int(Bus_Stop.sort_values(by='Distance').iloc[0]['NUMBER'])
+        Bus_Stop['DISTANCE'] = np.sqrt(np.square(Bus_X_diff)+np.square(Bus_Y_diff))
+        Bus_Stop_Number = int(Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NUMBER'])
+        Bus_Stop_Name = Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NAME']
         Bus_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/Bus_Transport_Volume.csv"))
-        Bus_Stop_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE']==Bus_Stop_Number][Bus_Transport_Volume['DAY_TYPE']=='WEEKDAY'].sort_values('TIME_PER_HOUR')
-        URL = "http://businterchange.net/sgbus/stops/busstop.php?stop={}".format(Bus_Stop_Number)
-        r = requests.get(URL)
-        Bus_Stop_Name = BeautifulSoup(r.content).find('table').get_text(separator=' ') 
+        Bus_Stop_Plotting_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE']==Bus_Stop_Number][Bus_Transport_Volume['DAY_TYPE']=='WEEKDAY'].sort_values('TIME_PER_HOUR')
         #code for extracting closest bus and passenger volume ends here
 
-        Bus_Time = [24 if x == 0 else x for x in Bus_Stop_Data['TIME_PER_HOUR'].tolist()]
+        Bus_Time = [24 if x == 0 else x for x in Bus_Stop_Plotting_Data['TIME_PER_HOUR'].tolist()]
 
         # code for Bus plotly begins here
         fig = go.Figure()
@@ -108,14 +106,14 @@ def index(request):
 
         fig.add_trace(go.Bar(
             x = Bus_Time,
-            y = Bus_Stop_Data['TOTAL_TAP_IN_VOLUME'].tolist(),
+            y = Bus_Stop_Plotting_Data['TOTAL_TAP_IN_VOLUME'].tolist(),
             name = 'Total Tap In Volume',
             marker_color = '#4287f5',)
         )
 
         fig.add_trace(go.Bar(
             x = Bus_Time,
-            y = Bus_Stop_Data['TOTAL_TAP_OUT_VOLUME'].tolist(),
+            y = Bus_Stop_Plotting_Data['TOTAL_TAP_OUT_VOLUME'].tolist(),
             name = 'Total Tap Out Volume',
             marker_color = 'LightSkyBlue')
         )
