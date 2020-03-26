@@ -119,13 +119,19 @@ def index(request):
 
         fig.update_layout(barmode = 'group', xaxis_tickangle = -45)
         bus_plot_div = plot(fig, output_type = "div", include_plotlyjs = False)
-        # code for MRT plotly ends here
+        # code for Bus plotly ends here
 
+        # code for Bus Services begins here
+        Bus_Route_Data = pd.DataFrame(pd.read_csv("propertea/static/Bus_Route_Data.csv"))
+        Bus_Table_Data = Bus_Route_Data[Bus_Route_Data['BUSSTOPCODE'] == str(Bus_Stop_Number)].to_dict('records')
+        # code for Bus Services ends here
+        
         context = {
             'name' : name,
             'postal' : postal,
             'mrt_lrt_plot' : mrt_lrt_plot_div,
-            'bus_plot' : bus_plot_div
+            'bus_plot' : bus_plot_div,
+            'bus_table_data' : Bus_Table_Data
         }
 
         return render(request, "propertyinfo/index.html", context)
