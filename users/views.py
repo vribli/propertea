@@ -36,7 +36,6 @@ def login_view(request):
         if user is not None:
             login(request, user)
             next_url = request.POST.get('next_url')
-            print(type(next_url))
             if next_url is None:
                 return HttpResponseRedirect("/")
             if next_url != "/users/login":
