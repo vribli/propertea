@@ -52,6 +52,7 @@
 
         .Header {
             margin-bottom: 10px;
+
         }
 
         .Footer {
@@ -103,6 +104,25 @@
 
         }
 
+        .toprighttable {
+            float: right;
+            width: 15%;
+            height: 10%;
+        }
+
+
+        td.big {
+            text-align: center;
+            font-size: 100%;
+        }
+
+        td.small {
+            font-size: 70%;
+        }
+
+        table, th, td {
+  border: 1px solid black;
+}
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -177,12 +197,39 @@
                         </li>
                 </ul>
                 </form>
-                <form action="/users">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                        </li>
-                </form>
+                <a></a>
+                {% if user.is_authenticated %}
+                    <table class="toprighttable">
+                        <tr>
+                            <td class="big" colspan="2">Welcome, {{ user.username }}</td>
+                            <td rowspan="2"><img src="{% static "usericon.jpg" %}" height=50px/></td>
+                        </tr>
+                        <tr>
+                            <td class="small">
+                                <a href="/users">
+                                    <div>VIEW FAVOURITES</div>
+                                </a>
+                            </td>
+                            <td class="small">
+                                <a href="/users/logout">
+                                    <div>LOGOUT</div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <form action="/users" class="form-inline">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                    </form>
+                {% endif %}
+                <!--
+                    <form action="/users">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
+                            </li>
+                    </form>
+                    -->
                 </ul>
             </div>
         </nav>

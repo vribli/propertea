@@ -21,14 +21,50 @@
             text-align: center;
             vertical-align: middle;
         }
+
+        .toprighttable {
+            float: right;
+            width: 15%;
+            height: 10%;
+        }
+
+
+        td.big {
+            text-align: center;
+            font-size: 100%;
+        }
+
+        td.small {
+            font-size: 70%;
+        }
+                table, th, td {
+  border: 1px solid black;
+}
     </style>
 </head>
 
 <body>
-<nav class="navbar navbar-light fixed-top">
+<nav class="navbar navbar-light fixed-top topright">
     <a></a>
     {% if user.is_authenticated %}
-        <a>Welcome, {{ user.username }}</a>
+        <table class="toprighttable">
+            <tr>
+                <td class="big" colspan="2">Welcome, {{ user.username }}</td>
+                <td rowspan="2"><img src="{% static "usericon.jpg" %}" height=50px/></td>
+            </tr>
+            <tr>
+                <td class="small">
+                    <a href="/users">
+                        <div>VIEW FAVOURITES</div>
+                    </a>
+                </td>
+                <td class="small">
+                    <a href="/users/logout">
+                        <div>LOGOUT</div>
+                    </a>
+                </td>
+            </tr>
+        </table>
     {% else %}
         <form action="/users" class="form-inline">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
