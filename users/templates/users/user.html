@@ -189,6 +189,14 @@
             height: 100%;
         }
 
+        body {
+            counter-reset: Serial; /* Set the Serial counter to 0 */
+        }
+
+        tr td:first-child:before {
+            counter-increment: Serial; /* Increment the Serial counter */
+            content: counter(Serial); /* Display the counter */
+        }
 
     </style>
     <!------ Include the above in your HEAD tag ---------->
@@ -324,7 +332,29 @@ Licensed under MIT
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                              aria-labelledby="v-pills-home-tab">
-                            Favourites
+                            <h3>Favourites</h3>
+                            Fast access to your favourite <i>propertea</i>-s!
+                            <br>
+                            <br>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th> Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for favourite in favourites %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{ favourite }}</td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                              aria-labelledby="v-pills-profile-tab">
@@ -332,7 +362,7 @@ Licensed under MIT
                         </div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
                              aria-labelledby="v-pills-messages-tab">
-                            <h1 id="the-_propertea_-project">The <em>propertea</em> Project</h1>
+                            <h2 id="the-_propertea_-project">The <em>propertea</em> Project</h2>
                             <p>Welcome! You&#39;ve landed on the git repository for our <em>CZ2006 (Software
                                 Engineering)</em> project. We&#39;re proud to bring you our first foray into web
                                 programming with Python! :fire::fire:</p>
