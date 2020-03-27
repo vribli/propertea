@@ -68,7 +68,7 @@ def index(request):
             name='Total Tap Out Volume',
             marker_color='LightSkyBlue')
         )
-        fig.update_layout(barmode='group', xaxis_tickangle=-45)
+        fig.update_layout(barmode='group', xaxis_tickangle=-45,font = {"family": "Karla", "size":16})
         mrt_lrt_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for MRT plotly ends here
 
@@ -122,7 +122,7 @@ def index(request):
             marker_color='LightSkyBlue')
         )
 
-        fig.update_layout(barmode='group', xaxis_tickangle=-45)
+        fig.update_layout(barmode='group', xaxis_tickangle=-45, font = {"family": "Karla", "size":16})
         bus_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for Bus plotly ends here
 
