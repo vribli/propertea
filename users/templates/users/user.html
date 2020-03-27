@@ -272,8 +272,9 @@ Licensed under MIT
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR BUTTONS -->
                     <div class="profile-userbuttons">
-                        <button type="button" class="btn btn-success btn-sm">Follow</button>
-                        <button type="button" class="btn btn-danger btn-sm">Message</button>
+                        <form action="/users/logout">
+                        <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                        </form>
                     </div>
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->
@@ -320,7 +321,34 @@ Licensed under MIT
                         </div>
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                              aria-labelledby="v-pills-profile-tab">
-                            Account Details
+                            <h5>Username</h5>
+                            <hr>
+                            {{ user.username}}
+                            <br>
+                            <br>
+                            <h5>First Name</h5>
+                            <hr>
+                            {{ user.first_name }}
+                            <br>
+                            <br>
+                            <h5>Last Name</h5>
+                            <hr>
+                            {{ user.last_name }}
+                            <br>
+                            <br>
+                            <h5>E-mail Address</h5>
+                            <hr>
+                            {{ user.email }}
+                            <br>
+                            <br>
+                            <h5>Date Joined</h5>
+                            <hr>
+                            {{ user.date_joined }}
+                            <br>
+                            <br>
+                            <h5>Last Login</h5>
+                            <hr>
+                            {{ user.last_login }}
                         </div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
                              aria-labelledby="v-pills-messages-tab">
