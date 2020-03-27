@@ -13,11 +13,16 @@
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
     <style>
         html, body {
             height: 100%;
             font-family: 'Karla', sans-serif;
+        tml,
+        body {
+            height: 100%;
         }
 
         body {
@@ -95,7 +100,7 @@
 <body class="text-center">
 <form class="form-signin" action="{% url 'login' %}" method="post">
     {% csrf_token %}
-    <img src="{% static "logo.png" %}" height=72px/>
+    <a href = "/"><img src="{% static "logo.png" %}" height=72px/></a>
     <br>
     <br>
     <h1>Propertea Log-in</h1>

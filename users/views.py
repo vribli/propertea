@@ -20,26 +20,32 @@ from .tokens import account_activation_token
 @login_required(login_url='/users/login')
 def index(request):
     context = {
-        "user": request.user
+        "user": request.user,
+        "favourites": [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
     }
     return render(request, "users/user.html", context)
 
 
 def login_view(request):
-    if request.POST:
+    if request.user.is_authenticated:
+        return HttpResponseRedirect("/users")
+    elif request.POST:
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            next_url = request.POST.get('next', '/')
+            next_url = request.POST.get('next_url')
+            if next_url is None:
+                return HttpResponseRedirect("/")
             if next_url != "/users/login":
                 return HttpResponseRedirect(next_url)
             else:
                 context = {
-                    "user": request.user
+                    "user": request.user,
+                    "favourites": [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
                 }
-                return render(request, "users/user.html", context)
+                return HttpResponseRedirect("/users")
         else:
             messages.error(request, "Invalid Credentials")
             return render(request, "users/login.html")
@@ -64,13 +70,13 @@ def createaccount_view(request):
         # user can't login until link confirmed
         user.is_active = False
         user.save()
-        current_site = get_current_site(request)
+        # current_site = get_current_site(request)
         subject = 'Please Activate Your Account'
         # load a template like get_template()
         # and calls its render() method immediately.
         message = render_to_string('users/activation_request.html', {
             'user': user,
-            'domain': current_site.domain,
+            'domain': "127.0.0.1:8000",
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             # method will generate a hash value with user related data
             'token': account_activation_token.make_token(user),
