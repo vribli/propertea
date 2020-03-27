@@ -2,198 +2,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" href="{% static  "favicon.ico" %}">
-{#{% block body %}#}
-{#<h1>Hello, {{ user.first_name }}</h1>#}
-{#<ul>#}
-{#    <li>Currently logged in as: {{ user.username }}</li>#}
-{#    <li><a href="{% url 'logout' %}">Logout</a></li>#}
-{#</ul>#}
-{#{% endblock %}#}
+    <link rel="icon" href="{% static  "favicon.ico" %}">
+    {#{% block body %}#}
+    {#<h1>Hello, {{ user.first_name }}</h1>#}
+    {#<ul>#}
+    {#    <li>Currently logged in as: {{ user.username }}</li>#}
+    {#    <li><a href="{% url 'logout' %}">Logout</a></li>#}
+    {#</ul>#}
+    {#{% endblock %}#}
 
-{#<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>#}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {#<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
 
-<style>
-    body{
-        background: #F1F3FA;
-        width: 100%;
-    }
+    <style>
+        body {
+            background: #F1F3FA;
+            width: 100%;
+            font-family: 'Karla', sans-serif;
+        }
 
-    /* Profile container */
-    .profile {
-      margin: 20px 0;
-    }
+        /* Profile container */
+        .profile {
+            margin: 20px 0;
+        }
 
-    /* Profile sidebar */
-    .profile-sidebar {
-      padding: 20px 0 10px 0;
-      background: #fff;
-    }
+        /* Profile sidebar */
+        .profile-sidebar {
+            padding: 20px 0 10px 0;
+            background: #fff;
+        }
 
-    .profile-userpic img {
-      float: none;
-      margin: 0 auto;
-      width: 50%;
-      height: 50%;
-      -webkit-border-radius: 50% !important;
-      -moz-border-radius: 50% !important;
-      border-radius: 50% !important;
-    }
+        .profile-userpic img {
+            float: none;
+            margin: 0 auto;
+            width: 50%;
+            height: 50%;
+            -webkit-border-radius: 50% !important;
+            -moz-border-radius: 50% !important;
+            border-radius: 50% !important;
+        }
 
-    .profile-usertitle {
-      text-align: center;
-      margin-top: 20px;
-    }
+        .profile-usertitle {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    .profile-usertitle-name {
-      color: #5a7391;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 7px;
-    }
+        .profile-usertitle-name {
+            color: #5a7391;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
 
-    .profile-usertitle-job {
-      text-transform: uppercase;
-      color: #5b9bd1;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
+        .profile-usertitle-job {
+            text-transform: uppercase;
+            color: #5b9bd1;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
 
-    .profile-userbuttons {
-      text-align: center;
-      margin-top: 10px;
-    }
+        .profile-userbuttons {
+            text-align: center;
+            margin-top: 10px;
+        }
 
-    .profile-userbuttons .btn {
-      text-transform: uppercase;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 6px 15px;
-      margin-right: 5px;
-    }
+        .profile-userbuttons .btn {
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 15px;
+            margin-right: 5px;
+        }
 
-    .profile-userbuttons .btn:last-child {
-      margin-right: 0px;
-    }
+        .profile-userbuttons .btn:last-child {
+            margin-right: 0px;
+        }
 
-    .profile-usermenu {
-      margin-top: 30px;
-    }
+        .profile-usermenu {
+            margin-top: 30px;
+        }
 
-    .profile-usermenu ul li {
-      border-bottom: 1px solid #f0f4f7;
-    }
+        .profile-usermenu ul li {
+            border-bottom: 1px solid #f0f4f7;
+        }
 
-    .profile-usermenu ul li:last-child {
-      border-bottom: none;
-    }
+        .profile-usermenu ul li:last-child {
+            border-bottom: none;
+        }
 
-    .profile-usermenu ul li a {
-      color: #93a3b5;
-      font-size: 14px;
-      font-weight: 400;
-    }
+        .profile-usermenu ul li a {
+            color: #93a3b5;
+            font-size: 14px;
+            font-weight: 400;
+        }
 
-    .profile-usermenu ul li a i {
-      margin-right: 8px;
-      font-size: 14px;
-    }
+        .profile-usermenu ul li a i {
+            margin-right: 8px;
+            font-size: 14px;
+        }
 
-    .profile-usermenu ul li a:hover {
-      background-color: #fafcfd;
-      color: #5b9bd1;
-    }
+        .profile-usermenu ul li a:hover {
+            background-color: #fafcfd;
+            color: #5b9bd1;
+        }
 
-    .profile-usermenu ul li.active {
-      border-bottom: none;
-    }
+        .profile-usermenu ul li.active {
+            border-bottom: none;
+        }
 
-    .profile-usermenu ul li.active a {
-      color: #5b9bd1;
-      background-color: #f6f9fb;
-      border-left: 2px solid #5b9bd1;
-      margin-left: -2px;
-    }
+        .profile-usermenu ul li.active a {
+            color: #5b9bd1;
+            background-color: #f6f9fb;
+            border-left: 2px solid #5b9bd1;
+            margin-left: -2px;
+        }
 
-    /* Profile Content */
-    .profile-content {
-      padding: 20px;
-      background: #fff;
-      min-height: 460px;
-    }
-    html,body{
-        height: 100%;
-        width: 100%;
-    }
-    table {
-        height: 90%;
-        width: 100%;
-    }
-     tr, td {
-        height:100%;
-        vertical-align: top;
-        pad:5px;
-    }
+        /* Profile Content */
+        .profile-content {
+            padding: 20px;
+            background: #fff;
+            min-height: 460px;
+        }
 
-    {#*#}
-    {#{#}
-    {#    margin: 0;#}
-    {#    padding: 0;#}
-    {#    width: 150%;#}
-    {##}
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
 
-    html, body, .Container
-    {
-        height: 100%;
-    }
+        table {
+            height: 90%;
+            width: 100%;
+        }
 
-    .Container:before
-    {
-        content: '';
-        height: 100%;
-        float: left;
-    }
+        tr, td {
+            height: 100%;
+            vertical-align: top;
+            pad: 5px;
+        }
 
-    .Header
-    {
-        margin-bottom: 10px;
-    }
-    .Footer
-    {
-        margin-top: 10px;
-    }
-    .Content
-    {
-        position: relative;
-        z-index: 1;
-    }
-        .Content:after
-        {
+        {#*#}
+        {#{#}
+        {#    margin: 0;#}
+        {#    padding: 0;#}
+        {#    width: 150%;#}
+        {##}
+
+        html, body, .Container {
+            height: 100%;
+        }
+
+        .Container:before {
+            content: '';
+            height: 100%;
+            float: left;
+        }
+
+        .Header {
+            margin-bottom: 10px;
+        }
+
+        .Footer {
+            margin-top: 10px;
+        }
+
+        .Content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .Content:after {
             content: '';
             clear: both;
             display: block;
         }
 
-    .Wrapper
-    {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-    .Wrapper > div
-    {
-        height: 100%;
-    }
+        .Wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
 
+        .Wrapper > div {
+            height: 100%;
+        }
 
+        body {
+            counter-reset: Serial; /* Set the Serial counter to 0 */
+        }
 
-</style>
-<!------ Include the above in your HEAD tag ---------->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        tr td:first-child:before {
+            counter-increment: Serial; /* Increment the Serial counter */
+            content: counter(Serial); /* Display the counter */
+        }
+
+    </style>
+    <!------ Include the above in your HEAD tag ---------->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 </head>
 <!--
 User Profile Sidebar by @keenthemes
@@ -205,27 +220,31 @@ Licensed under MIT
     <div class="Header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand mr-sm-6" href="/">
-                <img src="{% static "logo.png" %}" height=30px />
+                <img src="{% static "logo.png" %}" height=30px/>
                 <a class="navbar-brand" href="/">Propertea </a>
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <form class="form-inline my-2 my-lg-0" action ="/search" method = "get">
+                    <form class="form-inline my-2 my-lg-0" action="/search" method="get">
 
                         <li class="nav-item">
-                            <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id = "keyword" aria-label="Search" size=75%>
+                            <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name="keyword"
+                                   id="keyword" aria-label="Search" size=75%>
 
                         </li>
 
                         <li class="nav-item">
                             <div id="navbarNavDropdown">
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
                                         Sort by
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -239,7 +258,9 @@ Licensed under MIT
                         <li class="nav-item">
                             <div id="navbarNavDropdown">
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
                                         Apply filter
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -257,7 +278,7 @@ Licensed under MIT
                         </li>
                 </ul>
                 </form>
-                <form action="/users" >
+                <form action="/users">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
@@ -268,7 +289,7 @@ Licensed under MIT
         </nav>
     </div>
 
-    <div class = "container-lg">
+    <div class="container-lg">
         <div class="row profile">
             <div class="col-md-3">
                 <div class="profile-sidebar">
@@ -296,41 +317,77 @@ Licensed under MIT
                     <!-- SIDEBAR MENU -->
                     <br>
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Favourites</a>
-                      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Account Details</a>
-                      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">About</a>
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">Favourites</a>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+                           role="tab" aria-controls="v-pills-profile" aria-selected="false">Account Details</a>
+                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages"
+                           role="tab" aria-controls="v-pills-messages" aria-selected="false">About</a>
                     </div>
                     <!-- END MENU -->
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="profile-content">
-                   <div class="tab-content" id="v-pills-tabContent">
-                      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                          Favourites
-                      </div>
-                      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                          Account Details
-                      </div>
-                      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                          <h1 id="the-_propertea_-project">The <em>propertea</em> Project</h1>
-                          <p>Welcome! You&#39;ve landed on the git repository for our <em>CZ2006 (Software Engineering)</em> project.  We&#39;re proud to bring you our first foray into web programming with Python! :fire::fire:</p>
-                          <p>This project tries to bring you a comprehensive view of any residential property in Singapore, by bringing together data from various government sources and private sources.</p>
-                          <p>Essentially, we <strong><em>spill the tea</em></strong> on these properties :wink::wink:</p>
-                          <p>Feel free to look around and enjoy our amazing work :stuck_out_tongue_winking_eye:</p>
-                          <p>Our project consists of these sub-applications:</p>
-                          <ul>
-                              <li><code>Home</code></li>
-                              <li><code>Search</code></li>
-                              <li><code>Listing</code></li>
-                              <li><code>PropertyInformation</code></li>
-                              <li><code>Users</code></li>
-                          </ul>
-                          <p><del>Other groups coding this project, go away please</del>. :unamused::unamused:</p>
-                          <p><em>Team NACHOS</em> :taco: :taco:</p>
-                          <p>Johnson, Vincent, Tanay, Alice, Josephine, Raymond</p>
-                          <p>👩🏻‍💻👩🏻‍💻👨🏻‍💻👨🏻‍💻👨🏽‍💻👨🏻‍💻</p>
-                      </div>
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <h3>Favourites</h3>
+                            Fast access to your favourite <i>propertea</i>-s!
+                            <br>
+                            <br>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th> Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for favourite in favourites %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{ favourite }}</td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                             aria-labelledby="v-pills-profile-tab">
+                            Account Details
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                             aria-labelledby="v-pills-messages-tab">
+                            <h2 id="the-_propertea_-project">The <em>propertea</em> Project</h2>
+                            <p>Welcome! You&#39;ve landed on the git repository for our <em>CZ2006 (Software
+                                Engineering)</em> project. We&#39;re proud to bring you our first foray into web
+                                programming with Python! :fire::fire:</p>
+                            <p>This project tries to bring you a comprehensive view of any residential property in
+                                Singapore, by bringing together data from various government sources and private
+                                sources.</p>
+                            <p>Essentially, we <strong><em>spill the tea</em></strong> on these properties :wink::wink:
+                            </p>
+                            <p>Feel free to look around and enjoy our amazing work :stuck_out_tongue_winking_eye:</p>
+                            <p>Our project consists of these sub-applications:</p>
+                            <ul>
+                                <li><code>Home</code></li>
+                                <li><code>Search</code></li>
+                                <li><code>Listing</code></li>
+                                <li><code>PropertyInformation</code></li>
+                                <li><code>Users</code></li>
+                            </ul>
+                            <p>
+                                <del>Other groups coding this project, go away please</del>
+                                . :unamused::unamused:
+                            </p>
+                            <p><em>Team NACHOS</em> :taco: :taco:</p>
+                            <p>Johnson, Vincent, Tanay, Alice, Josephine, Raymond</p>
+                            <p>👩🏻‍💻👩🏻‍💻👨🏻‍💻👨🏻‍💻👨🏽‍💻👨🏻‍💻</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -338,7 +395,7 @@ Licensed under MIT
     </div>
 </div>
 <center>
-<strong>Powered by <a href="github.com/vribli/propertea" target="_blank">Team Nachos</a> 2020</strong>
+    <strong>Powered by <a href="github.com/vribli/propertea" target="_blank">Team Nachos</a> 2020</strong>
 </center>
 <br>
 <br>
