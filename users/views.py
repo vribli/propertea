@@ -20,7 +20,8 @@ from .tokens import account_activation_token
 @login_required(login_url='/users/login')
 def index(request):
     context = {
-        "user": request.user
+        "user": request.user,
+        "favourites": [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
     }
     return render(request, "users/user.html", context)
 
@@ -37,9 +38,10 @@ def login_view(request):
                 return HttpResponseRedirect(next_url)
             else:
                 context = {
-                    "user": request.user
+                    "user": request.user,
+                    "favourites": [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
                 }
-                return render(request, "users/user.html", context)
+                return HttpResponseRedirect("/users")
         else:
             messages.error(request, "Invalid Credentials")
             return render(request, "users/login.html")
