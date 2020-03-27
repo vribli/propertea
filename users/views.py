@@ -66,13 +66,13 @@ def createaccount_view(request):
         # user can't login until link confirmed
         user.is_active = False
         user.save()
-        current_site = get_current_site(request)
+        # current_site = get_current_site(request)
         subject = 'Please Activate Your Account'
         # load a template like get_template()
         # and calls its render() method immediately.
         message = render_to_string('users/activation_request.html', {
             'user': user,
-            'domain': current_site.domain,
+            'domain': "127.0.0.1:8000",
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             # method will generate a hash value with user related data
             'token': account_activation_token.make_token(user),
