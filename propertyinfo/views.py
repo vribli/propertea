@@ -4,80 +4,84 @@ import plotly.graph_objects as go
 from plotly.offline import plot
 import numpy as np
 import requests
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
+
 
 # Create your views here.
 def index(request):
     try:
         name = request.GET['name']
         postal = request.GET['postal']
-        
-        #code to get nearest property coordinate begins here
-        URL = "https://developers.onemap.sg/commonapi/search?searchVal={} {}&returnGeom=Y&getAddrDetails=Y&pageNum=1".format(name, postal)
+
+        # code to get nearest property coordinate begins here
+        URL = "https://developers.onemap.sg/commonapi/search?searchVal={} {}&returnGeom=Y&getAddrDetails=Y&pageNum=1".format(
+            name, postal)
         info = requests.get(URL).json()
         X = float(info['results'][0]['X'])
         Y = float(info['results'][0]['Y'])
-        #code to get nearest property coordinate ends here
+        # code to get nearest property coordinate ends here
 
-        #code for extracting closest MRT and passenger volume begins here
+        # code for extracting closest MRT and passenger volume begins here
         MRT_LRT_Station = pd.DataFrame(pd.read_csv("propertea/static/MRT_LRT_Station_Data.csv"))
         MRT_LRT_X_diff = np.subtract(np.array(MRT_LRT_Station['X']), X)
         MRT_LRT_Y_diff = np.subtract(np.array(MRT_LRT_Station['Y']), Y)
-        MRT_LRT_Station['DISTANCE'] = np.sqrt(np.square(MRT_LRT_X_diff)+np.square(MRT_LRT_Y_diff))
+        MRT_LRT_Station['DISTANCE'] = np.sqrt(np.square(MRT_LRT_X_diff) + np.square(MRT_LRT_Y_diff))
         MRT_LRT_Station_Name = MRT_LRT_Station.sort_values(by='DISTANCE').iloc[0]['NAME']
         MRT_LRT_Station_Number = MRT_LRT_Station.sort_values(by='DISTANCE').iloc[0]['NUMBER']
         MRT_LRT_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/MRT_LRT_Transport_Volume.csv"))
-        MRT_LRT_Plotting_Data = MRT_LRT_Transport_Volume[MRT_LRT_Transport_Volume['PT_CODE']==MRT_LRT_Station_Number].sort_values('TIME_PER_HOUR')
-        #code for extracting closest MRT and passenger volume ends here
+        MRT_LRT_Plotting_Data = MRT_LRT_Transport_Volume[
+            MRT_LRT_Transport_Volume['PT_CODE'] == MRT_LRT_Station_Number].sort_values('TIME_PER_HOUR')
+        # code for extracting closest MRT and passenger volume ends here
 
         MRT_LRT_Time = [24 if x == 0 else x for x in MRT_LRT_Plotting_Data['TIME_PER_HOUR'].tolist()]
-        
+
         # code for MRT plotly begins here
         fig = go.Figure()
         fig.layout = go.Layout(
-            title = go.layout.Title(
-                text = "[Nearest MRT/LRT Station] {}  {}".format(MRT_LRT_Station_Name, MRT_LRT_Station_Number),        
+            title=go.layout.Title(
+                text="[Nearest MRT/LRT Station] {}  {}".format(MRT_LRT_Station_Name, MRT_LRT_Station_Number),
             ),
 
-            xaxis = go.layout.XAxis(
-                tickmode = 'array',
-                tickvals = MRT_LRT_Time,
-                ticktext = [str(i) for i in MRT_LRT_Time],
-                title = go.layout.xaxis.Title(text='Time',) 
+            xaxis=go.layout.XAxis(
+                tickmode='array',
+                tickvals=MRT_LRT_Time,
+                ticktext=[str(i) for i in MRT_LRT_Time],
+                title=go.layout.xaxis.Title(text='Time', )
             ),
 
-            yaxis = go.layout.YAxis(
-                title = go.layout.yaxis.Title(
-                text = 'Passenger Volume',
+            yaxis=go.layout.YAxis(
+                title=go.layout.yaxis.Title(
+                    text='Passenger Volume',
                 )
             )
         )
         fig.add_trace(go.Bar(
-            x = MRT_LRT_Time,
-            y = MRT_LRT_Plotting_Data['TOTAL_TAP_IN_VOLUME'].tolist(),
-            name = 'Total Tap In Volume',
-            marker_color = '#4287f5',)
+            x=MRT_LRT_Time,
+            y=MRT_LRT_Plotting_Data['TOTAL_TAP_IN_VOLUME'].tolist(),
+            name='Total Tap In Volume',
+            marker_color='#4287f5', )
         )
         fig.add_trace(go.Bar(
-            x = MRT_LRT_Time,
-            y = MRT_LRT_Plotting_Data['TOTAL_TAP_OUT_VOLUME'].tolist(),
-            name = 'Total Tap Out Volume',
-            marker_color = 'LightSkyBlue')
+            x=MRT_LRT_Time,
+            y=MRT_LRT_Plotting_Data['TOTAL_TAP_OUT_VOLUME'].tolist(),
+            name='Total Tap Out Volume',
+            marker_color='LightSkyBlue')
         )
         fig.update_layout(barmode='group', xaxis_tickangle=-45)
         mrt_lrt_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for MRT plotly ends here
 
-        #code for extracting closest bus and passenger volume begins here
+        # code for extracting closest bus and passenger volume begins here
         Bus_Stop = pd.DataFrame(pd.read_csv("propertea/static/Bus_Stop_Data.csv"))
         Bus_X_diff = np.subtract(np.array(Bus_Stop['X']), X)
         Bus_Y_diff = np.subtract(np.array(Bus_Stop['Y']), Y)
-        Bus_Stop['DISTANCE'] = np.sqrt(np.square(Bus_X_diff)+np.square(Bus_Y_diff))
+        Bus_Stop['DISTANCE'] = np.sqrt(np.square(Bus_X_diff) + np.square(Bus_Y_diff))
         Bus_Stop_Number = int(Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NUMBER'])
         Bus_Stop_Name = Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NAME']
         Bus_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/Bus_Transport_Volume.csv"))
-        Bus_Stop_Plotting_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE']==Bus_Stop_Number].sort_values('TIME_PER_HOUR')
-        #code for extracting closest bus and passenger volume ends here
+        Bus_Stop_Plotting_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE'] == Bus_Stop_Number].sort_values(
+            'TIME_PER_HOUR')
+        # code for extracting closest bus and passenger volume ends here
 
         Bus_Time = [24 if x == 0 else x for x in Bus_Stop_Plotting_Data['TIME_PER_HOUR'].tolist()]
 
@@ -85,53 +89,53 @@ def index(request):
         fig = go.Figure()
         fig.layout = go.Layout(
             title=go.layout.Title(
-                text = "[Nearest Bus Stop] {}  {}".format(Bus_Stop_Name.upper(), Bus_Stop_Number),
-                yanchor = 'bottom'
+                text="[Nearest Bus Stop] {}  {}".format(Bus_Stop_Name.upper(), Bus_Stop_Number),
+                yanchor='bottom'
             ),
 
-            xaxis = go.layout.XAxis(
-                tickmode = 'array',
-                tickvals = Bus_Time,
-                ticktext = [str(i) for i in Bus_Time],
-                title = go.layout.xaxis.Title(text='Time',) 
+            xaxis=go.layout.XAxis(
+                tickmode='array',
+                tickvals=Bus_Time,
+                ticktext=[str(i) for i in Bus_Time],
+                title=go.layout.xaxis.Title(text='Time', )
             ),
 
-            yaxis = go.layout.YAxis(
-                title = go.layout.yaxis.Title(
-                text = 'Passenger Volume',
+            yaxis=go.layout.YAxis(
+                title=go.layout.yaxis.Title(
+                    text='Passenger Volume',
                 )
             )
         )
 
         fig.add_trace(go.Bar(
-            x = Bus_Time,
-            y = Bus_Stop_Plotting_Data['TOTAL_TAP_IN_VOLUME'].tolist(),
-            name = 'Total Tap In Volume',
-            marker_color = '#4287f5',)
+            x=Bus_Time,
+            y=Bus_Stop_Plotting_Data['TOTAL_TAP_IN_VOLUME'].tolist(),
+            name='Total Tap In Volume',
+            marker_color='#4287f5', )
         )
 
         fig.add_trace(go.Bar(
-            x = Bus_Time,
-            y = Bus_Stop_Plotting_Data['TOTAL_TAP_OUT_VOLUME'].tolist(),
-            name = 'Total Tap Out Volume',
-            marker_color = 'LightSkyBlue')
+            x=Bus_Time,
+            y=Bus_Stop_Plotting_Data['TOTAL_TAP_OUT_VOLUME'].tolist(),
+            name='Total Tap Out Volume',
+            marker_color='LightSkyBlue')
         )
 
-        fig.update_layout(barmode = 'group', xaxis_tickangle = -45)
-        bus_plot_div = plot(fig, output_type = "div", include_plotlyjs = False)
+        fig.update_layout(barmode='group', xaxis_tickangle=-45)
+        bus_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for Bus plotly ends here
 
         # code for Bus Services begins here
         Bus_Route_Data = pd.DataFrame(pd.read_csv("propertea/static/Bus_Route_Data.csv"))
         Bus_Table_Data = Bus_Route_Data[Bus_Route_Data['BUSSTOPCODE'] == str(Bus_Stop_Number)].to_dict('records')
         # code for Bus Services ends here
-        
+
         context = {
-            'name' : name,
-            'postal' : postal,
-            'mrt_lrt_plot' : mrt_lrt_plot_div,
-            'bus_plot' : bus_plot_div,
-            'bus_table_data' : Bus_Table_Data
+            'name': name,
+            'postal': postal,
+            'mrt_lrt_plot': mrt_lrt_plot_div,
+            'bus_plot': bus_plot_div,
+            'bus_table_data': Bus_Table_Data
         }
 
         return render(request, "propertyinfo/index.html", context)

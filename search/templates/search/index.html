@@ -134,32 +134,42 @@
                 <ul class="navbar-nav mr-auto">
                     <form class="form-inline my-2 my-lg-0" action="/search" method="get">
 
-                            <li class="nav-item">
-                                <div>
-                                    <label for="keyword"></label>
-                                    {% if keyword == "nil" %}
-                                        <input class="form-control mr-sm-2" type="search" name = "keyword" id="keyword" aria-label="Search" size=75%>
-                                    {% else %}
-                                        <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name = "keyword" id="keyword" aria-label="Search" size=75%>
-                                    {% endif %}
-                                    <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
-                                    <input type="hidden" name="filterby" id="filterby" value="nil">
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <div id="ApplyFilterDropdown">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Apply filter
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nil">All Residences</a>
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nonlanded">Non-Landed Residential</a>
-                                            <a class="dropdown-item" href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=landed">Landed Residential</a>
-                                        </div>
+                        <li class="nav-item">
+                            <div>
+                                <label for="keyword"></label>
+                                {% if keyword == "nil" %}
+                                    <input class="form-control mr-sm-2" type="search" name="keyword" id="keyword"
+                                           aria-label="Search" size=75%>
+                                {% else %}
+                                    <input class="form-control mr-sm-2" type="search" value="{{ keyword }}"
+                                           name="keyword" id="keyword" aria-label="Search" size=75%>
+                                {% endif %}
+                                <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
+                                <input type="hidden" name="filterby" id="filterby" value="nil">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div id="ApplyFilterDropdown">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Apply filter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item"
+                                           href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nil">All
+                                            Residences</a>
+                                        <a class="dropdown-item"
+                                           href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=nonlanded">Non-Landed
+                                            Residential</a>
+                                        <a class="dropdown-item"
+                                           href="/search?keyword={{ keyword }}&sortby=mostrelevant&filterby=landed">Landed
+                                            Residential</a>
                                     </div>
                                 </div>
-                            </li>
+                            </div>
+                        </li>
 
                         <li class="nav-item">
                             <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>

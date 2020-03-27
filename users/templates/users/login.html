@@ -11,115 +11,136 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
     <style>
-        tml,
-        body {
-          height: 100%;
+        html, body {
+            height: 100%;
+            font-family: 'Karla', sans-serif;
         }
 
         body {
-          display: -ms-flexbox;
-          display: block;
-          -ms-flex-align: center;
-          align-items: center;
-          padding-top: 100px;
-          padding-bottom: 40px;
-          background-color: #f5f5f5;
+            display: -ms-flexbox;
+            display: block;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 100px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
         }
 
         .form-signin {
-          width: 100%;
-          max-width: 500px;
-          padding: 15px;
-          margin: auto;
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            margin: auto;
         }
+
         .form-signin .checkbox {
-          font-weight: 400;
+            font-weight: 400;
         }
+
         .form-signin .form-control {
-          position: relative;
-          box-sizing: border-box;
-          height: auto;
-          padding: 10px;
-          font-size: 16px;
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
         }
+
         .form-signin .form-control:focus {
-          z-index: 2;
+            z-index: 2;
         }
+
         .form-signin input[type="email"] {
-          margin-bottom: -1px;
-          border-bottom-right-radius: 0;
-          border-bottom-left-radius: 0;
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
         }
+
         .form-signin input[type="password"] {
             margin-bottom: 10px;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
+
         .alert {
             margin: auto;
             margin-left: -40px;
         }
     </style>
     <!-- Favicons need to make our own yeah-->
-    <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/apple-touch-icon.png"
+          sizes="180x180">
     <link rel="icon" href="{% static  "favicon.ico" %}">
     <link rel="manifest" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="mask-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/safari-pinned-tab.svg"
+          color="#563d7c">
     <meta property="og:image" content="{% static "logo.png" %}">
     <meta name="msapplication-config" content="https://getbootstrap.com/docs/4.4/assets/img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#563d7c">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 
 </head>
 <body class="text-center">
-    <form class="form-signin" action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <img src="{% static "logo.png" %}" height=72px />
+<form class="form-signin" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <img src="{% static "logo.png" %}" height=72px/>
+    <br>
+    <br>
+    <h1>Propertea Log-in</h1>
+    <medium style="color: grey"> Log in to see your favourite <i>propertea-s</i>!</medium>
+    <br>
+    {% if messages %}
         <br>
-        <br>
-        <h1>Propertea Log-in</h1>
-        <medium style="color: grey"> Log in to see your favourite <i>propertea-s</i>!</medium>
-        <br>
-        {% if messages %}
-            <br>
-            <div>
-                <ul class="messages">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }} alert-dismissible center-block" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</strong> {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                </ul>
-            </div>
-        {% endif %}
-        <br>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" class="form-control" placeholder="Username" required="" autofocus="" width="200" name="username">
-        <br>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" width="200" name="password">
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+        <div>
+            <ul class="messages">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible center-block" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}
+                                {{ message.tags|title }}{% endif %}!</strong> {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </ul>
         </div>
-        <input type="hidden" name="next" value="{{ request.path }}">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <br>
-        <button class="btn btn-lg btn-secondary btn-block" onclick="location.href='{% url 'createaccount' %}'">Create Account</button>
-        <br>
-        <p>
-            <a href="{% url 'password_reset' %}">Forgot your password?</a>
-        </p>
-        <p class="mt-5 mb-3 text-muted">© Team NACHOS 2020</p>
-    </form>
+    {% endif %}
+    <br>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="text" class="form-control" placeholder="Username" required="" autofocus="" width="200" name="username">
+    <br>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" width="200"
+           name="password">
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <br>
+    <button class="btn btn-lg btn-secondary btn-block" onclick="location.href='{% url 'createaccount' %}'">Create
+        Account
+    </button>
+    <br>
+    <p>
+        <a href="{% url 'password_reset' %}">Forgot your password?</a>
+    </p>
+    <p class="mt-5 mb-3 text-muted">© Team NACHOS 2020</p>
+</form>
 </body>
 </html>
