@@ -68,6 +68,7 @@
             content: '';
             clear: both;
             display: block;
+            align-content: center;
         }
 
         .Wrapper {
@@ -106,7 +107,7 @@
 
         .toprighttable {
             float: right;
-            width: 15%;
+            width: 17%;
             height: 10%;
         }
 
@@ -118,11 +119,10 @@
 
         td.small {
             font-size: 70%;
+            text-align: center;
+            position: center;
         }
 
-        table, th, td {
-  border: 1px solid black;
-}
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -139,7 +139,7 @@
 
 <div class="Container">
     <div class="Header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
             <a class="navbar-brand mr-sm-6" href="/">
                 <img src="{% static "logo.png" %}" height=30px/>
                 <a class="navbar-brand" href="/">Propertea </a>
@@ -166,6 +166,8 @@
                                 {% endif %}
                                 <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
                                 <input type="hidden" name="filterby" id="filterby" value="nil">
+                                <input type="hidden" name="district" id="filterby" value="nil">
+
                             </div>
                         </li>
                         <li class="nav-item">
@@ -201,8 +203,8 @@
                 {% if user.is_authenticated %}
                     <table class="toprighttable">
                         <tr>
-                            <td class="big" colspan="2">Welcome, {{ user.username }}</td>
-                            <td rowspan="2"><img src="{% static "usericon.jpg" %}" height=50px/></td>
+                            <td class="big" colspan="3">Welcome, {{ user.username }}</td>
+                            <td rowspan="2"><img src="{% static "Profile.png" %}" height=50px/></td>
                         </tr>
                         <tr>
                             <td class="small">
@@ -210,6 +212,7 @@
                                     <div>VIEW FAVOURITES</div>
                                 </a>
                             </td>
+                            <td>|</td>
                             <td class="small">
                                 <a href="/users/logout">
                                     <div>LOGOUT</div>
@@ -218,18 +221,6 @@
                         </tr>
                     </table>
                 {% else %}
-                    <form action="/users" class="form-inline">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-                    </form>
-                {% endif %}
-                <!--
-                    <form action="/users">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                            </li>
-                    </form>
-                    -->
                 <form action="{% url 'login' %}?next={{ next_url }}">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -239,6 +230,7 @@
                         </li>
                         <input type="hidden" name="next_url" value="{{ next_url }}"/>
                 </form>
+                {% endif %}
                 </ul>
             </div>
         </nav>

@@ -24,7 +24,7 @@
 
         .toprighttable {
             float: right;
-            width: 15%;
+            width: 17%;
             height: 10%;
         }
 
@@ -37,29 +37,19 @@
         td.small {
             font-size: 70%;
         }
-                table, th, td {
-  border: 1px solid black;
-}
+
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-light fixed-top">
-        <a></a>
-        {% if user.is_authenticated %}
-            <a>Welcome, {{ user.username }}</a>
-        {% else %}
-        <form action="{% url 'login' %}?next={{next_url}}">
-           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-            <script>document.getElementById('next_url').value = window.location.href;</script>
-            <input type="hidden" name="next_url" id = "next_url" value="{{ next_url }}"/>
-<nav class="navbar navbar-light fixed-top topright">
+
+<nav class="navbar navbar-light fixed-top">
     <a></a>
     {% if user.is_authenticated %}
         <table class="toprighttable">
             <tr>
-                <td class="big" colspan="2">Welcome, {{ user.username }}</td>
-                <td rowspan="2"><img src="{% static "usericon.jpg" %}" height=50px/></td>
+                <td class="big" colspan="3">Welcome, {{ user.username }}</td>
+                <td rowspan="2"><img src="{% static "Profile.png" %}" height=50px/></td>
             </tr>
             <tr>
                 <td class="small">
@@ -67,6 +57,7 @@
                         <div>VIEW FAVOURITES</div>
                     </a>
                 </td>
+                <td>|</td>
                 <td class="small">
                     <a href="/users/logout">
                         <div>LOGOUT</div>
@@ -75,9 +66,10 @@
             </tr>
         </table>
     {% else %}
-        <form action="/users" class="form-inline">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-        </form>
+        <form action="{% url 'login' %}?next={{next_url}}">
+           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            <script>document.getElementById('next_url').value = window.location.href;</script>
+            <input type="hidden" name="next_url" id = "next_url" value="{{ next_url }}"/>
     {% endif %}
 </nav>
 <nav class="navbar navbar-light bg-light fixed-bottom">
