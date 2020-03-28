@@ -27,13 +27,17 @@ def index(request):
 
 
 def login_view(request):
-    if request.POST:
+    if request.user.is_authenticated:
+        return HttpResponseRedirect("/users")
+    elif request.POST:
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            next_url = request.POST.get('next', '/')
+            next_url = request.POST.get('next_url')
+            if next_url is None:
+                return HttpResponseRedirect("/")
             if next_url != "/users/login":
                 return HttpResponseRedirect(next_url)
             else:

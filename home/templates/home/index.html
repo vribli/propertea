@@ -30,8 +30,10 @@
         {% if user.is_authenticated %}
             <a>Welcome, {{ user.username }}</a>
         {% else %}
-        <form action="/users/login" class="form-inline">
+        <form action="{% url 'login' %}?next={{next_url}}">
            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            <script>document.getElementById('next_url').value = window.location.href;</script>
+            <input type="hidden" name="next_url" id = "next_url" value="{{ next_url }}"/>
         </form>
     {% endif %}
 </nav>

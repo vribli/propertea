@@ -25,13 +25,16 @@
 </head>
 
 <body>
-<nav class="navbar navbar-light fixed-top">
-    <a></a>
-    {% if user.is_authenticated %}
-        <a>Welcome, {{ user.username }}</a>
-    {% else %}
-        <form action="/users" class="form-inline">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+    <nav class="navbar navbar-light fixed-top">
+        <a></a>
+        {% if user.is_authenticated %}
+            <a>Welcome, {{ user.username }}</a>
+        {% else %}
+        <form action="{% url 'login' %}?next={{next_url}}">
+            {% csrf_token %}
+           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            <script>document.getElementById('next_url').value = window.location.href;</script>
+            <input type="hidden" name="next_url" id = "next_url" value="{{ next_url }}"/>
         </form>
     {% endif %}
 </nav>
