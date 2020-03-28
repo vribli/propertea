@@ -4,8 +4,8 @@ import plotly.graph_objects as go
 from plotly.offline import plot
 import numpy as np
 import requests
+from plotly.subplots import make_subplots
 from bs4 import BeautifulSoup
-
 
 # Create your views here.
 def index(request):
@@ -67,7 +67,7 @@ def index(request):
             name='Total Tap Out Volume',
             marker_color='LightSkyBlue')
         )
-        fig.update_layout(barmode='group', xaxis_tickangle=-45)
+        fig.update_layout(barmode='group', xaxis_tickangle=-45,font = {"family": "Karla", "size":16})
         mrt_lrt_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for MRT plotly ends here
 
@@ -121,13 +121,60 @@ def index(request):
             marker_color='LightSkyBlue')
         )
 
-        fig.update_layout(barmode='group', xaxis_tickangle=-45)
+        fig.update_layout(barmode='group', xaxis_tickangle=-45, font = {"family": "Karla", "size":16})
         bus_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for Bus plotly ends here
 
         # code for Bus Services begins here
         Bus_Route_Data = pd.DataFrame(pd.read_csv("propertea/static/Bus_Route_Data.csv"))
-        Bus_Table_Data = Bus_Route_Data[Bus_Route_Data['BUSSTOPCODE'] == str(Bus_Stop_Number)].to_dict('records')
+        Bus_Table_Data = Bus_Route_Data[Bus_Route_Data['BUSSTOPCODE'] == str(Bus_Stop_Number)]
+
+        fig = make_subplots(
+            rows=len(Bus_Table_Data), cols=1,
+            shared_xaxes=True,
+            vertical_spacing=0,
+            specs=list([{"type": "table"}] for i in range(len(Bus_Table_Data)))
+        )
+
+        for index in range(len(Bus_Table_Data)):
+            FirstBus = [Bus_Table_Data['WD_FIRSTBUS'].iloc[index], Bus_Table_Data['SAT_FIRSTBUS'].iloc[index], Bus_Table_Data['SUN_FIRSTBUS'].iloc[index]]
+            for j in range(len(FirstBus)):
+                if len(FirstBus[j]) == 2:
+                    FirstBus[j] = '00' + FirstBus[j]
+                elif len(FirstBus[j]) == 3:
+                    FirstBus[j] = '0' + FirstBus[j]
+
+            LastBus = [Bus_Table_Data['WD_LASTBUS'].iloc[index], Bus_Table_Data['SAT_LASTBUS'].iloc[index], Bus_Table_Data['SUN_LASTBUS'].iloc[index]]
+            for j in range(len(LastBus)):
+                if len(LastBus[j]) == 2:
+                    LastBus[j] = '00' + LastBus[j]
+                elif len(LastBus[j]) == 3:
+                    LastBus[j] = '0' + LastBus[j]
+
+            fig.add_trace(go.Table(
+                header=dict(values=['<b>{}</b>'.format(Bus_Table_Data['ROUTENAME'].iloc[index]), '<b>First Bus</b>', '<b>Last Bus</b>'],
+                            align=['right','center'],
+                            height=30,
+                            font=dict(family='Karla, monospace', size=18)
+                            ),
+                cells=dict(values=[['Weekdays', 'Saturdays', 'Sundays & Public Holidays'],
+                                    FirstBus,
+                                    LastBus
+                                    ],
+                            align=['right','center'],
+                            height=30,
+                            font=dict(family='Karla, monospace', size=18)
+                            )
+                ),
+                row=index+1, col=1
+            )
+
+        fig.update_layout(
+            height=len(Bus_Table_Data) * 220,
+            showlegend=True,
+            title_text="BUS SERVICES AT THIS STOP...",
+        )
+        bus_table_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for Bus Services ends here
 
         context = {
@@ -135,7 +182,7 @@ def index(request):
             'postal': postal,
             'mrt_lrt_plot': mrt_lrt_plot_div,
             'bus_plot': bus_plot_div,
-            'bus_table_data': Bus_Table_Data
+            'bus_table_plot': bus_table_div
         }
 
         return render(request, "propertyinfo/index.html", context)
