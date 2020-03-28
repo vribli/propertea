@@ -74,6 +74,54 @@ def index(request):
         mrt_lrt_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for MRT plotly ends here
 
+        # code for MRT LRT Services begins here
+        MRT_LRT_Route_Data = pd.read_csv("propertea/static/MRT_LRT_Route_Data.csv")
+        MRT_LRT_Table_Data = MRT_LRT_Route_Data[MRT_LRT_Route_Data['NUMBER'] == MRT_LRT_Station_Number]
+        fig = make_subplots(
+            rows=len(list(set(MRT_LRT_Table_Data['LINE'].values))), cols=1,
+            shared_xaxes=True,
+            vertical_spacing=0,
+            specs=list([{"type": "table"}] for i in range(len(list(set(MRT_LRT_Table_Data['LINE'].values)))))
+        )
+
+        num = 1 # super super bad coding style below, hope it doesn't crash the website
+
+        for trainline in list(set(MRT_LRT_Table_Data['LINE'].values)):
+            subset = MRT_LRT_Table_Data[MRT_LRT_Table_Data['LINE'] == trainline]
+            header_values = ["<b>{}</b>".format(trainline)]
+            table_values = [['', '<b>Weekday</b>', '<b>Saturday</b>', '<b>Sunday</b>']]
+            for index in range(len(subset)):
+                header_values.append('<b>{}</b>'.format(subset['TOWARDS'].iloc[index]))
+                header_values.append('<b>{}</b>'.format(subset['TOWARDS'].iloc[index]))
+                table_values.append(['First Train', str(subset['WD_FIRSTTRAIN'].iloc[index]), str(subset['SAT_FIRSTTRAIN'].iloc[index]), str(subset['SUN_FIRSTTRAIN'].iloc[index])])
+                table_values.append(['Last Train', str(subset['WD_LASTTRAIN'].iloc[index]), str(subset['SAT_LASTTRAIN'].iloc[index]), str(subset['SUN_LASTTRAIN'].iloc[index])])
+
+            fig.add_trace(go.Table(
+                header=dict(values=header_values,
+                            height=30,
+                            align=['right','center'],
+                            # fill = dict(color = "#9bc3eb"),
+                            font=dict(family='Karla, monospace', size=18)                
+                            ),
+                cells=dict(values=table_values,
+                            align=['right','center'],
+                            height=30,
+                            # fill = dict(color = "#d7e7f7"),
+                            font=dict(family='Karla, monospace', size=18)
+                            )
+                ),
+                row = num, col = 1
+            )
+            num+=1
+
+        fig.update_layout(
+            height=300*len(list(set(MRT_LRT_Table_Data['LINE'].values))),
+            showlegend=True,
+            title_text="MRT SERVICES AT THIS STOP",
+        )
+        mrt_lrt_table_div = plot(fig, output_type="div", include_plotlyjs=False)
+        # code for MRT LRT Services ends here
+
         # code for extracting closest bus and passenger volume begins here
         Bus_Stop = pd.DataFrame(pd.read_csv("propertea/static/Bus_Stop_Data.csv"))
         Bus_X_diff = np.subtract(np.array(Bus_Stop['X']), X)
@@ -82,8 +130,7 @@ def index(request):
         Bus_Stop_Number = int(Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NUMBER'])
         Bus_Stop_Name = Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NAME']
         Bus_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/Bus_Transport_Volume.csv"))
-        Bus_Stop_Plotting_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE'] == Bus_Stop_Number].sort_values(
-            'TIME_PER_HOUR')
+        Bus_Stop_Plotting_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE'] == Bus_Stop_Number].sort_values('TIME_PER_HOUR')
         # code for extracting closest bus and passenger volume ends here
 
         Bus_Time = [24 if x == 0 else x for x in Bus_Stop_Plotting_Data['TIME_PER_HOUR'].tolist()]
@@ -201,6 +248,7 @@ def index(request):
             'name': name,
             'postal': postal,
             'mrt_lrt_plot': mrt_lrt_plot_div,
+            'mrt_lrt_table_plot': mrt_lrt_table_div,
             'bus_plot': bus_plot_div,
             'bus_table_plot': bus_table_div,
             'links': links,
