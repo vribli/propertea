@@ -19,6 +19,8 @@ def index(request):
         info = requests.get(URL).json()
         X = float(info['results'][0]['X'])
         Y = float(info['results'][0]['Y'])
+        LAT = float(info['results'][0]['LATITUDE'])
+        LONG = float(info['results'][0]['LONGITUDE'])
         # code to get nearest property coordinate ends here
 
         # code for extracting closest MRT and passenger volume begins here
@@ -198,8 +200,9 @@ def index(request):
             'bus_plot': bus_plot_div,
             'bus_table_plot': bus_table_div,
             'links' : links,
-            'url' : 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q='+name+" singapore property"
-
+            'url' : 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q='+name+" singapore property",
+            'LAT' : LAT,
+            'LONG' : LONG
         }
 
         return render(request, "propertyinfo/index.html", context)

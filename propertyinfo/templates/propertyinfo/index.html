@@ -466,13 +466,20 @@
             <br/><br/><br/><br/>
                 <table>
                     <tr>
-                        <td width = 50%>
+                        <td width = 40%>
                             <h3> {{ name }}</h3>
                             {% for link in links %}
                                 <img src = "{{ link }}" width = 100px height = 100px>
-                            {% endfor %}
+                            {% endfor %}<br/>
                             <a>Click <a href = "{{ url }}">here</a> for more images.</a>
                         </td>
+                    <td width = 60%>
+                        <div>
+                        <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{ LAT }},{{ LONG }}!colour:red&popupWidth=200"
+                            height=300px width=100% scrolling="no" frameborder="0"
+                            allowfullscreen="allowfullscreen"></iframe>
+                </div>
+                    </td>
                     </tr>
                 </table>
                 <iframe id="sqftmain" style="background-color:#fcfcfc" frameborder="0" width="100%"></iframe>
