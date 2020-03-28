@@ -221,15 +221,15 @@
                         </tr>
                     </table>
                 {% else %}
-                <form action="{% url 'login' %}?next={{ next_url }}">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                            <script>document.getElementById('next_url').value = window.location.href;</script>
-                            <input type="hidden" name="next_url" id = "next_url" value="{{ next_url }}"/>
-                        </li>
-                        <input type="hidden" name="next_url" value="{{ next_url }}"/>
-                </form>
+                    <form action="{% url 'login' %}?next={{ next_url }}">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
+                                <script>document.getElementById('next_url').value = window.location.href;</script>
+                                <input type="hidden" name="next_url" id="next_url" value="{{ next_url }}"/>
+                            </li>
+                            <input type="hidden" name="next_url" value="{{ next_url }}"/>
+                    </form>
                 {% endif %}
                 </ul>
             </div>
