@@ -5,7 +5,6 @@ import requests
 from bs4 import BeautifulSoup
 from pandas import *
 
-
 # Create your views here.
 from users.models import FavouriteProperty
 
@@ -24,7 +23,8 @@ def index(request):
             resfiltered = [i for i in values if (i['DISTRICT'] == district)]
 
         else:
-            res = requests.get("https://developers.onemap.sg/commonapi/search?returnGeom=Y&getAddrDetails=Y&pageNum=1", params = {'searchVal' : keyword}).json()
+            res = requests.get("https://developers.onemap.sg/commonapi/search?returnGeom=Y&getAddrDetails=Y&pageNum=1",
+                               params={'searchVal': keyword}).json()
 
             resfiltered = [i for i in res.get('results') if not (i['POSTAL'] == 'NIL')]
 
@@ -39,12 +39,16 @@ def index(request):
 
                 try:
                     r = requests.get(URL)
-                    info_raw = BeautifulSoup(r.content).find('table', {"class": "minimalist", "width": "95%"}).text.replace("\n\n", "").replace("#", "").replace("*", "").split("\n")
+                    info_raw = BeautifulSoup(r.content).find('table',
+                                                             {"class": "minimalist", "width": "95%"}).text.replace(
+                        "\n\n", "").replace("#", "").replace("*", "").split("\n")
                     ptype = "Non-Landed Residential"
                 except:
                     try:
                         r = requests.get(URLL)
-                        info_raw = BeautifulSoup(r.content).find('table',{"class": "minimalist", "width": "95%"}).text.replace("\n\n", "").replace("#", "").replace("*", "").split("\n")
+                        info_raw = BeautifulSoup(r.content).find('table',
+                                                                 {"class": "minimalist", "width": "95%"}).text.replace(
+                            "\n\n", "").replace("#", "").replace("*", "").split("\n")
                         ptype = "Landed Residential"
                     except:
                         ptype = None
@@ -57,18 +61,18 @@ def index(request):
             resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Landed Residential")]
         else:
             resfiltered2 = [i for i in resfiltered if not (i['TYPE'] == None)]
-        favourite =[]
+        favourite = []
         if request.user.is_authenticated:
             favourite = [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
         print(favourite)
         context = {
-            'keyword' : keyword,
-            'res' : resfiltered2,
+            'keyword': keyword,
+            'res': resfiltered2,
             'district': district,
-            'favourite' : favourite,
+            'favourite': favourite,
         }
         return render(request, "search/index.html", context)
-    #except KeyError:
+    # except KeyError:
     #    return HttpResponse("Access through home, please")
 
 
@@ -77,7 +81,7 @@ def favourites_view(request):
     if request.POST:
         user = request.user
         if user is not None:
-            propertyname=request.POST['propertyname']
+            propertyname = request.POST['propertyname']
             favourite = []
             if request.user.is_authenticated:
                 favourite = [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
