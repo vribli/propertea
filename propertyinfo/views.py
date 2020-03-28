@@ -1,11 +1,12 @@
-from django.shortcuts import render
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-from plotly.offline import plot
-import numpy as np
 import requests
-from plotly.subplots import make_subplots
 from bs4 import BeautifulSoup
+from django.shortcuts import render
+from plotly.offline import plot
+from plotly.subplots import make_subplots
+
 
 # Create your views here.
 def index(request):
@@ -69,7 +70,7 @@ def index(request):
             name='Total Tap Out Volume',
             marker_color='LightSkyBlue')
         )
-        fig.update_layout(barmode='group', xaxis_tickangle=-45,font = {"family": "Karla", "size":16})
+        fig.update_layout(barmode='group', xaxis_tickangle=-45, font={"family": "Karla", "size": 16})
         mrt_lrt_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for MRT plotly ends here
 
@@ -123,7 +124,7 @@ def index(request):
             marker_color='LightSkyBlue')
         )
 
-        fig.update_layout(barmode='group', xaxis_tickangle=-45, font = {"family": "Karla", "size":16})
+        fig.update_layout(barmode='group', xaxis_tickangle=-45, font={"family": "Karla", "size": 16})
         bus_plot_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for Bus plotly ends here
 
@@ -139,14 +140,16 @@ def index(request):
         )
 
         for index in range(len(Bus_Table_Data)):
-            FirstBus = [Bus_Table_Data['WD_FIRSTBUS'].iloc[index], Bus_Table_Data['SAT_FIRSTBUS'].iloc[index], Bus_Table_Data['SUN_FIRSTBUS'].iloc[index]]
+            FirstBus = [Bus_Table_Data['WD_FIRSTBUS'].iloc[index], Bus_Table_Data['SAT_FIRSTBUS'].iloc[index],
+                        Bus_Table_Data['SUN_FIRSTBUS'].iloc[index]]
             for j in range(len(FirstBus)):
                 if len(FirstBus[j]) == 2:
                     FirstBus[j] = '00' + FirstBus[j]
                 elif len(FirstBus[j]) == 3:
                     FirstBus[j] = '0' + FirstBus[j]
 
-            LastBus = [Bus_Table_Data['WD_LASTBUS'].iloc[index], Bus_Table_Data['SAT_LASTBUS'].iloc[index], Bus_Table_Data['SUN_LASTBUS'].iloc[index]]
+            LastBus = [Bus_Table_Data['WD_LASTBUS'].iloc[index], Bus_Table_Data['SAT_LASTBUS'].iloc[index],
+                       Bus_Table_Data['SUN_LASTBUS'].iloc[index]]
             for j in range(len(LastBus)):
                 if len(LastBus[j]) == 2:
                     LastBus[j] = '00' + LastBus[j]
@@ -154,21 +157,22 @@ def index(request):
                     LastBus[j] = '0' + LastBus[j]
 
             fig.add_trace(go.Table(
-                header=dict(values=['<b>{}</b>'.format(Bus_Table_Data['ROUTENAME'].iloc[index]), '<b>First Bus</b>', '<b>Last Bus</b>'],
-                            align=['right','center'],
+                header=dict(values=['<b>{}</b>'.format(Bus_Table_Data['ROUTENAME'].iloc[index]), '<b>First Bus</b>',
+                                    '<b>Last Bus</b>'],
+                            align=['right', 'center'],
                             height=30,
                             font=dict(family='Karla, monospace', size=18)
                             ),
                 cells=dict(values=[['Weekdays', 'Saturdays', 'Sundays & Public Holidays'],
-                                    FirstBus,
-                                    LastBus
-                                    ],
-                            align=['right','center'],
-                            height=30,
-                            font=dict(family='Karla, monospace', size=18)
-                            )
-                ),
-                row=index+1, col=1
+                                   FirstBus,
+                                   LastBus
+                                   ],
+                           align=['right', 'center'],
+                           height=30,
+                           font=dict(family='Karla, monospace', size=18)
+                           )
+            ),
+                row=index + 1, col=1
             )
 
         fig.update_layout(
@@ -180,7 +184,7 @@ def index(request):
         # code for Bus Services ends here
 
         url = 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982'
-        page = requests.get(url, params = {'q': name + " singapore property"}).text
+        page = requests.get(url, params={'q': name + " singapore property"}).text
 
         soup = BeautifulSoup(page, 'html.parser')
 
@@ -199,10 +203,10 @@ def index(request):
             'mrt_lrt_plot': mrt_lrt_plot_div,
             'bus_plot': bus_plot_div,
             'bus_table_plot': bus_table_div,
-            'links' : links,
-            'url' : 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q='+name+" singapore property",
-            'LAT' : LAT,
-            'LONG' : LONG
+            'links': links,
+            'url': 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q=' + name + " singapore property",
+            'LAT': LAT,
+            'LONG': LONG
         }
 
         return render(request, "propertyinfo/index.html", context)
