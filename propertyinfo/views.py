@@ -177,12 +177,29 @@ def index(request):
         bus_table_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for Bus Services ends here
 
+        url = 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982'
+        page = requests.get(url, params = {'q': name + " singapore property"}).text
+
+        soup = BeautifulSoup(page, 'html.parser')
+
+        links = []
+
+        for raw_img in soup.find_all('img'):
+            link = raw_img.get('src')
+            if link and 'http://' in link:
+                links.append(link)
+            if len(links) >= 3:
+                break
+
         context = {
             'name': name,
             'postal': postal,
             'mrt_lrt_plot': mrt_lrt_plot_div,
             'bus_plot': bus_plot_div,
-            'bus_table_plot': bus_table_div
+            'bus_table_plot': bus_table_div,
+            'links' : links,
+            'url' : 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q='+name+" singapore property"
+
         }
 
         return render(request, "propertyinfo/index.html", context)

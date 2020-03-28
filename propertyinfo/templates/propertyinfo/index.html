@@ -463,6 +463,18 @@
                 </div>
             </div>
             <div class="RightContent">
+            <br/><br/><br/><br/>
+                <table>
+                    <tr>
+                        <td width = 50%>
+                            <h3> {{ name }}</h3>
+                            {% for link in links %}
+                                <img src = "{{ link }}" width = 100px height = 100px>
+                            {% endfor %}
+                            <a>Click <a href = "{{ url }}">here</a> for for images.</a>
+                        </td>
+                    </tr>
+                </table>
                 <iframe id="sqftmain" style="background-color:#fcfcfc" frameborder="0" width="100%"></iframe>
                 <div>{{ mrt_lrt_plot|safe }}</div>
                 <div>{{ bus_plot|safe }}</div>
