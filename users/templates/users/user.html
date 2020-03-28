@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static  "favicon.ico" %}">
+    {#<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 
     <style>
         body {
@@ -152,6 +157,7 @@
 
         html, body, .Container {
             height: 100%;
+            font-family: 'Karla', sans-serif;
         }
 
         .Container:before {
@@ -198,6 +204,7 @@
             content: counter(Serial); /* Display the counter */
         }
 
+
     </style>
     <!------ Include the above in your HEAD tag ---------->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -209,6 +216,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
 </head>
 <!--
 User Profile Sidebar by @keenthemes
@@ -237,39 +246,6 @@ Licensed under MIT
                             <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name="keyword"
                                    id="keyword" aria-label="Search" size=75%>
 
-                        </li>
-
-                        <li class="nav-item">
-                            <div id="navbarNavDropdown">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        Sort by
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Most relevant</a>
-                                        <a class="dropdown-item" href="#">Lowest price</a>
-                                        <a class="dropdown-item" href="#">Smallest size</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <div id="navbarNavDropdown">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle mr-sm-2" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        Apply filter
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Public</a>
-                                        <a class="dropdown-item" href="#">Public-private hybrid</a>
-                                        <a class="dropdown-item" href="#">Private</a>
-                                    </div>
-                                </div>
-                            </div>
                         </li>
 
                         <li class="nav-item">

@@ -52,6 +52,7 @@
 
         .Header {
             margin-bottom: 10px;
+
         }
 
         .Footer {
@@ -67,6 +68,7 @@
             content: '';
             clear: both;
             display: block;
+            align-content: center;
         }
 
         .Wrapper {
@@ -103,6 +105,24 @@
 
         }
 
+        .toprighttable {
+            float: right;
+            width: 17%;
+            height: 10%;
+        }
+
+
+        td.big {
+            text-align: center;
+            font-size: 100%;
+        }
+
+        td.small {
+            font-size: 70%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -119,7 +139,7 @@
 
 <div class="Container">
     <div class="Header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
             <a class="navbar-brand mr-sm-6" href="/">
                 <img src="{% static "logo.png" %}" height=30px/>
                 <a class="navbar-brand" href="/">Propertea </a>
@@ -147,6 +167,7 @@
                                 <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
                                 <input type="hidden" name="filterby" id="filterby" value="nil">
                                 <input type="hidden" name="district" id="district" value="nil">
+
                             </div>
                         </li>
                         <li class="nav-item">
@@ -178,6 +199,28 @@
                         </li>
                 </ul>
                 </form>
+                <a></a>
+                {% if user.is_authenticated %}
+                    <table class="toprighttable">
+                        <tr>
+                            <td class="big" colspan="3">Welcome, {{ user.username }}</td>
+                            <td rowspan="2"><img src="{% static "Profile.png" %}" height=50px/></td>
+                        </tr>
+                        <tr>
+                            <td class="small">
+                                <a href="/users">
+                                    <div>VIEW FAVOURITES</div>
+                                </a>
+                            </td>
+                            <td>|</td>
+                            <td class="small">
+                                <a href="/users/logout">
+                                    <div>LOGOUT</div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                {% else %}
                 <form action="{% url 'login' %}?next={{ next_url }}">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -187,6 +230,7 @@
                         </li>
                         <input type="hidden" name="next_url" value="{{ next_url }}"/>
                 </form>
+                {% endif %}
                 </ul>
             </div>
         </nav>
@@ -206,7 +250,6 @@
                         {% for r in res %}
                             <tr>
                                 <td>
-
                                     <form class="form-inline" action='/search/favourites' method=post>
                                         {% csrf_token %}
                                         <input type="hidden" name="propertyname" id="propertyname"
