@@ -5,10 +5,10 @@
 <head>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <meta charset="utf-8">
-    {% if keyword == 'nil' %}
+    {% if name == 'nil' %}
         <title>Propertea</title>
     {% else %}
-        <title>Propertea - {{ keyword }}</title>
+        <title>Propertea - {{ name }}</title>
     {% endif %}
 
     <link rel="icon" href="{% static  "favicon.ico" %}">
