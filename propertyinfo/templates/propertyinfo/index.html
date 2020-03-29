@@ -73,6 +73,7 @@
         .Content {
             position: relative;
             z-index: 1;
+            scroll-behavior: smooth;
         }
 
         .Content:after {
@@ -100,6 +101,7 @@
 
         .RightContent {
             overflow: auto;
+            scroll-behavior: smooth;
         }
 
         .center {
@@ -333,7 +335,7 @@
     </script>
 
     <script>
-        $(document).ready(function () {
+         $(document).ready(function () {
             squarefoot.load("busstop", {
                 task: "project",
                 name: " {{ name }}",
@@ -344,7 +346,7 @@
                 //transaction: "1", rental: "1",
             });
             $("#busstop").iFrameResize();
-        });
+        }).scrollIntoView({behavior: "smooth"});
     </script>
 
 </head>
@@ -420,7 +422,7 @@
                         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                             <div class="sidebar-sticky">
                                 <br>
-                                <ul class="nav flex-column smooth-scroll">
+                                <ul class="nav flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="#pinfo">
                                             <img src="{% static "home.svg" %}" width="20" height="20">
@@ -458,7 +460,7 @@
                                             Transport Information
                                         </a>
                                     </li>
-                                </ul>
+                                </ul></ul>
                             </div>
                         </nav>
                     </div>
