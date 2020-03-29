@@ -1,27 +1,26 @@
-from . import controller
-from django.http import HttpResponse, HttpResponseRedirect
+from .controller import PropertyInfoController
 from django.shortcuts import render
 
 
 # Create your views here.
 def index(request):
-    c = controller.PropertyInfoController(request)
+    c = PropertyInfoController(request)
 
     context = {
         'name': c.name,
         'postal': c.postal,
-        'mrt_lrt_plot': c.MRTLRTPlot(),
-        'mrt_lrt_table_plot': c.MRTLRTTable(),
-        'bus_plot': c.BusPlot(),
-        'bus_table_plot': c.BusTable(),
-        'links': c.PropertyImages(),
-        'url': 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q=' + c.name + " singapore property",
+        'mrt_lrt_plot': c.getMRTLRTData().plot(),
+        'mrt_lrt_table_plot': c.getMRTLRTData().table(),
+        'bus_plot': c.getBusData().plot(),
+        'bus_table_plot': c.getBusData().table(),
+        'links': c.getImages(),
+        'url': c.getImageURL(),
         'LAT': c.LAT,
         'LONG': c.LONG,
-        'nearest_train_lat': c.MRT_LRT_Data['Lat'],
-        'nearest_train_long': c.MRT_LRT_Data['Long'],
-        'nearest_bus_lat': c.Bus_Data['Lat'],
-        'nearest_bus_long': c.Bus_Data['Long']
+        'nearest_train_lat': c.getMRTLRTData().lat,
+        'nearest_train_long': c.getMRTLRTData().long,
+        'nearest_bus_lat': c.getBusData().lat,
+        'nearest_bus_long': c.getBusData().long
     }
 
     return render(request, "propertyinfo/index.html", context)
