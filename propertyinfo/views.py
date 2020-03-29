@@ -10,18 +10,18 @@ def index(request):
     context = {
         'name': c.name,
         'postal': c.postal,
-        'mrt_lrt_plot': c.MRT_LRT_Data.plot(),
-        'mrt_lrt_table_plot': c.MRT_LRT_Data.table(),
-        'bus_plot': c.Bus_Data.plot(),
-        'bus_table_plot': c.Bus_Data.table(),
-        'links': c.PropertyImages(),
-        'url': 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q=' + c.name + " singapore property",
+        'mrt_lrt_plot': c.getMRTLRTData().plot(),
+        'mrt_lrt_table_plot': c.getMRTLRTData().table(),
+        'bus_plot': c.getBusData().plot(),
+        'bus_table_plot': c.getBusData().table(),
+        'links': c.getImages(),
+        'url': c.getImageURL(),
         'LAT': c.LAT,
         'LONG': c.LONG,
-        'nearest_train_lat': c.MRT_LRT_Data.lat,
-        'nearest_train_long': c.MRT_LRT_Data.long,
-        'nearest_bus_lat': c.Bus_Data.lat,
-        'nearest_bus_long': c.Bus_Data.long
+        'nearest_train_lat': c.getMRTLRTData().lat,
+        'nearest_train_long': c.getMRTLRTData().long,
+        'nearest_bus_lat': c.getBusData().lat,
+        'nearest_bus_long': c.getBusData().long
     }
 
     return render(request, "propertyinfo/index.html", context)

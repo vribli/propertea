@@ -194,6 +194,25 @@ class BusData(TransportData):
         return plot(fig, output_type="div", include_plotlyjs=False)
 
 
+class PropertyImages:
+    def __init__(self, name):
+        self.name = name
 
+    def getLinks(self):
+        url = 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982'
+        page = requests.get(url, params={'q': self.name + " singapore property"}).text
+        soup = BeautifulSoup(page, 'html.parser')
 
+        links = []
 
+        for raw_img in soup.find_all('img'):
+            link = raw_img.get('src')
+            if link and 'http://' in link:
+                links.append(link)
+            if len(links) >= 3:
+                break
+
+        return links
+
+    def getURL(self):
+        return 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q=' + self.name + " singapore property"
