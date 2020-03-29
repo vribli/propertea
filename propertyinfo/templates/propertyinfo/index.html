@@ -16,10 +16,15 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
     <style>
-        html, body {
+        body {
             height: 100%;
             width: 100%;
             font-family: 'Karla', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         h3 {
@@ -43,6 +48,7 @@
 
         html, body, .Container {
             height: 100%;
+            scroll-behavior: smooth;
         }
 
         .Container:before {
@@ -66,6 +72,7 @@
         .Content {
             position: relative;
             z-index: 1;
+            scroll-behavior: smooth;
         }
 
         .Content:after {
@@ -93,11 +100,7 @@
 
         .RightContent {
             overflow: auto;
-        }
-
-        .right {
-            text-align: right;
-            vertical-align: center;
+            scroll-behavior: smooth;
         }
 
         .center {
@@ -106,14 +109,6 @@
             text-align: center;
             vertical-align: center;
 
-        }
-
-        .fixed_header {
-            width: 100%;
-            table-layout: auto;
-            border-collapse: collapse;
-            margin-bottom: 100px;
-            position: fixed;
         }
 
         .Header {
@@ -160,18 +155,12 @@
             overflow: auto;
         }
 
-        .right {
-            text-align: right;
-            vertical-align: center;
-        }
-
         .center {
             width: 90%;
             height: 20%;
             text-align: center;
             vertical-align: center;
         }
-
 
         .fixed_header tbody {
             display: block;
@@ -180,29 +169,13 @@
             height: 700%;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         a {
             text-decoration: none;
             color: black;
         }
 
-        #top, #middle, #bottom {
-            height: 600px;
-            width: 300px;
-            background: none;
-        }
-
         body {
             font-size: .875rem;
-        }
-
-        .feather {
-            width: 16px;
-            height: 16px;
-            vertical-align: text-bottom;
         }
 
         /*
@@ -254,11 +227,6 @@
             color: inherit;
         }
 
-        .sidebar-heading {
-            font-size: .75rem;
-            text-transform: uppercase;
-        }
-
         /*
          * Content
          */
@@ -271,30 +239,11 @@
          * Navbar
          */
 
-        {#.navbar-brand {#}
-        {#    padding-top: .75rem;#}
-        {#    padding-bottom: .75rem;#}
-        {#    font-size: 1rem;#}
-        {#background-color: rgba(0, 0, 0, .25);#}{#box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);#}
-        #}#}
-
         .navbar .form-control {
             padding: .75rem 1rem;
             border-width: 0;
             border-radius: 0;
         }
-
-        .form-control-dark {
-            color: #fff;
-            background-color: rgba(255, 255, 255, .1);
-            border-color: rgba(255, 255, 255, .1);
-        }
-
-        .form-control-dark:focus {
-            border-color: transparent;
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-        }
-
 
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -376,11 +325,27 @@
                 type: "r",
                 subtype: "abc",
                 map: "1",
-                amenities: "1,1,500,ckl"
+                //amenities: "1,1,500,ckl"
                 //transaction: "1", rental: "1",
             });
             $("#amenities").iFrameResize();
         });
+
+    </script>
+
+    <script>
+         $(document).ready(function () {
+            squarefoot.load("busstop", {
+                task: "project",
+                name: " {{ name }}",
+                type: "r",
+                subtype: "abc",
+                {#map: "1",#}
+                amenities: "1,1,500,ckl"
+                //transaction: "1", rental: "1",
+            });
+            $("#busstop").iFrameResize();
+        }).scrollIntoView({behavior: "smooth"});
     </script>
 
 </head>
@@ -421,7 +386,6 @@
                     </li>
                     <li class="nav-item">
                         <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
-
                     </li>
             </ul>
             </form>
@@ -461,58 +425,40 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" href="#pinfo">
                                             <img src="{% static "home.svg" %}" width="20" height="20">
-                                            {#                                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>#}
-                                            {#                                                <polyline points="9 22 9 12 15 12 15 22"></polyline>#}
                                             Property Information <span class="sr-only">(current)</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#pchart">
                                             <img src="{% static "activity.svg" %}" width="20" height="20">
-                                            {#                                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>#}
-                                            {#                                                <polyline points="13 2 13 9 20 9"></polyline>#}
                                             Past Transaction Prices
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#rchart">
                                             <img src="{% static "activity.svg" %}" width="20" height="20">
-                                            {#                                                <circle cx="9" cy="21" r="1"></circle>#}
-                                            {#                                                <circle cx="20" cy="21" r="1"></circle>#}
-                                            {#                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>#}
-                                            {#                                            </svg>#}
                                             Monthly Price Range
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#amenities">
                                             <img src="{% static "map.svg" %}" width="20" height="20">
-                                            {#                                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>#}
-                                            {#                                                <circle cx="9" cy="7" r="4"></circle>#}
-                                            {#                                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>#}
-                                            {#                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>#}
                                             Nearby Amenities
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="#busstop">
                                             <img src="{% static "clipboard.svg" %}" width="20" height="20">
-                                            {#                                                <line x1="18" y1="20" x2="18" y2="10"></line>#}
-                                            {#                                                <line x1="12" y1="20" x2="12" y2="4"></line>#}
-                                            {#                                                <line x1="6" y1="20" x2="6" y2="14"></line>#}
                                             Bus Stops
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="#tinfo">
                                             <img src="{% static "bar-chart-2.svg" %}" width="20" height="20">
-                                            {#                                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>#}
-                                            {#                                                <polyline points="2 17 12 22 22 17"></polyline>#}
-                                            {#                                                <polyline points="2 12 12 17 22 12"></polyline>#}
                                             Transport Information
                                         </a>
                                     </li>
-                                </ul>
+                                </ul></ul>
                             </div>
                         </nav>
                     </div>
@@ -554,6 +500,11 @@
                     <iframe id="amenities" frameborder="0" width="100%"
                             style="background-color:#fcfcfc; position: relative; top: -125px"></iframe>
                 </div>
+                <div style="width: 100%; overflow: hidden" name="busstop">
+                    <iframe id="busstop" frameborder="0" width="100%"
+                            style="background-color:#fcfcfc; position: relative; top: -125px"></iframe>
+                </div>
+                <div id="tinfo">
                 <table>
                     <tr>
                         <td width=70%>
@@ -590,6 +541,7 @@
                         </td>
                     </tr>
                 </table>
+                </div>
 
 
                 <div class="center">
@@ -601,8 +553,6 @@
                     </a>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
