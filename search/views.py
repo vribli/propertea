@@ -55,20 +55,21 @@ def index(request):
 
                 i['TYPE'] = ptype
 
-        if filterby == "nonlanded":
-            resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Non-Landed Residential")]
-        elif filterby == "landed":
-            resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Landed Residential")]
-        else:
-            resfiltered2 = [i for i in resfiltered if not (i['TYPE'] == None)]
-
         seen = set()
-        final = []
-        for d in resfiltered2:
+        resfiltered2 = []
+        for d in resfiltered:
             t = tuple(d['BUILDING'])
             if t not in seen:
                 seen.add(t)
-                final.append(d)
+                resfiltered2.append(d)
+
+        if filterby == "nonlanded":
+            final = [i for i in resfiltered2 if (i['TYPE'] == "Non-Landed Residential")]
+        elif filterby == "landed":
+            final = [i for i in resfiltered2 if (i['TYPE'] == "Landed Residential")]
+        else:
+            final = [i for i in resfiltered2 if not (i['TYPE'] == None)]
+
 
         favourite = []
         if request.user.is_authenticated:
