@@ -118,7 +118,7 @@ def index(request):
         fig.update_layout(
             height=400*len(list(set(MRT_LRT_Table_Data['LINE'].values))),
             showlegend=True,
-            title_text="MRT SERVICES AT THIS STOP",
+            title_text="MRT/LRT SERVICES AT THIS STOP",
         )
         mrt_lrt_table_div = plot(fig, output_type="div", include_plotlyjs=False)
         # code for MRT LRT Services ends here
