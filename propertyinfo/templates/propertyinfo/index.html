@@ -15,11 +15,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
+
     <style>
-        html, body {
+        body {
             height: 100%;
             width: 100%;
             font-family: 'Karla', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         h3 {
@@ -43,6 +49,7 @@
 
         html, body, .Container {
             height: 100%;
+            scroll-behavior: smooth;
         }
 
         .Container:before {
@@ -95,25 +102,12 @@
             overflow: auto;
         }
 
-        .right {
-            text-align: right;
-            vertical-align: center;
-        }
-
         .center {
             width: 100%;
             height: 100%;
             text-align: center;
             vertical-align: center;
 
-        }
-
-        .fixed_header {
-            width: 100%;
-            table-layout: auto;
-            border-collapse: collapse;
-            margin-bottom: 100px;
-            position: fixed;
         }
 
         .Header {
@@ -160,18 +154,12 @@
             overflow: auto;
         }
 
-        .right {
-            text-align: right;
-            vertical-align: center;
-        }
-
         .center {
             width: 90%;
             height: 20%;
             text-align: center;
             vertical-align: center;
         }
-
 
         .fixed_header tbody {
             display: block;
@@ -180,29 +168,13 @@
             height: 700%;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         a {
             text-decoration: none;
             color: black;
         }
 
-        #top, #middle, #bottom {
-            height: 600px;
-            width: 300px;
-            background: none;
-        }
-
         body {
             font-size: .875rem;
-        }
-
-        .feather {
-            width: 16px;
-            height: 16px;
-            vertical-align: text-bottom;
         }
 
         /*
@@ -276,7 +248,6 @@
         {#    padding-bottom: .75rem;#}
         {#    font-size: 1rem;#}
         {#background-color: rgba(0, 0, 0, .25);#}{#box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);#}
-        {#}#}
 
         .navbar .form-control {
             padding: .75rem 1rem;
@@ -421,10 +392,9 @@
                     </li>
                     <li class="nav-item">
                         <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
-
                     </li>
+                </form>
             </ul>
-            </form>
             {% if user.is_authenticated %}
                 <a>Welcome, {{ user.username }}</a>
 
@@ -457,7 +427,8 @@
                         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                             <div class="sidebar-sticky">
                                 <br>
-                                <ul class="nav flex-column">
+{#                                <ul class="nav flex-column">#}
+                                    <ul class="smooth-scroll list-unstyled">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="#pinfo">
                                             <img src="{% static "home.svg" %}" width="20" height="20">
@@ -468,6 +439,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#pchart">
+
                                             <img src="{% static "activity.svg" %}" width="20" height="20">
                                             {#                                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>#}
                                             {#                                                <polyline points="13 2 13 9 20 9"></polyline>#}
@@ -504,7 +476,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="#tinfo">
                                             <img src="{% static "bar-chart-2.svg" %}" width="20" height="20">
                                             {#                                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>#}
                                             {#                                                <polyline points="2 17 12 22 22 17"></polyline>#}
@@ -554,7 +526,7 @@
                     <iframe id="amenities" frameborder="0" width="100%"
                             style="background-color:#fcfcfc; position: relative; top: -125px"></iframe>
                 </div>
-                <div>{{ mrt_lrt_plot|safe }}</div>
+                <div id="tinfo">{{ mrt_lrt_plot|safe }}</div>
                 <div>{{ bus_plot|safe }}</div>
                 <div>{{ bus_table_plot|safe }}</div>
                 <div class="center">
@@ -566,8 +538,6 @@
                     </a>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
