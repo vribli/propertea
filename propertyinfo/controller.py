@@ -1,6 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
-from . import models
+from .models import MRTLRTData, BusData, PropertyImages
 
 class PropertyInfoController:
     def __init__(self, request):
@@ -12,9 +11,9 @@ class PropertyInfoController:
         self.Y = float(self.info['results'][0]['Y'])
         self.LAT = float(self.info['results'][0]['LATITUDE'])
         self.LONG = float(self.info['results'][0]['LONGITUDE'])
-        self.MRT_LRT_Data = models.MRTLRTData(self.X, self.Y)
-        self.Bus_Data = models.BusData(self.X, self.Y)
-        self.images = models.PropertyImages(self.name)
+        self.MRT_LRT_Data = MRTLRTData(self.X, self.Y)
+        self.Bus_Data = BusData(self.X, self.Y)
+        self.images = PropertyImages(self.name)
 
     def getMRTLRTData(self):
         return self.MRT_LRT_Data

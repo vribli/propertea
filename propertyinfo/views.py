@@ -1,11 +1,10 @@
-from . import controller
-from django.http import HttpResponse, HttpResponseRedirect
+from .controller import PropertyInfoController
 from django.shortcuts import render
 
 
 # Create your views here.
 def index(request):
-    c = controller.PropertyInfoController(request)
+    c = PropertyInfoController(request)
 
     context = {
         'name': c.name,
