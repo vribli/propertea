@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -218,14 +219,12 @@
         .sidebar .nav-link .feather {
             margin-right: 4px;
             color: #999;
+            cursor: pointer;
         }
 
-        .sidebar .nav-link.active {
-            color: #007bff;
-        }
-
-        .sidebar .nav-link:hover .feather,
-        .sidebar .nav-link.active .feather {
+        .sidebar .nav-link:hover,
+        .sidebar .active {
+            background-color: lightskyblue;
             color: inherit;
         }
 
@@ -248,6 +247,7 @@
         }
 
     </style>
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>
@@ -336,7 +336,7 @@
     </script>
 
     <script>
-         $(document).ready(function () {
+        $(document).ready(function () {
             squarefoot.load("busstop", {
                 task: "project",
                 name: " {{ name }}",
@@ -425,9 +425,10 @@
                                 <br>
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#pinfo">
+                                        <a class="nav-link" href="#pinfo">
                                             <img src="{% static "home.svg" %}" width="20" height="20">
-                                            Property Information <span class="sr-only">(current)</span>
+                                            Property Information
+                                            {#<span class="sr-only">(current)</span>#}
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -461,7 +462,7 @@
                                             Transport Information
                                         </a>
                                     </li>
-                                </ul></ul>
+                                </ul>
                             </div>
                         </nav>
                     </div>
