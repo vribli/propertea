@@ -91,7 +91,8 @@
                     </div>
                     <div class="col-sm-3"></div>
                     <div class="col-sm-6">
-                        <form action="/search" method="get">
+                        <form action="/search" method="get" name="searchbar" onsubmit="return validateForm()"
+                              method="post" required>
                             <div class="form-group">
                                 <label for="keyword"></label>
                                 <input type="text" class="form-control" name="keyword" id="keyword"
@@ -109,7 +110,15 @@
         </td>
     </tr>
 </table>
-
+<script>
+    function validateForm() {
+        var x = document.forms["searchbar"]["keyword"].value;
+        if (x == "") {
+            alert("Please enter property name, address or postal code");
+            return false;
+        }
+    }
+</script>
 
 </body>
 
