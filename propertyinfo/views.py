@@ -31,6 +31,7 @@ def index(request):
         MRT_LRT_Station['DISTANCE'] = np.sqrt(np.square(MRT_LRT_X_diff) + np.square(MRT_LRT_Y_diff))
         MRT_LRT_Station_Name = MRT_LRT_Station.sort_values(by='DISTANCE').iloc[0]['NAME']
         MRT_LRT_Station_Number = MRT_LRT_Station.sort_values(by='DISTANCE').iloc[0]['NUMBER']
+        MRT_LRT_Station_Lat, MRT_LRT_Station_Long = MRT_LRT_Station.sort_values(by='DISTANCE').iloc[0]['LATITUDE'], MRT_LRT_Station.sort_values(by='DISTANCE').iloc[0]['LONGITUDE']
         MRT_LRT_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/MRT_LRT_Transport_Volume.csv"))
         MRT_LRT_Plotting_Data = MRT_LRT_Transport_Volume[
             MRT_LRT_Transport_Volume['PT_CODE'] == MRT_LRT_Station_Number].sort_values('TIME_PER_HOUR')
@@ -115,7 +116,7 @@ def index(request):
             num+=1
 
         fig.update_layout(
-            height=300*len(list(set(MRT_LRT_Table_Data['LINE'].values))),
+            height=400*len(list(set(MRT_LRT_Table_Data['LINE'].values))),
             showlegend=True,
             title_text="MRT SERVICES AT THIS STOP",
         )
@@ -129,6 +130,7 @@ def index(request):
         Bus_Stop['DISTANCE'] = np.sqrt(np.square(Bus_X_diff) + np.square(Bus_Y_diff))
         Bus_Stop_Number = int(Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NUMBER'])
         Bus_Stop_Name = Bus_Stop.sort_values(by='DISTANCE').iloc[0]['NAME']
+        Bus_Stop_Lat, Bus_Stop_Long = Bus_Stop.sort_values(by='DISTANCE').iloc[0]['LATITUDE'], Bus_Stop.sort_values(by='DISTANCE').iloc[0]['LONGITUDE']
         Bus_Transport_Volume = pd.DataFrame(pd.read_csv("propertea/static/Bus_Transport_Volume.csv"))
         Bus_Stop_Plotting_Data = Bus_Transport_Volume[Bus_Transport_Volume['PT_CODE'] == Bus_Stop_Number].sort_values('TIME_PER_HOUR')
         # code for extracting closest bus and passenger volume ends here
@@ -254,7 +256,11 @@ def index(request):
             'links': links,
             'url': 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q=' + name + " singapore property",
             'LAT': LAT,
-            'LONG': LONG
+            'LONG': LONG,
+            'nearest_train_lat': MRT_LRT_Station_Lat, 
+            'nearest_train_long':MRT_LRT_Station_Long,
+            'nearest_bus_lat': Bus_Stop_Lat,
+            'nearest_bus_long': Bus_Stop_Long
         }
 
         return render(request, "propertyinfo/index.html", context)
