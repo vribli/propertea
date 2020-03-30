@@ -17,7 +17,14 @@ class LoginController():
     def __init__(self, request):
         self.request = request
 
-    def login(self):
+    def indexResponse(self):
+        context = {
+            "user": self.request.user,
+            "favourites": [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
+        }
+        return render(self.request, "users/user.html", context)
+
+    def loginResponse(self):
         if self.request.user.is_authenticated:
             return HttpResponseRedirect("/users")
         elif self.request.POST:
@@ -42,3 +49,83 @@ class LoginController():
                 return render(self.request, "users/login.html")
         else:
             return render(self.request, "users/login.html")
+
+    def logoutResponse(self):
+        logout(self.request)
+        messages.success(self.request, "Logged Out.")
+        return HttpResponseRedirect("/users/login")
+
+    def createAccountResponse(self):
+        form = SignUpForm(self.request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+
+            # user can't login until link confirmed
+            user.is_active = False
+            user.save()
+            # current_site = get_current_site(request)
+            subject = 'Please Activate Your Account'
+            # load a template like get_template()
+            # and calls its render() method immediately.
+            message = render_to_string('users/activation_request.html', {
+                'user': user,
+                'domain': "127.0.0.1:8000",
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                # method will generate a hash value with user related data
+                'token': account_activation_token.make_token(user),
+            })
+            user.email_user(subject, message)
+            return redirect("activation_sent")
+        else:
+            if striptags(
+                    form.errors) != "usernameThis field is required.emailThis field is required.first_nameThis field " \
+                                    "is required.last_nameThis field is required.password1This field is " \
+                                    "required.password2This field is required.":
+                errorlist = []
+                for errors in form.errors.items():
+                    messages.error(self.request, errors[1][0])
+                    print(errors)
+            form = SignUpForm()
+        return render(self.request, 'users/createaccount.html', {'form': form})
+
+    def activateResponse(self, uidb64, token):
+        form = SignUpForm(self.request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+
+            # user can't login until link confirmed
+            user.is_active = False
+            user.save()
+            # current_site = get_current_site(request)
+            subject = 'Please Activate Your Account'
+            # load a template like get_template()
+            # and calls its render() method immediately.
+            message = render_to_string('users/activation_request.html', {
+                'user': user,
+                'domain': "127.0.0.1:8000",
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                # method will generate a hash value with user related data
+                'token': account_activation_token.make_token(user),
+            })
+            user.email_user(subject, message)
+            return redirect("activation_sent")
+        else:
+            if striptags(
+                    form.errors) != "usernameThis field is required.emailThis field is required.first_nameThis field " \
+                                    "is required.last_nameThis field is required.password1This field is " \
+                                    "required.password2This field is required.":
+                errorlist = []
+                for errors in form.errors.items():
+                    messages.error(self.request, errors[1][0])
+                    print(errors)
+            form = SignUpForm()
+        return render(self.request, 'users/createaccount.html', {'form': form})
+
+    def activationSentResponse(self):
+        return render(self.request, 'users/activation_sent.html')
