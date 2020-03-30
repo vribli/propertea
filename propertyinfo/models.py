@@ -34,7 +34,7 @@ class TransportData(metaclass = ABCMeta):
         fig = go.Figure()
         fig.layout = go.Layout(
             title=go.layout.Title(
-                text="[Nearest " + self.type + " " + self.term + "] {}  {}".format(self.name, self.number),
+                text="{}  {}".format(self.name.upper(), self.number),
             ),
 
             xaxis=go.layout.XAxis(
@@ -169,7 +169,7 @@ class BusData(TransportData):
                 header=dict(values=['<b>{}</b>'.format(tableData['ROUTENAME'].iloc[index]), '<b>First Bus</b>',
                                     '<b>Last Bus</b>'],
                             align=['right', 'center'],
-                            fill=dict(color = 'rgb(201,190,120'),
+                            fill=dict(color = 'rgb(201,190,120)'),
                             height=30,
                             font=dict(family='Karla, monospace', size=18)
                             ),
@@ -178,7 +178,7 @@ class BusData(TransportData):
                                    LastBus
                                    ],
                            align=['right', 'center'],
-                           fill=dict(color = 'rgb(252,250,241'),
+                           fill=dict(color = 'rgb(252,250,241)'),
                            height=30,
                            font=dict(family='Karla, monospace', size=18)
                            )
@@ -189,7 +189,7 @@ class BusData(TransportData):
         fig.update_layout(
             height=len(tableData) * 220,
             showlegend=True,
-            title_text="BUS SERVICES AT THIS STOP...",
+            title_text="BUS SERVICES AT THIS STOP",
         )
         return plot(fig, output_type="div", include_plotlyjs=False)
 
