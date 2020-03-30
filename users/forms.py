@@ -7,6 +7,10 @@ from django.utils.safestring import mark_safe
 class SignUpForm(UserCreationForm):
     """
     This class defines the Sign-Up form for Users.
+
+    :ivar first_name: The first name of the user.
+    :ivar last_name: The last name of the user.
+    :ivar email: The email of the user.
     """
     first_name = forms.CharField(max_length=400)
     last_name = forms.CharField(max_length=400)

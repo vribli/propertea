@@ -135,6 +135,14 @@
 <dt id="users.models.FavouriteProperty">
 <em class="property">class </em><code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">FavouriteProperty</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.FavouriteProperty" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class seeks to save the User’s favourite properties in a one-to-one relationship.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> – The User object of the selected user.</p></li>
+<li><p><strong>name</strong> – The Name of the property saved.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="exception">
 <dt id="users.models.FavouriteProperty.DoesNotExist">
 <em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#users.models.FavouriteProperty.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -151,6 +159,14 @@
 <dt id="users.models.Profile">
 <em class="property">class </em><code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">Profile</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.Profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class seeks to create a separate class to ensure the activation is needed for account usage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> – The User object of the selected user.</p></li>
+<li><p><strong>signup_confirmation</strong> – A boolean value of the activation status of the user.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="exception">
 <dt id="users.models.Profile.DoesNotExist">
 <em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#users.models.Profile.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -173,6 +189,11 @@
 <dt id="users.models.save_user_profile">
 <code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">save_user_profile</code><span class="sig-paren">(</span><em class="sig-param">sender</em>, <em class="sig-param">instance</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.save_user_profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method seeks to assist in the saving of user profiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sender</strong> – The user in charge of the request.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -182,6 +203,15 @@
 <dt id="users.forms.SignUpForm">
 <em class="property">class </em><code class="sig-prename descclassname">users.forms.</code><code class="sig-name descname">SignUpForm</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.forms.SignUpForm" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class defines the Sign-Up form for Users.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first_name</strong> – The first name of the user.</p></li>
+<li><p><strong>last_name</strong> – The last name of the user.</p></li>
+<li><p><strong>email</strong> – The email of the user.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <div class="admonition important">
@@ -195,6 +225,11 @@
 <dt id="users.controller.LoginController">
 <em class="property">class </em><code class="sig-prename descclassname">users.controller.</code><code class="sig-name descname">LoginController</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController" title="Permalink to this definition">¶</a></dt>
 <dd><p>This controller class executes the logic for the ‘Users’ sub-application</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><p><strong>request</strong> – The HTTP request at that instance.</p>
+</dd>
+</dl>
 <dl class="method">
 <dt id="users.controller.LoginController.activateResponse">
 <code class="sig-name descname">activateResponse</code><span class="sig-paren">(</span><em class="sig-param">uidb64</em>, <em class="sig-param">token</em><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController.activateResponse" title="Permalink to this definition">¶</a></dt>
@@ -215,13 +250,7 @@
 <dl class="method">
 <dt id="users.controller.LoginController.activationSentResponse">
 <code class="sig-name descname">activationSentResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController.activationSentResponse" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function implements logic for the ‘Activation Sent’ page.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Render of the ‘Activation Sent’ webpage.</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="users.controller.LoginController.createAccountResponse">

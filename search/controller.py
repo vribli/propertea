@@ -12,6 +12,10 @@ from users.models import FavouriteProperty
 class SearchController:
     """
     This controller class executes the logic for the 'Search' sub-application
+
+    :ivar keyword: The search keyword used.
+    :ivar filterby: The filter variable used, if present.
+    :ivar district: The district used to search, if used.
     """
     def __init__(self, request):
         self.keyword = request.GET['keyword']
