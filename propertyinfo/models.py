@@ -130,6 +130,7 @@ class MRTLRTData(TransportData):
         )
         return plot(fig, output_type="div", include_plotlyjs=False)
 
+
 class BusData(TransportData):
     def __init__(self, X, Y):
         directory = "propertea/static/Bus_Stop_Data.csv"
