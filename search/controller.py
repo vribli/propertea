@@ -1,6 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 from pandas import *
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+
+# Create your views here.
+from users.models import FavouriteProperty
+
 
 
 class SearchController:
@@ -76,3 +82,33 @@ class SearchController:
         if self.request.user.is_authenticated:
             favourite = [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
         return favourite
+
+    def getResponse(self):
+        context = {
+            'keyword': self.keyword,
+            'res': self.search(),
+            'district': self.district,
+            'favourite': self.favourite(),
+        }
+        return render(self.request, "search/index.html", context)
+
+    def favouriteResponse(self):
+        if self.request.POST:
+            user = self.request.user
+            if user is not None:
+                propertyname = self.request.POST['propertyname']
+                favourite = []
+                if self.request.user.is_authenticated:
+                    favourite = [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
+                if propertyname in favourite:
+                    FavouriteProperty.objects.get(name=propertyname, user=user).delete()
+                else:
+                    new_favourite = FavouriteProperty.objects.create(name=propertyname, user=user)
+                    new_favourite.save()
+                next_url = self.request.POST.get('next', '/')
+                if next_url != "/users/login":
+                    return HttpResponseRedirect(next_url)
+            else:
+                HttpResponseRedirect(self.request)
+        else:
+            return HttpResponseRedirect(self.request)

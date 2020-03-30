@@ -1,5 +1,6 @@
 import requests
 from .models import MRTLRTData, BusData, PropertyImages
+from django.shortcuts import render
 
 class PropertyInfoController:
     def __init__(self, request):
@@ -14,15 +15,23 @@ class PropertyInfoController:
         self.MRT_LRT_Data = MRTLRTData(self.X, self.Y)
         self.Bus_Data = BusData(self.X, self.Y)
         self.images = PropertyImages(self.name)
+        self.request = request
 
-    def getMRTLRTData(self):
-        return self.MRT_LRT_Data
-
-    def getBusData(self):
-        return self.Bus_Data
-
-    def getImages(self):
-        return self.images.getLinks()
-
-    def getImageURL(self):
-        return self.images.getURL()
+    def getResponse(self):
+        context = {
+            'name': self.name,
+            'postal': self.postal,
+            'mrt_lrt_plot': self.MRT_LRT_Data.plot(),
+            'mrt_lrt_table_plot': self.MRT_LRT_Data.table(),
+            'bus_plot': self.Bus_Data.plot(),
+            'bus_table_plot': self.Bus_Data.table(),
+            'links': self.images.getLinks(),
+            'url': self.images.getURL(),
+            'LAT': self.LAT,
+            'LONG': self.LONG,
+            'nearest_train_lat': self.MRT_LRT_Data.lat,
+            'nearest_train_long': self.MRT_LRT_Data.long,
+            'nearest_bus_lat': self.Bus_Data.lat,
+            'nearest_bus_long': self.Bus_Data.long
+        }
+        return render(self.request, "propertyinfo/index.html", context)

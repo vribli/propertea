@@ -1,19 +1,17 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import striptags
 from django.template.loader import render_to_string
-from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from .forms import SignUpForm
 from .models import User
-# Create your views here.
 from .tokens import account_activation_token
+from .controller import LoginController
 
 
 @login_required(login_url='/users/login')
@@ -26,30 +24,8 @@ def index(request):
 
 
 def login_view(request):
-    if request.user.is_authenticated:
-        return HttpResponseRedirect("/users")
-    elif request.POST:
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            next_url = request.POST.get('next_url')
-            if next_url is None:
-                return HttpResponseRedirect("/")
-            if next_url != "/users/login":
-                return HttpResponseRedirect(next_url)
-            else:
-                context = {
-                    "user": request.user,
-                    "favourites": [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
-                }
-                return HttpResponseRedirect("/users")
-        else:
-            messages.error(request, "Invalid Credentials")
-            return render(request, "users/login.html")
-    else:
-        return render(request, "users/login.html")
+    c = LoginController(request)
+    return c.login()
 
 
 def logout_view(request):
