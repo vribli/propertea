@@ -203,9 +203,11 @@
             counter-increment: Serial; /* Increment the Serial counter */
             content: counter(Serial); /* Display the counter */
         }
-        .listfav tr{
+
+        .listfav tr {
             cursor: pointer;
         }
+
         .toprighttable {
             float: right;
             width: 17%;
@@ -261,12 +263,24 @@ Licensed under MIT
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <form class="form-inline my-2 my-lg-0" action="/search" method="get">
+                    <form class="form-inline my-2 my-lg-0" action="/search" method="get" name="searchbar"
+                          onsubmit="return validateForm()"
+                          method="post" required>
 
                         <li class="nav-item">
-                            <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name="keyword"
-                                   id="keyword" aria-label="Search" size=75%>
-
+                            <div>
+                                <label for="keyword"></label>
+                                {% if keyword == "nil" %}
+                                    <input class="form-control mr-sm-2" type="search" name="keyword" id="keyword"
+                                           aria-label="Search" size=75%>
+                                {% else %}
+                                    <input class="form-control mr-sm-2" type="search" value="{{ keyword }}"
+                                           name="keyword" id="keyword" aria-label="Search" size=75%>
+                                {% endif %}
+                                <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
+                                <input type="hidden" name="filterby" id="filterby" value="nil">
+                                <input type="hidden" name="district" id="district" value="nil">
+                            </div>
                         </li>
 
                         <li class="nav-item">
@@ -369,7 +383,8 @@ Licensed under MIT
                                     </thead>
                                     <tbody>
                                     {% for favourite in favourites %}
-                                        <tr class='clickable-row' data-href="/propertyinfo?name={{ favourite }}&postal=">
+                                        <tr class='clickable-row'
+                                            data-href="/propertyinfo?name={{ favourite }}&postal=&keyword=">
                                             <td></td>
                                             <td>{{ favourite }}</td>
 
@@ -450,11 +465,19 @@ Licensed under MIT
 <br>
 <br>
 <script>
-    jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
+    jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
     });
-});
+
+    function validateForm() {
+        var x = document.forms["searchbar"]["keyword"].value;
+        if (x == "") {
+            alert("Please enter property name, address or postal code");
+            return false;
+        }
+    }
 </script>
 </body>
 </html>

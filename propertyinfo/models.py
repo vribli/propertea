@@ -34,7 +34,7 @@ class TransportData(metaclass = ABCMeta):
         fig = go.Figure()
         fig.layout = go.Layout(
             title=go.layout.Title(
-                text="{}  {}".format(self.name.upper(), self.number),
+                text="{} ({})".format(self.name.upper(), self.number),
             ),
 
             xaxis=go.layout.XAxis(
