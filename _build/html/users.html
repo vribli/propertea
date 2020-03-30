@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Users &#8212; propertea 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to propertea’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to propertea’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">propertea 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="users">
+<h1>Users<a class="headerlink" href="#users" title="Permalink to this headline">¶</a></h1>
+<p>This page seeks to explain the methods and classes involved in the Users sub-application of the <em>propertea</em> Application.</p>
+<div class="section" id="module-users.models">
+<span id="models-py-methods"></span><h2>models.py Methods<a class="headerlink" href="#module-users.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="users.models.FavouriteProperty">
+<em class="property">class </em><code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">FavouriteProperty</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.FavouriteProperty" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class seeks to save the User’s favourite properties in a one-to-one relationship.</p>
+<dl class="exception">
+<dt id="users.models.FavouriteProperty.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#users.models.FavouriteProperty.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="users.models.FavouriteProperty.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#users.models.FavouriteProperty.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="users.models.Profile">
+<em class="property">class </em><code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">Profile</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.Profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class seeks to create a separate class to ensure the activation is needed for account usage.</p>
+<dl class="exception">
+<dt id="users.models.Profile.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#users.models.Profile.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="users.models.Profile.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#users.models.Profile.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="users.models.create_user_profile">
+<code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">create_user_profile</code><span class="sig-paren">(</span><em class="sig-param">sender</em>, <em class="sig-param">instance</em>, <em class="sig-param">created</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.create_user_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method seeks to assist in the creation of new user profiles.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="users.models.save_user_profile">
+<code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">save_user_profile</code><span class="sig-paren">(</span><em class="sig-param">sender</em>, <em class="sig-param">instance</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.save_user_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method seeks to assist in the saving of user profiles.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-users.forms">
+<span id="forms-py-methods"></span><h2>forms.py Methods<a class="headerlink" href="#module-users.forms" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="users.forms.SignUpForm">
+<em class="property">class </em><code class="sig-prename descclassname">users.forms.</code><code class="sig-name descname">SignUpForm</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.forms.SignUpForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class defines the Sign-Up form for Users.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-users.controller">
+<span id="controller-py-methods"></span><h2>controller.py Methods<a class="headerlink" href="#module-users.controller" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="users.controller.LoginController">
+<em class="property">class </em><code class="sig-prename descclassname">users.controller.</code><code class="sig-name descname">LoginController</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController" title="Permalink to this definition">¶</a></dt>
+<dd><p>This controller class executes the logic for the ‘Users’ sub-application</p>
+<dl class="method">
+<dt id="users.controller.LoginController.activateResponse">
+<code class="sig-name descname">activateResponse</code><span class="sig-paren">(</span><em class="sig-param">uidb64</em>, <em class="sig-param">token</em><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController.activateResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for the ‘Account Activation’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uidb64</strong> – Unique Slug generated from a combination of factors</p></li>
+<li><p><strong>token</strong> – Token generated from a combination of factors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Redirect to the ‘User’ Page</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="users.controller.LoginController.activationSentResponse">
+<code class="sig-name descname">activationSentResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController.activationSentResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for the ‘Activation Sent’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Render of the ‘Activation Sent’ webpage.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="users.controller.LoginController.createAccountResponse">
+<code class="sig-name descname">createAccountResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController.createAccountResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for the ‘Create Account’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Give a ‘Activation Sent’ page.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="users.controller.LoginController.indexResponse">
+<code class="sig-name descname">indexResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController.indexResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for the ‘User’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Render of the ‘User’ page.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="users.controller.LoginController.loginResponse">
+<code class="sig-name descname">loginResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController.loginResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for the ‘login’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Redirect to a relevant page.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="users.controller.LoginController.logoutResponse">
+<code class="sig-name descname">logoutResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#users.controller.LoginController.logoutResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for the ‘logout’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Redirect back to the login page.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-users.tokens">
+<span id="user-tokens-methods"></span><h2>User Tokens Methods<a class="headerlink" href="#module-users.tokens" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="users.tokens.AccountActivationTokenGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">users.tokens.</code><code class="sig-name descname">AccountActivationTokenGenerator</code><a class="headerlink" href="#users.tokens.AccountActivationTokenGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class seeks to generate tokens for activation emails.</p>
+<dl class="method">
+<dt id="users.tokens.AccountActivationTokenGenerator._make_hash_value">
+<code class="sig-name descname">_make_hash_value</code><span class="sig-paren">(</span><em class="sig-param">user</em>, <em class="sig-param">timestamp</em><span class="sig-paren">)</span><a class="headerlink" href="#users.tokens.AccountActivationTokenGenerator._make_hash_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method seeks to generate tokens for activation emails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> – The User associated with the request.</p></li>
+<li><p><strong>timestamp</strong> – The timestamp associated with the request</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The token used for activation emails for the particular user at the particular timestamp.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="urls-py-methods">
+<h2>urls.py Methods<a class="headerlink" href="#urls-py-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="attribute">
+<dt id="users.urls.urlpatterns">
+<code class="sig-prename descclassname">users.urls.</code><code class="sig-name descname">urlpatterns</code><a class="headerlink" href="#users.urls.urlpatterns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-users.views">
+<span id="views-py-methods"></span><h2>views.py Methods<a class="headerlink" href="#module-users.views" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="users.views.activate">
+<code class="sig-prename descclassname">users.views.</code><code class="sig-name descname">activate</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">uidb64</em>, <em class="sig-param">token</em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.activate" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function serves to access account activation functionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – HTTP Request of the Application</p></li>
+<li><p><strong>uidb64</strong> – Unique Slug generated from a combination of factors</p></li>
+<li><p><strong>token</strong> – Token generated from a combination of factors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function of LoginController relevant to the functionality.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="users.views.activation_sent_view">
+<code class="sig-prename descclassname">users.views.</code><code class="sig-name descname">activation_sent_view</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.activation_sent_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function serves to view the account activation page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP Request of the Application</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function of LoginController relevant to the functionality.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="users.views.createaccount_view">
+<code class="sig-prename descclassname">users.views.</code><code class="sig-name descname">createaccount_view</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.createaccount_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function serves to access create account functionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP Request of the Application</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function of LoginController relevant to the functionality.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="users.views.index">
+<code class="sig-prename descclassname">users.views.</code><code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function serves to access the ‘users’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP Request of the Application</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function of LoginController relevant to the functionality.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="users.views.login_view">
+<code class="sig-prename descclassname">users.views.</code><code class="sig-name descname">login_view</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.login_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function serves to access login functionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP Request of the Application</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function of LoginController relevant to the functionality.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="users.views.logout_view">
+<code class="sig-prename descclassname">users.views.</code><code class="sig-name descname">logout_view</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.logout_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function serves to access logout functionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP Request of the Application</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function of LoginController relevant to the functionality.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="users.views.redirect_view">
+<code class="sig-prename descclassname">users.views.</code><code class="sig-name descname">redirect_view</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#users.views.redirect_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function serves to view the redirect success page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP Request of the Application</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function of LoginController relevant to the functionality.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Users</a><ul>
+<li><a class="reference internal" href="#module-users.models">models.py Methods</a></li>
+<li><a class="reference internal" href="#module-users.forms">forms.py Methods</a></li>
+<li><a class="reference internal" href="#module-users.controller">controller.py Methods</a></li>
+<li><a class="reference internal" href="#module-users.tokens">User Tokens Methods</a></li>
+<li><a class="reference internal" href="#urls-py-methods">urls.py Methods</a></li>
+<li><a class="reference internal" href="#module-users.views">views.py Methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to propertea’s documentation!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/users.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to propertea’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">propertea 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Tanay.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>
