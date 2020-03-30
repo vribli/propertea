@@ -14,10 +14,13 @@ class SearchController:
     This controller class executes the logic for the 'Search' sub-application
     """
     def __init__(self, request):
-        self.keyword = request.GET['keyword']
-        self.filterby = request.GET['filterby']
-        self.district = request.GET['district']
-        self.request = request
+        try:
+            self.request = request
+            self.keyword = request.GET['keyword']
+            self.filterby = request.GET['filterby']
+            self.district = request.GET['district']
+        except:
+            pass
 
     def search(self):
         """
