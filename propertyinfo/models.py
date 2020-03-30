@@ -60,7 +60,7 @@ class TransportData(metaclass = ABCMeta):
             y=plotData['TOTAL_TAP_OUT_VOLUME'].tolist(),
             name='Total Tap Out Volume',
             marker_color='rgb(206, 123, 91)'))
-        fig.update_layout(barmode='group', xaxis_tickangle=-45, font={"family": "Karla", "size": 16})
+        fig.update_layout(barmode='group', xaxis_tickangle=-45, plot_bgcolor='rgb(252, 250, 241)', font={"family": "Karla", "size": 16})
         return plot(fig, output_type="div", include_plotlyjs=False)
 
     @abstractmethod
@@ -160,7 +160,9 @@ class BusData(TransportData):
             LastBus = [tableData['WD_LASTBUS'].iloc[index], tableData['SAT_LASTBUS'].iloc[index],
                        tableData['SUN_LASTBUS'].iloc[index]]
             for j in range(len(LastBus)):
-                if len(LastBus[j]) == 2:
+                if len(LastBus[j]) == 1 and LastBus[j]!='-':
+                    LastBus[j] = '000' + LastBus[j]
+                elif len(LastBus[j]) == 2:  
                     LastBus[j] = '00' + LastBus[j]
                 elif len(LastBus[j]) == 3:
                     LastBus[j] = '0' + LastBus[j]
