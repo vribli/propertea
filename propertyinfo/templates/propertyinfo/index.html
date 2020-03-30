@@ -325,7 +325,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            squarefoot.load("amenities", {
+            squarefoot.load("nmap", {
                 task: "project",
                 name: " {{ name }}",
                 type: "r",
@@ -334,23 +334,23 @@
                 //amenities: "1,1,500,ckl"
                 //transaction: "1", rental: "1",
             });
-            $("#amenities").iFrameResize();
+            $("#nmap").iFrameResize();
         });
 
     </script>
 
     <script>
         $(document).ready(function () {
-            squarefoot.load("busstop", {
+            squarefoot.load("amenities", {
                 task: "project",
                 name: " {{ name }}",
                 type: "r",
                 subtype: "abc",
                 {#map: "1",#}
-                amenities: "1,1,500,ckl"
+                amenities: "1,1,500,abdefghijmnpqr"
                 //transaction: "1", rental: "1",
             });
-            $("#busstop").iFrameResize();
+            $("#amenities").iFrameResize();
         }).scrollIntoView({behavior: "smooth"});
     </script>
 
@@ -452,17 +452,17 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#amenities">
+                                        <a class="nav-link" href="#nmap">
                                             <img src="{% static "map.svg" %}" width="20" height="20">
                                             <i class="fa fa-reply"></i>
-                                            Nearby Amenities
+                                            Location Map
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#busstop">
+                                        <a class="nav-link" href="#amenities">
                                             <img src="{% static "clipboard.svg" %}" width="20" height="20">
                                             <i class="fa fa-reply"></i>
-                                            Bus Stops
+                                            Nearby Amenities
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -510,12 +510,12 @@
                     <iframe id="rchart" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
-                <div style="width: 100%; overflow: hidden" name="amenities">
-                    <iframe id="amenities" frameborder="0" width="100%"
+                <div style="width: 100%; overflow: hidden" name="nmap">
+                    <iframe id="nmap" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
-                <div style="width: 100%; overflow: hidden" name="busstop">
-                    <iframe id="busstop" frameborder="0" width="100%"
+                <div style="width: 100%; overflow: hidden" name="amenities">
+                    <iframe id="amenities" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
                 <center><b>
