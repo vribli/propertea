@@ -159,7 +159,7 @@
         }
 
         .center {
-            width: 90%;
+            width: 100%;
             height: 20%;
             text-align: center;
             vertical-align: center;
@@ -518,12 +518,13 @@
                     <iframe id="amenities" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
+            <div id="tinfo">
                 <center><b>
                     <p style = "font-family:'Arial Narrow';font-size:15px;font-style: normal;">
                         TRANSPORT INFORMATION
                     </p></b>
-                </center>
-                <div id="tinfo">{{ mrt_lrt_plot|safe }}</div>
+                </center></div>
+                <div>{{ mrt_lrt_plot|safe }}</div>
                 <div>{{ bus_plot|safe }}</div>
                 <div>{{ bus_table_plot|safe }}</div>
                 <div class="center">
