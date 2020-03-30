@@ -199,9 +199,30 @@
             counter-reset: Serial; /* Set the Serial counter to 0 */
         }
 
-        tr td:first-child:before {
+        .listfav tr td:first-child:before {
             counter-increment: Serial; /* Increment the Serial counter */
             content: counter(Serial); /* Display the counter */
+        }
+        .listfav tr{
+            cursor: pointer;
+        }
+        .toprighttable {
+            float: right;
+            width: 17%;
+            height: 10%;
+
+        }
+
+
+        td.big {
+            text-align: center;
+            font-size: 100%;
+        }
+
+        td.small {
+            font-size: 70%;
+            vertical-align: middle;
+            text-align: center;
         }
 
 
@@ -254,12 +275,37 @@ Licensed under MIT
                         </li>
                 </ul>
                 </form>
-                <form action="/users">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                        </li>
-                </form>
+                {% if user.is_authenticated %}
+                    <table class="toprighttable">
+                        <tr>
+                            <td class="big" colspan="3">Welcome, {{ user.username }}</td>
+                            <td rowspan="2"><img src="{% static "Profile.png" %}" height=50px/></td>
+                        </tr>
+                        <tr>
+                            <td class="small">
+                                <a href="/users">
+                                    <div>VIEW FAVOURITES</div>
+                                </a>
+                            </td>
+                            <td>|</td>
+                            <td class="small">
+                                <a href="/users/logout">
+                                    <div>LOGOUT</div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <form action="{% url 'login' %}?next={{ next_url }}">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
+                                <script>document.getElementById('next_url').value = window.location.href;</script>
+                                <input type="hidden" name="next_url" id="next_url" value="{{ next_url }}"/>
+                            </li>
+                            <input type="hidden" name="next_url" value="{{ next_url }}"/>
+                    </form>
+                {% endif %}
                 </ul>
             </div>
         </nav>
@@ -314,7 +360,7 @@ Licensed under MIT
                             <br>
                             <br>
                             <div class="table-responsive">
-                                <table class="table table-striped table-sm">
+                                <table class="table table-striped table-sm listfav">
                                     <thead>
                                     <tr>
                                         <th>#</th>
@@ -323,7 +369,7 @@ Licensed under MIT
                                     </thead>
                                     <tbody>
                                     {% for favourite in favourites %}
-                                        <tr>
+                                        <tr class='clickable-row' data-href="/propertyinfo?name={{ favourite }}&postal=">
                                             <td></td>
                                             <td>{{ favourite }}</td>
 
@@ -403,5 +449,12 @@ Licensed under MIT
 </center>
 <br>
 <br>
+<script>
+    jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
 </body>
 </html>
