@@ -15,7 +15,7 @@ def index(request):
         filterby = request.GET['filterby']
         district = request.GET['district']
 
-        if (keyword == 'nil') & (filterby == 'nil') & (district != 'nil'):
+        if (keyword == 'nil') & (district != 'nil'):
             xls = ExcelFile("propertea/static/propertea.xlsx")
             data = xls.parse(xls.sheet_names[0])
             data = data.to_dict('index')
@@ -61,13 +61,23 @@ def index(request):
             resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Landed Residential")]
         else:
             resfiltered2 = [i for i in resfiltered if not (i['TYPE'] == None)]
+
+        seen = set()
+        final = []
+        for d in resfiltered2:
+            t = tuple(d['BUILDING'])
+            if t not in seen:
+                seen.add(t)
+                final.append(d)
+
         favourite = []
         if request.user.is_authenticated:
             favourite = [i[0] for i in list(request.user.favouriteproperty_set.values_list('name'))]
         print(favourite)
+
         context = {
             'keyword': keyword,
-            'res': resfiltered2,
+            'res': final,
             'district': district,
             'favourite': favourite,
         }
