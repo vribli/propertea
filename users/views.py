@@ -88,9 +88,8 @@ def createaccount_view(request):
                                      "required.password2This field is required.":
             errorlist = []
             for errors in form.errors.items():
-                errorlist.append(errors[1][0])
-            messages.error(request, errorlist)
-            print(errorlist)
+                messages.error(request,errors[1][0])
+                print(errors)
         form = SignUpForm()
     return render(request, 'users/createaccount.html', {'form': form})
 
