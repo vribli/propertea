@@ -103,6 +103,15 @@ class MRTLRTData(TransportData):
                     ['Last Train', str(subset['WD_LASTTRAIN'].iloc[index]), str(subset['SAT_LASTTRAIN'].iloc[index]),
                      str(subset['SUN_LASTTRAIN'].iloc[index])])
 
+            for row_index in range(1, len(table_values)):
+                for col_index in range(len(table_values[row_index])):
+                    if len(table_values[row_index][col_index]) == 1 and table_values[row_index][col_index]!='-':
+                        table_values[row_index][col_index] = '000' + table_values[row_index][col_index]
+                    elif len(table_values[row_index][col_index]) == 2:
+                        table_values[row_index][col_index] = '00' + table_values[row_index][col_index]
+                    elif len(table_values[row_index][col_index]) == 3:
+                        table_values[row_index][col_index] = '0' + table_values[row_index][col_index]
+
             fig.add_trace(go.Table(
                 header=dict(values=header_values,
                             height=30,
