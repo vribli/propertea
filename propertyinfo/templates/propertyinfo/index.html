@@ -58,14 +58,6 @@
             float: left;
         }
 
-        .Header {
-            width: 100%;
-            table-layout: auto;
-            border-collapse: collapse;
-            margin-bottom: 100px;
-            position: fixed;
-        }
-
         .Footer {
             margin-top: 10px;
         }
@@ -109,6 +101,7 @@
             height: 100%;
             text-align: center;
             vertical-align: center;
+            padding-bottom: 30px;
 
         }
 
@@ -155,13 +148,6 @@
         .RightContent {
             overflow: auto;
             scroll-padding: 12%
-        }
-
-        .center {
-            width: 100%;
-            height: 20%;
-            text-align: center;
-            vertical-align: center;
         }
 
         .fixed_header tbody {
@@ -213,11 +199,6 @@
         .sidebar .nav-link {
             font-weight: 500;
             color: #333;
-        }
-
-        .sidebar .nav-link .feather {
-            margin-right: 4px;
-            color: #999;
             cursor: pointer;
         }
 
@@ -249,6 +230,27 @@
             border-radius: 0;
         }
 
+        /*FOR THE USER LOGIN*/
+
+        .toprighttable {
+            float: right;
+            width: 17%;
+            height: 10%;
+
+        }
+
+
+        td.big {
+            text-align: center;
+            font-size: 100%;
+        }
+
+        td.small {
+            font-size: 70%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
     </style>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -261,7 +263,7 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="//www.squarefoot.com.sg/js/iframeresizer.min.js"></script>
     <!-- Replace j93b541us62ngpax78dqefm0rzocythi in the following line with token issued for your domain -->
     <script src="//www.squarefoot.com.sg/component/sqftapi?token=krsq4yuwi8tldbp6vn9fxhc2o3m5170e&task=js"></script>
@@ -372,7 +374,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <form class="form-inline my-2 my-lg-0" action="/search" method="get">
+                <form class="form-inline my-2 my-lg-0" action="/search" method="get" name="searchbar"
+                          onsubmit="return validateForm()"
+                          method="post" required>
 
                     <li class="nav-item">
                         <div>
@@ -393,25 +397,40 @@
                         <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
                     </li>
                 </form>
+            <a></a>
+                {% if user.is_authenticated %}
+                    <table class="toprighttable">
+                        <tr>
+                            <td class="big" colspan="3">Welcome, {{ user.username }}</td>
+                            <td rowspan="2"><img src="{% static "Profile.png" %}" height=50px/></td>
+                        </tr>
+                        <tr>
+                            <td class="small">
+                                <a href="/users">
+                                    <div>VIEW FAVOURITES</div>
+                                </a>
+                            </td>
+                            <td>|</td>
+                            <td class="small">
+                                <a href="/users/logout">
+                                    <div>LOGOUT</div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <form action="{% url 'login' %}?next={{ next_url }}">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
+                                <script>document.getElementById('next_url').value = window.location.href;</script>
+                                <input type="hidden" name="next_url" id="next_url" value="{{ next_url }}"/>
+                            </li>
+                            <input type="hidden" name="next_url" value="{{ next_url }}"/>
+                    </form>
+                {% endif %}
+
             </ul>
-            {% if user.is_authenticated %}
-                <a>Welcome, {{ user.username }}</a>
-
-            {% else %}
-                <form action="/users" class="form-inline">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-                </form>
-            {% endif %}
-            <!--
-                <form action="/users">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                        </li>
-
-                </ul>
-                </form>
-                -->
         </div>
     </nav>
 </div>
@@ -561,12 +580,13 @@
                         </td>
                     </tr>
                 </table>
+                <div class="center">
                 <a href="https://www.propertyguru.com.sg/">
                     <center>
                         <font size="3">Search for Listing on Property Guru</font>
                         <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
                     </center>
-                </a>
+                </a></div>
             </div>
 
 
@@ -581,6 +601,15 @@
         <a>© 2020 Propertea</a>
     </nav>
 </div>
+<script>
+        function validateForm() {
+        var x = document.forms["searchbar"]["keyword"].value;
+        if (x == "") {
+            alert("Please enter property name, address or postal code");
+            return false;
+        }
+    }
+</script>
 </body>
 
 </html>
