@@ -505,11 +505,27 @@
                 <table>
                     <tr>
                         <td width=50%>
-                            <h3> {{ name }}</h3>
+                            <form class="form-inline" action='/search/favourites' method=post>
+                                {% csrf_token %}
+                                <input type="hidden" name="propertyname" id="propertyname"
+                                       value="{{ name }}"/>
+                                <h3> {{ name }} </h3>
+                                {% if name in favourite %}
+                                    <button class="btn" type="submit">
+                                        <a style="color: orange; font-size: large">★</a>
+                                    </button>
+                                {% else %}
+                                    <button class="btn" type="submit">
+                                        <a style="color: orange; font-size: large">☆</a>
+                                    </button>
+                                {% endif %}
+                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            </form>
                             <a>{{ address }}</a>
+                            <br/>
 
                             <br/>
-                            {#                            Fill address here#}
+                            {#Fill address here#}
                             {% for link in links %}
                                 <img src="{{ link }}" width=150px height=150px>
                             {% endfor %}<br/>
@@ -524,6 +540,7 @@
                         </td>
                     </tr>
                 </table>
+                <br/>
                 <div style="width: 100%; overflow: hidden" name="pinfo">
                     <iframe id="pinfo" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
@@ -605,11 +622,14 @@
                     </table>
 
                     <div class="center">
-                        <a href="https://www.propertyguru.com.sg/">
+                        <a>
                             <center>
                                 <font size="3">Search for Listing on Property Guru</font>
-                                <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
                             </center>
+                        </a>
+                        <a href="https://www.propertyguru.com.sg/property-for-sale?freetext={{ name }}&market=residential">
+                            <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
+
                         </a>
                     </div>
                 </div>
@@ -622,12 +642,12 @@
 
 <div class="Footer">
     <nav class="navbar navbar-light bg-light fixed-bottom">
-        <a href="/"></a>
+        <a></a>
         <a>© 2020 Propertea</a>
     </nav>
 </div>
 <script>
-        function validateForm() {
+    function validateForm() {
         var x = document.forms["searchbar"]["keyword"].value;
         if (x == "") {
             alert("Please enter property name, address or postal code");

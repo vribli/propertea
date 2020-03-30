@@ -1,6 +1,9 @@
 import requests
 from .models import MRTLRTData, BusData, PropertyImages
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+
+from users.models import FavouriteProperty
 
 
 class PropertyInfoController:
@@ -38,6 +41,33 @@ class PropertyInfoController:
             'nearest_bus_lat': self.Bus_Data.lat,
             'nearest_bus_long': self.Bus_Data.long,
             'keyword': self.keyword,
-
+            'favourite': self.favourite(),
         }
         return render(self.request, "propertyinfo/index.html", context)
+
+    def favouriteResponse(self):
+        if self.request.POST:
+            user = self.request.user
+            if user is not None:
+                propertyname = self.request.POST['propertyname']
+                favourite = []
+                if self.request.user.is_authenticated:
+                    favourite = [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
+                if propertyname in favourite:
+                    FavouriteProperty.objects.get(name=propertyname, user=user).delete()
+                else:
+                    new_favourite = FavouriteProperty.objects.create(name=propertyname, user=user)
+                    new_favourite.save()
+                next_url = self.request.POST.get('next', '/')
+                if next_url != "/users/login":
+                    return HttpResponseRedirect(next_url)
+            else:
+                HttpResponseRedirect(self.request)
+        else:
+            return HttpResponseRedirect(self.request)
+
+    def favourite(self):
+        favourite = []
+        if self.request.user.is_authenticated:
+            favourite = [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
+        return favourite
