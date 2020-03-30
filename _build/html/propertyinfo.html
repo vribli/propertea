@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PropertyInfo &mdash; propertea 1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="propertea 1.0 documentation" href="index.html"/>
+        <link rel="next" title="Home" href="home.html"/>
+        <link rel="prev" title="Search" href="searchapplication.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> propertea</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="users.html">Users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.models">models.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.forms">forms.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.controller">controller.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.tokens">tokens.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.views">views.py Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="searchapplication.html">Search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="searchapplication.html#module-search.controller">controller.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchapplication.html#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchapplication.html#module-search.views">views.py Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PropertyInfo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-propertyinfo.models">models.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-propertyinfo.controller">controller.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-propertyinfo.views">views.py Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Home</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#module-home.views">views.py Methods</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">propertea</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>PropertyInfo</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/propertyinfo.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="propertyinfo">
+<h1>PropertyInfo<a class="headerlink" href="#propertyinfo" title="Permalink to this headline">¶</a></h1>
+<p>This page seeks to explain the methods and classes involved in the PropertyInfo sub-application of the <em>propertea</em> Application.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Please note that the uses of these classes and functions are heavily dependent on the provision of the CSV files that store the transport data and other related information.</p>
+</div>
+<div class="section" id="module-propertyinfo.models">
+<span id="models-py-methods"></span><h2>models.py Methods<a class="headerlink" href="#module-propertyinfo.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="propertyinfo.models.BusData">
+<em class="property">class </em><code class="sig-prename descclassname">propertyinfo.models.</code><code class="sig-name descname">BusData</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.BusData" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class aims to facilitate storing and retrieving Bus Stop data, while being an extention of Transport Data.</p>
+<dl class="method">
+<dt id="propertyinfo.models.BusData.table">
+<code class="sig-name descname">table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.BusData.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function aims to create the tables for the first and last bus services arrving at the selected bus stop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A plot of the table of the first and last bus services arrving at the selected bus stop.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="propertyinfo.models.MRTLRTData">
+<em class="property">class </em><code class="sig-prename descclassname">propertyinfo.models.</code><code class="sig-name descname">MRTLRTData</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.MRTLRTData" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class aims to facilitate storing and retrieving MRT and LRT station data, while being an extention of Transport Data.</p>
+<dl class="method">
+<dt id="propertyinfo.models.MRTLRTData.table">
+<code class="sig-name descname">table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.MRTLRTData.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function aims to create the tables for the first and last train services from the selected MRT and LRT station.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A plot of a table containing the first and last train timings from the selected MRT and LRT station.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="propertyinfo.models.PropertyImages">
+<em class="property">class </em><code class="sig-prename descclassname">propertyinfo.models.</code><code class="sig-name descname">PropertyImages</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.PropertyImages" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class aims to facilitate storing and retrieving property image information.</p>
+<dl class="method">
+<dt id="propertyinfo.models.PropertyImages.getLinks">
+<code class="sig-name descname">getLinks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.PropertyImages.getLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function generates a link to view more Google Images on the selected property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The link that can be used to link to a Google Images search.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="propertyinfo.models.PropertyImages.getURL">
+<code class="sig-name descname">getURL</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.PropertyImages.getURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the URL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>URL.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="propertyinfo.models.TransportData">
+<em class="property">class </em><code class="sig-prename descclassname">propertyinfo.models.</code><code class="sig-name descname">TransportData</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em>, <em class="sig-param">directory</em>, <em class="sig-param">volumeDir</em>, <em class="sig-param">routeDir</em>, <em class="sig-param">type</em>, <em class="sig-param">term</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.TransportData" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class aims to facilitate storing and retrieving transport data.</p>
+<dl class="method">
+<dt id="propertyinfo.models.TransportData.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.TransportData.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function seeks to plot the transport ameneties graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A plot of the traffic volume of the selected transport facility.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please note that we have seperated view logic into controller and views in order to comply with the MVC framework.</p>
+</div>
+</div>
+<div class="section" id="module-propertyinfo.controller">
+<span id="controller-py-methods"></span><h2>controller.py Methods<a class="headerlink" href="#module-propertyinfo.controller" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="propertyinfo.controller.PropertyInfoController">
+<em class="property">class </em><code class="sig-prename descclassname">propertyinfo.controller.</code><code class="sig-name descname">PropertyInfoController</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.controller.PropertyInfoController" title="Permalink to this definition">¶</a></dt>
+<dd><p>This controller class executes the logic for the ‘PropertyInfo’ sub-application.</p>
+<dl class="method">
+<dt id="propertyinfo.controller.PropertyInfoController.getResponse">
+<code class="sig-name descname">getResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.controller.PropertyInfoController.getResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the ‘index’ page for the propertyinfo sub-application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Render of ‘index’ page.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="urls-py-methods">
+<h2>urls.py Methods<a class="headerlink" href="#urls-py-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="attribute">
+<dt id="propertyinfo.urls.urlpatterns">
+<code class="sig-prename descclassname">propertyinfo.urls.</code><code class="sig-name descname">urlpatterns</code><a class="headerlink" href="#propertyinfo.urls.urlpatterns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-propertyinfo.views">
+<span id="views-py-methods"></span><h2>views.py Methods<a class="headerlink" href="#module-propertyinfo.views" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="propertyinfo.views.index">
+<code class="sig-prename descclassname">propertyinfo.views.</code><code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.views.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function displays the ‘index’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The HTTP request at that instance.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A HTTP response about the property information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="home.html" class="btn btn-neutral float-right" title="Home">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="searchapplication.html" class="btn btn-neutral" title="Search"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <div role="contentinfo">
+		<p class="centered">© 2014 drove.io is a <b>connectical</b> project. <span class="nnlogo"></span></p>
+  </div>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

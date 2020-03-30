@@ -10,6 +10,9 @@ from bs4 import BeautifulSoup
 
 # Create your models here.
 class TransportData(metaclass = ABCMeta):
+    """
+    This class aims to facilitate storing and retrieving transport data.
+    """
     def __init__(self, X, Y, directory, volumeDir, routeDir, type, term):
         self.X = X
         self.Y = Y
@@ -28,6 +31,11 @@ class TransportData(metaclass = ABCMeta):
         self.long = self.csv.sort_values(by='DISTANCE').iloc[0]['LONGITUDE']
 
     def plot(self):
+        """
+        This function seeks to plot the transport ameneties graph.
+
+        :return: A plot of the traffic volume of the selected transport facility.
+        """
         volume = pd.DataFrame(pd.read_csv(self.volumeDir))
         plotData = volume[volume['PT_CODE'] == self.number].sort_values('TIME_PER_HOUR')
         time = [24 if x == 0 else x for x in plotData['TIME_PER_HOUR'].tolist()]
@@ -69,6 +77,9 @@ class TransportData(metaclass = ABCMeta):
 
 
 class MRTLRTData(TransportData):
+    """
+    This class aims to facilitate storing and retrieving MRT and LRT station data, while being an extention of Transport Data.
+    """
     def __init__(self, X, Y):
         directory = "propertea/static/MRT_LRT_Station_Data.csv"
         volumeDir = "propertea/static/MRT_LRT_Transport_Volume.csv"
@@ -78,6 +89,11 @@ class MRTLRTData(TransportData):
         super().__init__(X, Y, directory, volumeDir, routeDir, type, term)
 
     def table(self):
+        """
+        This function aims to create the tables for the first and last train services from the selected MRT and LRT station.
+
+        :return: A plot of a table containing the first and last train timings from the selected MRT and LRT station.
+        """
         routeData = pd.read_csv(self.routeDir)
         tableData = routeData[routeData['NUMBER'] == self.number]
         fig = make_subplots(
@@ -139,6 +155,9 @@ class MRTLRTData(TransportData):
 
 
 class BusData(TransportData):
+    """
+    This class aims to facilitate storing and retrieving Bus Stop data, while being an extention of Transport Data.
+    """
     def __init__(self, X, Y):
         directory = "propertea/static/Bus_Stop_Data.csv"
         volumeDir = "propertea/static/Bus_Transport_Volume.csv"
@@ -148,6 +167,11 @@ class BusData(TransportData):
         super().__init__(X, Y, directory, volumeDir, routeDir, type, term)
 
     def table(self):
+        """
+        This function aims to create the tables for the first and last bus services arrving at the selected bus stop.
+
+        :return: A plot of the table of the first and last bus services arrving at the selected bus stop.
+        """
         routeData = pd.DataFrame(pd.read_csv(self.routeDir))
         tableData = routeData[routeData['BUSSTOPCODE'] == str(self.number)]
 
@@ -207,10 +231,18 @@ class BusData(TransportData):
 
 
 class PropertyImages:
+    """
+    This class aims to facilitate storing and retrieving property image information.
+    """
     def __init__(self, name):
         self.name = name
 
     def getLinks(self):
+        """
+        This function generates a link to view more Google Images on the selected property.
+
+        :return: The link that can be used to link to a Google Images search.
+        """
         url = 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982'
         page = requests.get(url, params={'q': self.name + " singapore property"}).text
         soup = BeautifulSoup(page, 'html.parser')
@@ -227,4 +259,9 @@ class PropertyImages:
         return links
 
     def getURL(self):
+        """
+        Returns the URL.
+
+        :return: URL.
+        """
         return 'https://www.google.no/search?client=opera&hs=cTQ&source=lnms&tbm=isch&sa=X&ved=0ahUKEwig3LOx4PzKAhWGFywKHZyZAAgQ_AUIBygB&biw=1920&bih=982&q=' + self.name + " singapore property"

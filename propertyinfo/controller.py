@@ -3,6 +3,9 @@ from .models import MRTLRTData, BusData, PropertyImages
 from django.shortcuts import render
 
 class PropertyInfoController:
+    """
+    This controller class executes the logic for the 'PropertyInfo' sub-application.
+    """
     def __init__(self, request):
         self.name = request.GET['name']
         self.postal = request.GET['postal']
@@ -19,6 +22,11 @@ class PropertyInfoController:
         self.request = request
 
     def getResponse(self):
+        """
+        Returns the 'index' page for the propertyinfo sub-application.
+
+        :return: Render of 'index' page.
+        """
         context = {
             'name': self.name,
             'postal': self.postal,

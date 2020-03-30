@@ -5,6 +5,27 @@
 
 Welcome to propertea's documentation!
 =====================================
+.. note::
+   This project was created by Tanay, Vincent, Alice, Johnson and Josephine as part of our CZ2006 - Software Engineering Project. We're proud to bring you our first foray into web programming with Python! 🔥🔥
+
+   This project tries to bring you a comprehensive view of any residential property in Singapore, by bringing together data from various government sources and private sources.
+
+Feel free to look around and enjoy our amazing work 😜
+
+Our project consists of these sub-applications:
+
+* Home
+* Search
+* PropertyInformation
+* Users
+
+Our git repository can be found `here`_.
+
+.. _here: https://github.com/vribli/propertea/
+
+Team NACHOS 🌮 🌮
+
+👩🏻‍💻👩🏻‍💻👨🏻‍💻👨🏻‍💻👨🏽‍💻👻
 
 .. toctree::
    :maxdepth: 2
@@ -12,6 +33,11 @@ Welcome to propertea's documentation!
 
    users
 
+   searchapplication
+
+   propertyinfo
+
+   home
 
 
 Indices and tables
