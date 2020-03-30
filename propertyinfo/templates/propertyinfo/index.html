@@ -227,6 +227,10 @@
             color: inherit;
         }
 
+        i {
+            margin-right: 5px;
+        }
+
         /*
          * Content
          */
@@ -320,7 +324,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            squarefoot.load("amenities", {
+            squarefoot.load("nmap", {
                 task: "project",
                 name: " {{ name }}",
                 type: "r",
@@ -329,23 +333,23 @@
                 //amenities: "1,1,500,ckl"
                 //transaction: "1", rental: "1",
             });
-            $("#amenities").iFrameResize();
+            $("#nmap").iFrameResize();
         });
 
     </script>
 
     <script>
         $(document).ready(function () {
-            squarefoot.load("busstop", {
+            squarefoot.load("amenities", {
                 task: "project",
                 name: " {{ name }}",
                 type: "r",
                 subtype: "abc",
                 {#map: "1",#}
-                amenities: "1,1,500,ckl"
+                amenities: "1,1,500,abdefghijmnpqr"
                 //transaction: "1", rental: "1",
             });
-            $("#busstop").iFrameResize();
+            $("#amenities").iFrameResize();
         }).scrollIntoView({behavior: "smooth"});
     </script>
 
@@ -426,6 +430,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="#pinfo">
                                             <img src="{% static "home.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
                                             Property Information
                                             {#<span class="sr-only">(current)</span>#}
                                         </a>
@@ -433,30 +438,35 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="#pchart">
                                             <img src="{% static "activity.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
                                             Past Transaction Prices
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#rchart">
                                             <img src="{% static "activity.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
                                             Monthly Price Range
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#amenities">
+                                        <a class="nav-link" href="#nmap">
                                             <img src="{% static "map.svg" %}" width="20" height="20">
-                                            Nearby Amenities
+                                            <i class="fa fa-reply"></i>
+                                            Location Map
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#busstop">
+                                        <a class="nav-link" href="#amenities">
                                             <img src="{% static "clipboard.svg" %}" width="20" height="20">
-                                            Bus Stops
+                                            <i class="fa fa-reply"></i>
+                                            Nearby Amenities
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#tinfo">
                                             <img src="{% static "bar-chart-2.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
                                             Transport Information
                                         </a>
                                     </li>
@@ -488,29 +498,34 @@
                 </table>
                 <div style="width: 100%; overflow: hidden" name="pinfo">
                     <iframe id="pinfo" frameborder="0" width="100%"
-                            style="background-color:#fcfcfc; position: relative; top: -125px"></iframe>
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
                 <div style="width: 100%; overflow: hidden" name="pchart">
                     <iframe id="pchart" frameborder="0" width="100%"
-                            style="background-color:#fcfcfc; position: relative; top: -125px"></iframe>
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
                 <div style="width: 100%; overflow: hidden" name="rchart">
                     <iframe id="rchart" frameborder="0" width="100%"
-                            style="background-color:#fcfcfc; position: relative; top: -125px"></iframe>
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
+                </div>
+                <div style="width: 100%; overflow: hidden" name="nmap">
+                    <iframe id="nmap" frameborder="0" width="100%"
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
                 <div style="width: 100%; overflow: hidden" name="amenities">
                     <iframe id="amenities" frameborder="0" width="100%"
-                            style="background-color:#fcfcfc; position: relative; top: -125px"></iframe>
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
-                <div style="width: 100%; overflow: hidden" name="busstop">
-                    <iframe id="busstop" frameborder="0" width="100%"
-                            style="background-color:#fcfcfc; position: relative; top: -125px"></iframe>
-                </div>
-                <div id="tinfo">
+                <center><b>
+                    <p style = "font-family:'Arial Narrow';font-size:15px;font-style: normal;">
+                        TRANSPORT INFORMATION
+                    </p></b>
+                </center>
+
                 <table>
                     <tr>
                         <td width=70%>
-                            <div>{{ mrt_lrt_plot|safe }}</div>
+                            <div id = "tinfo">{{ mrt_lrt_plot|safe }}</div>
                         </td>
                         <td width=30%>
                             <br/><br/><br/><br/>
