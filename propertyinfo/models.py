@@ -54,14 +54,12 @@ class TransportData(metaclass = ABCMeta):
             x=time,
             y=plotData['TOTAL_TAP_IN_VOLUME'].tolist(),
             name='Total Tap In Volume',
-            marker_color='#4287f5', )
-        )
+            marker_color='rgb(255, 211, 120)'))
         fig.add_trace(go.Bar(
             x=time,
             y=plotData['TOTAL_TAP_OUT_VOLUME'].tolist(),
             name='Total Tap Out Volume',
-            marker_color='LightSkyBlue')
-        )
+            marker_color='rgb(206, 123, 91)'))
         fig.update_layout(barmode='group', xaxis_tickangle=-45, font={"family": "Karla", "size": 16})
         return plot(fig, output_type="div", include_plotlyjs=False)
 
@@ -109,13 +107,13 @@ class MRTLRTData(TransportData):
                 header=dict(values=header_values,
                             height=30,
                             align=['right', 'center'],
-                            # fill = dict(color = "#9bc3eb"),
+                            fill = dict(color = 'rgb(201, 190, 120)'),
                             font=dict(family='Karla, monospace', size=18)
                             ),
                 cells=dict(values=table_values,
                            align=['right', 'center'],
                            height=30,
-                           # fill = dict(color = "#d7e7f7"),
+                           fill = dict(color = 'rgb(252, 250, 241)'),
                            font=dict(family='Karla, monospace', size=18)
                            )
             ),
@@ -171,6 +169,7 @@ class BusData(TransportData):
                 header=dict(values=['<b>{}</b>'.format(tableData['ROUTENAME'].iloc[index]), '<b>First Bus</b>',
                                     '<b>Last Bus</b>'],
                             align=['right', 'center'],
+                            fill=dict(color = 'rgb(201,190,120'),
                             height=30,
                             font=dict(family='Karla, monospace', size=18)
                             ),
@@ -179,6 +178,7 @@ class BusData(TransportData):
                                    LastBus
                                    ],
                            align=['right', 'center'],
+                           fill=dict(color = 'rgb(252,250,241'),
                            height=30,
                            font=dict(family='Karla, monospace', size=18)
                            )
