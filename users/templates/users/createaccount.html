@@ -3,24 +3,30 @@
 
 {% block content %}
 
-<form class="form-signin" method="post">
+<form class="form-signin" method="post" xmlns:style="http://www.w3.org/1999/xhtml">
     {% csrf_token %}
     {% if messages %}
         <br>
         <div>
             <ul class="messages">
                 {% if messages %}
-                    <ul>
                         {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }} alert-dismissible center-block" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}
-                                    {{ message.tags|title }}{% endif %}!</strong>
-                                <li>{{ message }}</li>
+                            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert" style="width:70vh; margin:auto;max-width: 100%;padding-right: initial;padding-left: initial">
+                                <button type="button" class="btn-md close" style='width: 10vh; margin: auto auto -40px' data-dismiss="alert" aria-label="Close">
+                                    <span
+                                        aria-hidden="true">&times;
+                                    </span>
+                                </button>
+                                <strong>
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                        Error
+                                    {% else %}
+                                        {{ message.tags|title }}{% endif %}!
+                                </strong>
+                                 {{ message }}
                             </div>
+                            <br>
                         {% endfor %}
-                    </ul>
                 {% endif %}
             </ul>
         </div>
@@ -49,7 +55,7 @@
         {% endfor %}
     </div>
     <br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+    <button class="btn btn-lg btn-primary" type="submit">Create Account</button>
 </form>
 
 {% endblock %}

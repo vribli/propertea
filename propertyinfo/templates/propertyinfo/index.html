@@ -166,6 +166,15 @@
             font-size: .875rem;
         }
 
+        .svnty {
+            width: 70%;
+        }
+
+        .shrink {
+            width: 90%;
+            height: 90%;
+        }
+
         /*
          * Sidebar
          */
@@ -502,6 +511,7 @@
                     <tr>
                         <td width=50%>
                             <h3> {{ name }}</h3>
+                            {#                            Fill address here#}
                             {% for link in links %}
                                 <img src="{{ link }}" width=150px height=150px>
                             {% endfor %}<br/>
@@ -536,63 +546,67 @@
                     <iframe id="amenities" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
-            <div id="tinfo">
-                <center><b>
-                    <p style="font-family:'Arial Narrow';font-size:15px;font-style: normal;">
-                        TRANSPORT INFORMATION
-                    </p></b>
-                </center>
-
-
-                <table>
-                    <tr>
-                        <td width=70%>
-                            <div>{{ mrt_lrt_plot|safe }}</div>
-                        </td>
-                        <td width=30%>
-                            <br/><br/><br/><br/>
-                            <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{ nearest_train_lat }},{{ nearest_train_long }}!colour:red&popupWidth=200"
-                                    height=300px width=100% scrolling="no" frameborder="0"
-                                    allowfullscreen="allowfullscreen"></iframe>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div>{{ mrt_lrt_table_plot|safe }}</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width=70%>
-                            <div>{{ bus_plot|safe }}</div>
-                        </td>
-                        <td width=30%>
-                            <br/><br/><br/><br/>
-                            <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{ nearest_bus_lat }},{{ nearest_bus_long }}!colour:red&popupWidth=200"
-                                    height=300px width=100% scrolling="no" frameborder="0"
-                                    allowfullscreen="allowfullscreen"></iframe>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div>{{ bus_table_plot|safe }}</div>
-                        </td>
-                    </tr>
-                </table>
-                <div class="center">
-                <a href="https://www.propertyguru.com.sg/">
-                    <center>
-                        <font size="3">Search for Listing on Property Guru</font>
-                        <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
+                <div id="tinfo">
+                    <center><b>
+                        <p style="font-family:'Arial Narrow';font-size:15px;font-style: normal;">
+                            TRANSPORT INFORMATION
+                        </p></b>
                     </center>
-                </a></div>
+
+
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="svnty">{{ mrt_lrt_plot|safe }}</div>
+                            </td>
+                            <td>
+                                <br/><br/><br/><br/>
+                                <div class="shrink">
+                                    <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{ nearest_train_lat }},{{ nearest_train_long }}!colour:red&popupWidth=200"
+                                            height=300px width=100% scrolling="no" frameborder="0"
+                                            allowfullscreen="allowfullscreen">
+                                    </iframe>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div>{{ mrt_lrt_table_plot|safe }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="svnty">{{ bus_plot|safe }}</div>
+                            </td>
+                            <td>
+                                <br/><br/><br/><br/>
+                                <div class="shrink">
+                                    <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{ nearest_bus_lat }},{{ nearest_bus_long }}!colour:red&popupWidth=200"
+                                            height=300px width=100% scrolling="no" frameborder="0"
+                                            allowfullscreen="allowfullscreen">
+                                    </iframe>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div>{{ bus_table_plot|safe }}</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <a href="https://www.propertyguru.com.sg/">
+                        <center>
+                            <font size="3">Search for Listing on Property Guru</font>
+                            <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
+                        </center>
+                    </a>
+                </div>
+
+
             </div>
-
-
         </div>
     </div>
-</div>
 </div>
 
 <div class="Footer">
