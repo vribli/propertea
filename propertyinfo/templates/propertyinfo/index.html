@@ -158,7 +158,7 @@
         }
 
         .center {
-            width: 90%;
+            width: 100%;
             height: 20%;
             text-align: center;
             vertical-align: center;
@@ -392,8 +392,8 @@
                     <li class="nav-item">
                         <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
                     </li>
+                </form>
             </ul>
-            </form>
             {% if user.is_authenticated %}
                 <a>Welcome, {{ user.username }}</a>
 
@@ -437,6 +437,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#pchart">
+
                                             <img src="{% static "activity.svg" %}" width="20" height="20">
                                             <i class="fa fa-reply"></i>
                                             Past Transaction Prices
@@ -516,16 +517,18 @@
                     <iframe id="amenities" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
+            <div id="tinfo">
                 <center><b>
                     <p style="font-family:'Arial Narrow';font-size:15px;font-style: normal;">
                         TRANSPORT INFORMATION
                     </p></b>
                 </center>
 
+
                 <table>
                     <tr>
                         <td width=70%>
-                            <div id="tinfo">{{ mrt_lrt_plot|safe }}</div>
+                            <div>{{ mrt_lrt_plot|safe }}</div>
                         </td>
                         <td width=30%>
                             <br/><br/><br/><br/>
