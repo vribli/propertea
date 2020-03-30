@@ -6,8 +6,11 @@ class PropertyInfoController:
     def __init__(self, request):
         self.name = request.GET['name']
         self.postal = request.GET['postal']
+        self.keyword = request.GET['keyword']
+        self.address = request.GET['address']
         # may break when user clicks on property from favourites list
-        self.URL = "https://developers.onemap.sg/commonapi/search?searchVal={} {}&returnGeom=Y&getAddrDetails=Y&pageNum=1".format(self.name, self.postal)
+        self.URL = "https://developers.onemap.sg/commonapi/search?searchVal={} {}&returnGeom=Y&getAddrDetails=Y&pageNum=1".format(
+            self.name, self.postal)
         self.info = requests.get(self.URL).json()
         self.X = float(self.info['results'][0]['X'])
         self.Y = float(self.info['results'][0]['Y'])
@@ -33,6 +36,9 @@ class PropertyInfoController:
             'nearest_train_lat': self.MRT_LRT_Data.lat,
             'nearest_train_long': self.MRT_LRT_Data.long,
             'nearest_bus_lat': self.Bus_Data.lat,
-            'nearest_bus_long': self.Bus_Data.long
+            'nearest_bus_long': self.Bus_Data.long,
+            'keyword': self.keyword,
+            'address': self.address,
+
         }
         return render(self.request, "propertyinfo/index.html", context)

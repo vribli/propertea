@@ -159,11 +159,6 @@
 
         a {
             text-decoration: none;
-            color: black;
-        }
-
-        body {
-            font-size: .875rem;
         }
 
         .svnty {
@@ -186,7 +181,7 @@
             left: 0;
             z-index: 100; /* Behind the navbar */
             padding: 48px 0 0; /* Height of navbar */
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1)
         }
 
         .sidebar-sticky {
@@ -196,6 +191,7 @@
             padding-top: .5rem;
             overflow-x: hidden;
             overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+            background-color: #EEEEEE;
         }
 
         @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -229,22 +225,13 @@
             padding-top: 48px; /* Space for fixed navbar */
         }
 
-        /*
-         * Navbar
-         */
-
-        .navbar .form-control {
-            padding: .75rem 1rem;
-            border-width: 0;
-            border-radius: 0;
-        }
-
         /*FOR THE USER LOGIN*/
 
         .toprighttable {
             float: right;
             width: 17%;
             height: 10%;
+            border-color: #00A000 1px;
 
         }
 
@@ -368,45 +355,50 @@
 
 <body>
 
-<div class="Header" style="z-index: 2">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand mr-sm-6" href="/">
-            <img src="{% static "logo.png" %}" height=30px/>
-            <a class="navbar-brand" href="/">Propertea </a>
-        </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<div class="Container">
+    <div class="Header" style="z-index:2">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <a class="navbar-brand mr-sm-6" href="/">
+                <img src="{% static "logo.png" %}" height=30px/>
+                <a class="navbar-brand" href="/">Propertea </a>
+            </a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <form class="form-inline my-2 my-lg-0" action="/search" method="get" name="searchbar"
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <form class="form-inline my-2 my-lg-0" action="/search" method="get" name="searchbar"
                           onsubmit="return validateForm()"
                           method="post" required>
 
-                    <li class="nav-item">
-                        <div>
-                            <label for="keyword"></label>
-                            {% if keyword == "nil" %}
-                                <input class="form-control mr-sm-2" type="search" name="keyword" id="keyword"
-                                       aria-label="Search" size=75%>
-                            {% else %}
-                                <input class="form-control mr-sm-2" type="search" value="{{ keyword }}"
-                                       name="keyword" id="keyword" aria-label="Search" size=75%>
-                            {% endif %}
-                            <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
-                            <input type="hidden" name="filterby" id="filterby" value="nil">
-                            <input type="hidden" name="district" id="district" value="nil">
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
-                    </li>
+                        <li class="nav-item">
+                            <div>
+                                <label for="keyword"></label>
+                                {% if keyword == "nil" %}
+                                    <input class="form-control mr-sm-2" type="search" name="keyword" id="keyword"
+                                           aria-label="Search" size=75%>
+                                {% else %}
+                                    <input class="form-control mr-sm-2" type="search" value="{{ keyword }}"
+                                           name="keyword" id="keyword" aria-label="Search" size=75%>
+                                {% endif %}
+                                <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
+                                <input type="hidden" name="filterby" id="filterby" value="nil">
+                                <input type="hidden" name="district" id="district" value="nil">
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
+
+                        </li>
+                </ul>
                 </form>
-            <a></a>
+                <a></a>
                 {% if user.is_authenticated %}
                     <table class="toprighttable">
                         <tr>
@@ -438,15 +430,11 @@
                             <input type="hidden" name="next_url" value="{{ next_url }}"/>
                     </form>
                 {% endif %}
-
-            </ul>
-        </div>
-    </nav>
-</div>
-
-<div class="Container" style="z-index:0">
-
-    <div class="Content">
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="Content" style="z-index:0">
         <div class="Wrapper">
             <div class="LeftContent">
                 <div class="container-fluid">
@@ -511,6 +499,8 @@
                     <tr>
                         <td width=50%>
                             <h3> {{ name }}</h3>
+                            <a>{{ address }}</a>
+                            <br/>
                             {#                            Fill address here#}
                             {% for link in links %}
                                 <img src="{{ link }}" width=150px height=150px>
