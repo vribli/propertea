@@ -109,7 +109,7 @@
             height: 100%;
             text-align: center;
             vertical-align: center;
-
+            padding-bottom: 30px;
         }
 
         .Header {
@@ -157,13 +157,6 @@
             scroll-padding: 12%
         }
 
-        .center {
-            width: 100%;
-            height: 20%;
-            text-align: center;
-            vertical-align: center;
-        }
-
         .fixed_header tbody {
             display: block;
             width: 100%;
@@ -185,8 +178,8 @@
         }
 
         .shrink {
-            width: 90%;
-            height: 90%;
+            width: 95%;
+            height: 95%;
         }
 
         /*
@@ -474,10 +467,17 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#tinfo">
+                                        <a class="nav-link" href="#minfo">
                                             <img src="{% static "bar-chart-2.svg" %}" width="20" height="20">
                                             <i class="fa fa-reply"></i>
-                                            Transport Information
+                                            MRT/LRT Information
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#binfo">
+                                            <img src="{% static "bar-chart-2.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
+                                            Bus Information
                                         </a>
                                     </li>
                                 </ul>
@@ -527,13 +527,13 @@
                     <iframe id="amenities" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
-                <div id="tinfo">
+
+                <div id="minfo">
                     <center><b>
                         <p style="font-family:'Arial Narrow';font-size:15px;font-style: normal;">
-                            TRANSPORT INFORMATION
+                            MRT/LRT INFORMATION
                         </p></b>
                     </center>
-
 
                     <table>
                         <tr>
@@ -549,13 +549,23 @@
                                     </iframe>
                                 </div>
                             </td>
-
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <div>{{ mrt_lrt_table_plot|safe }}</div>
                             </td>
                         </tr>
+                    </table>
+                </div>
+
+                <div id="binfo">
+                    <center><b>
+                        <p style="font-family:'Arial Narrow';font-size:15px;font-style: normal;">
+                            BUS INFORMATION
+                        </p></b>
+                    </center>
+
+                    <table>
                         <tr>
                             <td>
                                 <div class="svnty">{{ bus_plot|safe }}</div>
@@ -576,15 +586,16 @@
                             </td>
                         </tr>
                     </table>
-                    <a href="https://www.propertyguru.com.sg/">
-                        <center>
-                            <font size="3">Search for Listing on Property Guru</font>
-                            <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
-                        </center>
-                    </a>
+
+                    <div class="center">
+                        <a href="https://www.propertyguru.com.sg/">
+                            <center>
+                                <font size="3">Search for Listing on Property Guru</font>
+                                <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
+                            </center>
+                        </a>
+                    </div>
                 </div>
-
-
             </div>
         </div>
     </div>
