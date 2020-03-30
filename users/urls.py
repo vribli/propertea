@@ -17,3 +17,6 @@ urlpatterns = [
     re_path(r'^reset/done/$', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path("redirect", views.redirect_view, name="redirect")
 ]
+"""
+Hello
+"""

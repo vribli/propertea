@@ -14,10 +14,18 @@ from .tokens import account_activation_token
 
 
 class LoginController():
+    """
+    This controller class executes the logic for the 'Users' sub-application
+    """
     def __init__(self, request):
         self.request = request
 
     def indexResponse(self):
+        """
+        This function implements logic for the 'User' page.
+
+        :return: Render of the 'User' page.
+        """
         context = {
             "user": self.request.user,
             "favourites": [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
@@ -25,6 +33,11 @@ class LoginController():
         return render(self.request, "users/user.html", context)
 
     def loginResponse(self):
+        """
+        This function implements logic for the 'login' page.
+
+        :return: Redirect to a relevant page.
+        """
         if self.request.user.is_authenticated:
             return HttpResponseRedirect("/users")
         elif self.request.POST:
@@ -51,11 +64,21 @@ class LoginController():
             return render(self.request, "users/login.html")
 
     def logoutResponse(self):
+        """
+        This function implements logic for the 'logout' page.
+
+        :return: Redirect back to the login page.
+        """
         logout(self.request)
         messages.success(self.request, "Logged Out.")
         return HttpResponseRedirect("/users/login")
 
     def createAccountResponse(self):
+        """
+        This function implements logic for the 'Create Account' page.
+
+        :return: Give a 'Activation Sent' page.
+        """
         form = SignUpForm(self.request.POST)
         if form.is_valid():
             form.save()
@@ -92,6 +115,13 @@ class LoginController():
         return render(self.request, 'users/createaccount.html', {'form': form})
 
     def activateResponse(self, uidb64, token):
+        """
+        This function implements logic for the 'Account Activation' page.
+
+        :param uidb64: Unique Slug generated from a combination of factors
+        :param token: Token generated from a combination of factors
+        :return: Redirect to the 'User' Page
+        """
         try:
             uid = force_text(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=uid)
