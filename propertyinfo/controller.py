@@ -4,6 +4,9 @@ from django.shortcuts import render
 
 
 class PropertyInfoController:
+    """
+    This controller class executes the logic for the 'PropertyInfo' sub-application.
+    """
     def __init__(self, request):
         self.name = request.GET['name']
         self.keyword = request.GET['keyword']
@@ -22,6 +25,11 @@ class PropertyInfoController:
         self.request = request
 
     def getResponse(self):
+        """
+        Returns the 'index' page for the propertyinfo sub-application.
+
+        :return: Render of 'index' page.
+        """
         context = {
             'name': self.name,
             'address': self.address,
