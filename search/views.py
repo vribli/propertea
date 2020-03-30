@@ -20,14 +20,14 @@ def index(request):
             data = xls.parse(xls.sheet_names[0])
             data = data.to_dict('index')
             values = [v for v in data.values()]
-            resfiltered = [i for i in values if (i['DISTRICT'] == district)]
+            resfiltered2 = [i for i in values if (i['DISTRICT'] == district)]
 
         else:
             res = requests.get("https://developers.onemap.sg/commonapi/search?returnGeom=Y&getAddrDetails=Y&pageNum=1",
                                params={'searchVal': keyword}).json()
 
             resfiltered = [i for i in res.get('results') if not (i['POSTAL'] == 'NIL')]
-
+            resfiltered2 = []
             for i in resfiltered:
                 if i['BUILDING'] == 'NIL':
                     i['BUILDING'] = i['ADDRESS']
@@ -54,21 +54,23 @@ def index(request):
                         ptype = None
 
                 i['TYPE'] = ptype
+                seen = set()
+                resfiltered2 = []
+                for d in resfiltered:
+                    t = tuple(d['BUILDING'])
+                    if t not in seen:
+                        seen.add(t)
+                        resfiltered2.append(d)
+
+
 
         if filterby == "nonlanded":
-            resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Non-Landed Residential")]
+            final = [i for i in resfiltered2 if (i['TYPE'] == "Non-Landed Residential")]
         elif filterby == "landed":
-            resfiltered2 = [i for i in resfiltered if (i['TYPE'] == "Landed Residential")]
+            final = [i for i in resfiltered2 if (i['TYPE'] == "Landed Residential")]
         else:
-            resfiltered2 = [i for i in resfiltered if not (i['TYPE'] == None)]
+            final = [i for i in resfiltered2 if not (i['TYPE'] == None)]
 
-        seen = set()
-        final = []
-        for d in resfiltered2:
-            t = tuple(d['BUILDING'])
-            if t not in seen:
-                seen.add(t)
-                final.append(d)
 
         favourite = []
         if request.user.is_authenticated:
