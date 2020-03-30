@@ -20,14 +20,14 @@ def index(request):
             data = xls.parse(xls.sheet_names[0])
             data = data.to_dict('index')
             values = [v for v in data.values()]
-            resfiltered = [i for i in values if (i['DISTRICT'] == district)]
+            resfiltered2 = [i for i in values if (i['DISTRICT'] == district)]
 
         else:
             res = requests.get("https://developers.onemap.sg/commonapi/search?returnGeom=Y&getAddrDetails=Y&pageNum=1",
                                params={'searchVal': keyword}).json()
 
             resfiltered = [i for i in res.get('results') if not (i['POSTAL'] == 'NIL')]
-
+            resfiltered2 = []
             for i in resfiltered:
                 if i['BUILDING'] == 'NIL':
                     i['BUILDING'] = i['ADDRESS']
@@ -54,14 +54,15 @@ def index(request):
                         ptype = None
 
                 i['TYPE'] = ptype
+                seen = set()
+                resfiltered2 = []
+                for d in resfiltered:
+                    t = tuple(d['BUILDING'])
+                    if t not in seen:
+                        seen.add(t)
+                        resfiltered2.append(d)
 
-        seen = set()
-        resfiltered2 = []
-        for d in resfiltered:
-            t = tuple(d['BUILDING'])
-            if t not in seen:
-                seen.add(t)
-                resfiltered2.append(d)
+
 
         if filterby == "nonlanded":
             final = [i for i in resfiltered2 if (i['TYPE'] == "Non-Landed Residential")]

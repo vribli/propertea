@@ -137,6 +137,7 @@
             crossorigin="anonymous"></script>
     <script src = "https://http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+
 </head>
 
 <body>
@@ -241,18 +242,18 @@
     </div>
     <div class="Content">
         <div class="Wrapper">
-            <div class="RightContent">
+            <div id="content" class="RightContent">
                 <div>
                     <iframe src="https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:{{ res.0.LATITUDE }},{{ res.0.LONGITUDE }}!colour:red&popupWidth=200"
                             height=690px width=100% scrolling="no" frameborder="0"
-                            allowfullscreen="allowfullscreen"></iframe>
+                            allowfullscreen="allowfullscreen" name="Right"></iframe>
                 </div>
             </div>
             <div class="LeftContent">
                 {% if res %}
                     <table class="table table-striped table table-hover">
                         {% for r in res %}
-                            <tr>
+                            <tr onclick="refreshIframe();">
                                 <td>
                                     <form class="form-inline" action='/search/favourites' method=post>
                                         {% csrf_token %}
@@ -277,6 +278,7 @@
                                     <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}"
                                        class="btn btn-secondary btn-lg active btn btn-info" role="button"
                                        aria-pressed="true">Spill the Tea</a>
+
                                 </td>
                             </tr>
                         {% endfor %}
@@ -299,14 +301,12 @@
     </div>
 </div>
 <script>
-    function validateForm() {
-        var x = document.forms["searchbar"]["keyword"].value;
-        if (x == "") {
-            alert("Please enter property name, address or postal code");
-            return false;
-        }
-    }
+function refreshIframe() {
+    var ifr = document.getElementsByName('Right')[0];
+    ifr.src = ifr.src;
+}
 </script>
+
 
 
 
