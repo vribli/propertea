@@ -5,10 +5,10 @@ from django.shortcuts import render
 class PropertyInfoController:
     def __init__(self, request):
         self.name = request.GET['name']
-        self.postal = request.GET['postal']
         # may break when user clicks on property from favourites list
-        self.URL = "https://developers.onemap.sg/commonapi/search?searchVal={} {}&returnGeom=Y&getAddrDetails=Y&pageNum=1".format(self.name, self.postal)
+        self.URL = "https://developers.onemap.sg/commonapi/search?searchVal={}&returnGeom=Y&getAddrDetails=Y&pageNum=1".format(self.name)
         self.info = requests.get(self.URL).json()
+        self.address = self.info['results'][0]['ADDRESS']
         self.X = float(self.info['results'][0]['X'])
         self.Y = float(self.info['results'][0]['Y'])
         self.LAT = float(self.info['results'][0]['LATITUDE'])
@@ -21,7 +21,7 @@ class PropertyInfoController:
     def getResponse(self):
         context = {
             'name': self.name,
-            'postal': self.postal,
+            'address': self.address,
             'mrt_lrt_plot': self.MRT_LRT_Data.plot(),
             'mrt_lrt_table_plot': self.MRT_LRT_Data.table(),
             'bus_plot': self.Bus_Data.plot(),
