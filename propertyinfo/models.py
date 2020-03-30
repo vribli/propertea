@@ -34,7 +34,7 @@ class TransportData(metaclass = ABCMeta):
         fig = go.Figure()
         fig.layout = go.Layout(
             title=go.layout.Title(
-                text="[Nearest " + self.type + " " + self.term + "] {}  {}".format(self.name, self.number),
+                text="{}  {}".format(self.name.upper(), self.number),
             ),
 
             xaxis=go.layout.XAxis(
@@ -54,15 +54,13 @@ class TransportData(metaclass = ABCMeta):
             x=time,
             y=plotData['TOTAL_TAP_IN_VOLUME'].tolist(),
             name='Total Tap In Volume',
-            marker_color='#4287f5', )
-        )
+            marker_color='rgb(255, 211, 120)'))
         fig.add_trace(go.Bar(
             x=time,
             y=plotData['TOTAL_TAP_OUT_VOLUME'].tolist(),
             name='Total Tap Out Volume',
-            marker_color='LightSkyBlue')
-        )
-        fig.update_layout(barmode='group', xaxis_tickangle=-45, font={"family": "Karla", "size": 16})
+            marker_color='rgb(206, 123, 91)'))
+        fig.update_layout(barmode='group', xaxis_tickangle=-45, plot_bgcolor='rgb(252, 250, 241)', font={"family": "Karla", "size": 16})
         return plot(fig, output_type="div", include_plotlyjs=False)
 
     @abstractmethod
@@ -105,17 +103,26 @@ class MRTLRTData(TransportData):
                     ['Last Train', str(subset['WD_LASTTRAIN'].iloc[index]), str(subset['SAT_LASTTRAIN'].iloc[index]),
                      str(subset['SUN_LASTTRAIN'].iloc[index])])
 
+            for row_index in range(1, len(table_values)):
+                for col_index in range(len(table_values[row_index])):
+                    if len(table_values[row_index][col_index]) == 1 and table_values[row_index][col_index]!='-':
+                        table_values[row_index][col_index] = '000' + table_values[row_index][col_index]
+                    elif len(table_values[row_index][col_index]) == 2:
+                        table_values[row_index][col_index] = '00' + table_values[row_index][col_index]
+                    elif len(table_values[row_index][col_index]) == 3:
+                        table_values[row_index][col_index] = '0' + table_values[row_index][col_index]
+
             fig.add_trace(go.Table(
                 header=dict(values=header_values,
                             height=30,
                             align=['right', 'center'],
-                            # fill = dict(color = "#9bc3eb"),
+                            fill = dict(color = 'rgb(201, 190, 120)'),
                             font=dict(family='Karla, monospace', size=18)
                             ),
                 cells=dict(values=table_values,
                            align=['right', 'center'],
                            height=30,
-                           # fill = dict(color = "#d7e7f7"),
+                           fill = dict(color = 'rgb(252, 250, 241)'),
                            font=dict(family='Karla, monospace', size=18)
                            )
             ),
@@ -162,7 +169,9 @@ class BusData(TransportData):
             LastBus = [tableData['WD_LASTBUS'].iloc[index], tableData['SAT_LASTBUS'].iloc[index],
                        tableData['SUN_LASTBUS'].iloc[index]]
             for j in range(len(LastBus)):
-                if len(LastBus[j]) == 2:
+                if len(LastBus[j]) == 1 and LastBus[j]!='-':
+                    LastBus[j] = '000' + LastBus[j]
+                elif len(LastBus[j]) == 2:  
                     LastBus[j] = '00' + LastBus[j]
                 elif len(LastBus[j]) == 3:
                     LastBus[j] = '0' + LastBus[j]
@@ -171,6 +180,7 @@ class BusData(TransportData):
                 header=dict(values=['<b>{}</b>'.format(tableData['ROUTENAME'].iloc[index]), '<b>First Bus</b>',
                                     '<b>Last Bus</b>'],
                             align=['right', 'center'],
+                            fill=dict(color = 'rgb(201,190,120)'),
                             height=30,
                             font=dict(family='Karla, monospace', size=18)
                             ),
@@ -179,6 +189,7 @@ class BusData(TransportData):
                                    LastBus
                                    ],
                            align=['right', 'center'],
+                           fill=dict(color = 'rgb(252,250,241)'),
                            height=30,
                            font=dict(family='Karla, monospace', size=18)
                            )
@@ -189,7 +200,7 @@ class BusData(TransportData):
         fig.update_layout(
             height=len(tableData) * 220,
             showlegend=True,
-            title_text="BUS SERVICES AT THIS STOP...",
+            title_text="BUS SERVICES AT THIS STOP",
         )
         return plot(fig, output_type="div", include_plotlyjs=False)
 

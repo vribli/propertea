@@ -5,6 +5,7 @@ class PropertyInfoController:
     def __init__(self, request):
         self.name = request.GET['name']
         self.postal = request.GET['postal']
+        # may break when user clicks on property from favourites list
         self.URL = "https://developers.onemap.sg/commonapi/search?searchVal={} {}&returnGeom=Y&getAddrDetails=Y&pageNum=1".format(self.name, self.postal)
         self.info = requests.get(self.URL).json()
         self.X = float(self.info['results'][0]['X'])
