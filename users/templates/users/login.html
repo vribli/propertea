@@ -73,6 +73,19 @@
             margin: auto;
             margin-left: -40px;
         }
+
+        .signinbut {
+            padding-left: 16px;
+            padding-right: 16px;
+            width: 470px;
+            vertical-align: middle;
+            horiz-align: center;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
     </style>
     <!-- Favicons need to make our own yeah-->
     <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/apple-touch-icon.png"
@@ -136,15 +149,18 @@
     </div>
     <input type="hidden" name="next" value="{{ request.path }}">
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <br>
-    <button class="btn btn-lg btn-secondary btn-block" onclick="location.href='{% url 'createaccount' %}'">Create
+</form>
+<div class="center">
+    <button class="btn btn-lg btn-secondary btn-block signinbut"
+            onclick="location.href='{% url 'createaccount' %}'">Create
         Account
     </button>
-    <br>
-    <p>
-        <a href="{% url 'password_reset' %}">Forgot your password?</a>
-    </p>
-    <p class="mt-5 mb-3 text-muted">© Team NACHOS 2020</p>
-</form>
+</div>
+
+<br>
+<p>
+    <a href="{% url 'password_reset' %}">Forgot your password?</a>
+</p>
+<p class="mt-5 mb-3 text-muted">© Team NACHOS 2020</p>
 </body>
 </html>
