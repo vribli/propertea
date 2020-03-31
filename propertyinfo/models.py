@@ -12,6 +12,18 @@ from bs4 import BeautifulSoup
 class TransportData(metaclass = ABCMeta):
     """
     This class aims to facilitate storing and retrieving transport data.
+
+    :ivar X: X-Coordinate of Property.
+    :ivar Y: Y-Coordinate of Property.
+    :ivar directory: Location of Stations CSV file.
+    :ivar volumeDir: Location of the Volume CSV file.
+    :ivar routeDir: Location of the Route CSV file.
+    :ivar type: "Bus" or "MRT".
+    :ivar term: "Stop" or "Station".
+    :ivar name: Transport Facility Name.
+    :ivar number: Bus Stop Number or MRT Number.
+    :ivar lat: Latitude of Facility.
+    :ivar long: Longitude of Facility.
     """
     def __init__(self, X, Y, directory, volumeDir, routeDir, type, term):
         self.X = X
@@ -233,6 +245,8 @@ class BusData(TransportData):
 class PropertyImages:
     """
     This class aims to facilitate storing and retrieving property image information.
+
+    :ivar name: Google Image Search Keyword
     """
     def __init__(self, name):
         self.name = name

@@ -9,6 +9,20 @@ from users.models import FavouriteProperty
 class PropertyInfoController:
     """
     This controller class executes the logic for the 'PropertyInfo' sub-application.
+
+    :ivar name: Name of property considered.
+    :ivar keyword: Search keyword used to find the building.
+    :ivar URL: URL for API.
+    :ivar info: Information Retrieved from API.
+    :ivar address: Address of Property.
+    :ivar X: X-Coordinate of Property.
+    :ivar Y: Y-Coordinate of Property.
+    :ivar LAT: Latitude of Property.
+    :ivar LONG: Longitude of Property.
+    :ivar MRT_LRT_Data: Data of the nearest MRT/LRT.
+    :ivar Bus_Data: Data of the nearest Bus Stop.
+    :ivar images: Data from Google Images.
+    :ivar request: The HTTP Request at that instance.
     """
     def __init__(self, request):
         self.name = request.GET['name']

@@ -169,6 +169,11 @@
 <dt id="propertyinfo.models.PropertyImages">
 <em class="property">class </em><code class="sig-prename descclassname">propertyinfo.models.</code><code class="sig-name descname">PropertyImages</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.PropertyImages" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class aims to facilitate storing and retrieving property image information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><p><strong>name</strong> – Google Image Search Keyword</p>
+</dd>
+</dl>
 <dl class="method">
 <dt id="propertyinfo.models.PropertyImages.getLinks">
 <code class="sig-name descname">getLinks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.PropertyImages.getLinks" title="Permalink to this definition">¶</a></dt>
@@ -197,6 +202,23 @@
 <dt id="propertyinfo.models.TransportData">
 <em class="property">class </em><code class="sig-prename descclassname">propertyinfo.models.</code><code class="sig-name descname">TransportData</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em>, <em class="sig-param">directory</em>, <em class="sig-param">volumeDir</em>, <em class="sig-param">routeDir</em>, <em class="sig-param">type</em>, <em class="sig-param">term</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.TransportData" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class aims to facilitate storing and retrieving transport data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – X-Coordinate of Property.</p></li>
+<li><p><strong>Y</strong> – Y-Coordinate of Property.</p></li>
+<li><p><strong>directory</strong> – Location of Stations CSV file.</p></li>
+<li><p><strong>volumeDir</strong> – Location of the Volume CSV file.</p></li>
+<li><p><strong>routeDir</strong> – Location of the Route CSV file.</p></li>
+<li><p><strong>type</strong> – “Bus” or “MRT”.</p></li>
+<li><p><strong>term</strong> – “Stop” or “Station”.</p></li>
+<li><p><strong>name</strong> – Transport Facility Name.</p></li>
+<li><p><strong>number</strong> – Bus Stop Number or MRT Number.</p></li>
+<li><p><strong>lat</strong> – Latitude of Facility.</p></li>
+<li><p><strong>long</strong> – Longitude of Facility.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="propertyinfo.models.TransportData.plot">
 <code class="sig-name descname">plot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.models.TransportData.plot" title="Permalink to this definition">¶</a></dt>
@@ -221,6 +243,25 @@
 <dt id="propertyinfo.controller.PropertyInfoController">
 <em class="property">class </em><code class="sig-prename descclassname">propertyinfo.controller.</code><code class="sig-name descname">PropertyInfoController</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.controller.PropertyInfoController" title="Permalink to this definition">¶</a></dt>
 <dd><p>This controller class executes the logic for the ‘PropertyInfo’ sub-application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of property considered.</p></li>
+<li><p><strong>keyword</strong> – Search keyword used to find the building.</p></li>
+<li><p><strong>URL</strong> – URL for API.</p></li>
+<li><p><strong>info</strong> – Information Retrieved from API.</p></li>
+<li><p><strong>address</strong> – Address of Property.</p></li>
+<li><p><strong>X</strong> – X-Coordinate of Property.</p></li>
+<li><p><strong>Y</strong> – Y-Coordinate of Property.</p></li>
+<li><p><strong>LAT</strong> – Latitude of Property.</p></li>
+<li><p><strong>LONG</strong> – Longitude of Property.</p></li>
+<li><p><strong>MRT_LRT_Data</strong> – Data of the nearest MRT/LRT.</p></li>
+<li><p><strong>Bus_Data</strong> – Data of the nearest Bus Stop.</p></li>
+<li><p><strong>images</strong> – Data from Google Images.</p></li>
+<li><p><strong>request</strong> – The HTTP Request at that instance.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="propertyinfo.controller.PropertyInfoController.getResponse">
 <code class="sig-name descname">getResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#propertyinfo.controller.PropertyInfoController.getResponse" title="Permalink to this definition">¶</a></dt>
