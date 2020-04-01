@@ -226,15 +226,9 @@
             text-align: center;
         }
 
-        .btn-circle {
-            width: 30px;
-            height: 30px;
-            padding: 6px 0px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.42857;
-            float: right;
+        .right {
+            text-align: right;
+            vertical-align: center;
         }
 
 
@@ -386,22 +380,22 @@ Licensed under MIT
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th> Name</th>
+                                        <th colspan="2"> Name</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for favourite in results %}
-                                        {% if favourite.name %}
+                                    {% for r in result %}
+                                        {% if r.name %}
                                             <tr class='clickable-row'
-                                                data-href="/propertyinfo?name={{ favourite }}&postal=&keyword=">
+                                                data-href="/propertyinfo?name={{ r.name }}&postal=&keyword=">
                                                 <td></td>
                                                 <td class="wordformat">
                                                     <div class="wordformat">
-                                                        {{ favourite }}
+                                                        {{ r.name }}
                                                     </div>
                                                 </td>
                                                 <td class="right">
-                                                    <a href="/propertyinfo?name={{ favourite }}&postal=nil&keyword={{ keyword }}"
+                                                    <a href="/propertyinfo?name={{ r.name }}&postal=nil&keyword={{ keyword }}"
                                                        class="btn btn-secondary active btn btn-info"
                                                        role="button"
                                                        aria-pressed="true">Spill the Tea</a>
