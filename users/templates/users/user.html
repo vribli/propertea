@@ -328,6 +328,7 @@ Licensed under MIT
                                 <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
                             </li>
                             <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
+                        </ul>
                     </form>
                 {% endif %}
                 </ul>
@@ -387,23 +388,20 @@ Licensed under MIT
                                     <tr>
                                         <th>#</th>
                                         <th> Name</th>
+{#                                        <th> Date Added</th>#}
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for favourite in favourites %}
-                                        {% if favourite %}
+                                    {% for tuple in result %}
                                             <tr class='clickable-row'
-                                                data-href="/propertyinfo?name={{ favourite }}&postal=&keyword=">
+                                                data-href="/propertyinfo?name={{ tuple.name }}&postal=&keyword=">
                                                 <td></td>
-                                                <td>{{ favourite }}</td>
                                                 <td>
-                                                    <!--
-                                <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
-                                </button>
-                                -->
+                                                    <a href="/propertyinfo?name={{ tuple.name }}&postal=nil&keyword=nil" role="link">
+                                                        {{ tuple.name }}
+                                                    </a>
                                                 </td>
                                             </tr>
-                                        {% endif %}
                                     {% endfor %}
                                     </tbody>
                                 </table>

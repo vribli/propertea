@@ -30,7 +30,7 @@ class LoginController():
         """
         context = {
             "user": self.request.user,
-            "favourites": [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
+            "result": [{"name": x[0]} for x in list(self.request.user.favouriteproperty_set.order_by('name').values_list('name'))],
         }
         return render(self.request, "users/user.html", context)
 
