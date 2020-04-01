@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Search &mdash; propertea 1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="propertea 1.0 documentation" href="index.html"/>
+        <link rel="next" title="PropertyInfo" href="propertyinfo.html"/>
+        <link rel="prev" title="Users" href="users.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> propertea</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="users.html">Users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.models">models.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.forms">forms.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.controller">controller.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.tokens">tokens.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users.html#module-users.views">views.py Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-search.controller">controller.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-search.views">views.py Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="propertyinfo.html">PropertyInfo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#module-propertyinfo.models">models.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#module-propertyinfo.controller">controller.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#module-propertyinfo.views">views.py Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Home</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#module-home.views">views.py Methods</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">propertea</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Search</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/searchapplication.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="search">
+<h1>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h1>
+<p>This page seeks to explain the methods and classes involved in the Search sub-application of the <em>propertea</em> Application.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please note that we have seperated view logic into controller and views in order to comply with the MVC framework.</p>
+</div>
+<div class="section" id="module-search.controller">
+<span id="controller-py-methods"></span><h2>controller.py Methods<a class="headerlink" href="#module-search.controller" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="search.controller.SearchController">
+<em class="property">class </em><code class="sig-prename descclassname">search.controller.</code><code class="sig-name descname">SearchController</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#search.controller.SearchController" title="Permalink to this definition">¶</a></dt>
+<dd><p>This controller class executes the logic for the ‘Search’ sub-application</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keyword</strong> – The search keyword used.</p></li>
+<li><p><strong>filterby</strong> – The filter variable used, if present.</p></li>
+<li><p><strong>district</strong> – The district used to search, if used.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="search.controller.SearchController.favourite">
+<code class="sig-name descname">favourite</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#search.controller.SearchController.favourite" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for toggling the favourites button.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of Favourite Properties in the database for a particular user.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="search.controller.SearchController.favouriteResponse">
+<code class="sig-name descname">favouriteResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#search.controller.SearchController.favouriteResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for toggling the favourites button.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Redirect back to the search page.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="search.controller.SearchController.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="headerlink" href="#search.controller.SearchController.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for filtering the results obtained.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>result</strong> – The result obtained via Search.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The filtered result based on the initial result.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="search.controller.SearchController.getResponse">
+<code class="sig-name descname">getResponse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#search.controller.SearchController.getResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for displaying the index page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The render of the search results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="search.controller.SearchController.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#search.controller.SearchController.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for the ‘Search Results’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Calls the relavant functions based on user request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="search.controller.SearchController.searchByDistrict">
+<code class="sig-name descname">searchByDistrict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#search.controller.SearchController.searchByDistrict" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for searching by district.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of Properties in the district based on the CSV.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="search.controller.SearchController.searchByKeyword">
+<code class="sig-name descname">searchByKeyword</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#search.controller.SearchController.searchByKeyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function implements logic for searching by keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of Properties related to the specific keyword.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="urls-py-methods">
+<h2>urls.py Methods<a class="headerlink" href="#urls-py-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="attribute">
+<dt id="search.urls.urlpatterns">
+<code class="sig-prename descclassname">search.urls.</code><code class="sig-name descname">urlpatterns</code><a class="headerlink" href="#search.urls.urlpatterns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-search.views">
+<span id="views-py-methods"></span><h2>views.py Methods<a class="headerlink" href="#module-search.views" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="search.views.favourites_view">
+<code class="sig-prename descclassname">search.views.</code><code class="sig-name descname">favourites_view</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#search.views.favourites_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function seeks to assist in the toggling of favourites.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – THe HTTP Request at the instance.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HTTP Response of favouriteResponse()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="search.views.index">
+<code class="sig-prename descclassname">search.views.</code><code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#search.views.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function seeks to access the ‘index’ page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The HTTP request at the instance</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HTTP Response of getResponse()</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="propertyinfo.html" class="btn btn-neutral float-right" title="PropertyInfo">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="users.html" class="btn btn-neutral" title="Users"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <div role="contentinfo">
+		<p class="centered">© 2014 drove.io is a <b>connectical</b> project. <span class="nnlogo"></span></p>
+  </div>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

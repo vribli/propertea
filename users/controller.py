@@ -16,6 +16,8 @@ from .tokens import account_activation_token
 class LoginController():
     """
     This controller class executes the logic for the 'Users' sub-application
+
+    :ivar request: The HTTP request at that instance.
     """
     def __init__(self, request):
         self.request = request
