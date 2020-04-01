@@ -55,9 +55,15 @@ class SearchController:
 
         :return: List of Properties related to the specific keyword.
         """
-        res = requests.get("https://developers.onemap.sg/commonapi/search?returnGeom=Y&getAddrDetails=Y&pageNum=1",
-                           params={'searchVal': self.keyword}).json()
-        resfiltered = [i for i in res.get('results') if not (i['POSTAL'] == 'NIL')]
+        try:
+            res = requests.get("https://developers.onemap.sg/commonapi/search?returnGeom=Y&getAddrDetails=Y&pageNum=1",
+                               params={'searchVal': self.keyword}).json()
+        except:
+            res = []
+        try:
+            resfiltered = [i for i in res.get('results') if not (i['POSTAL'] == 'NIL')]
+        except:
+            resfiltered = []
 
         for i in resfiltered:
             if i['BUILDING'] == 'NIL':
@@ -65,7 +71,7 @@ class SearchController:
             name = i['BUILDING'].replace(" ", "-")
             URL = "https://www.squarefoot.com.sg/trends-and-analysis/residential?p={}".format(name)
             URLL = "https://www.squarefoot.com.sg/trends-and-analysis/landed?p={}".format(name)
-
+            res.get('results')
             try:
                 r = requests.get(URL)
                 info_raw = BeautifulSoup(r.content).find('table',

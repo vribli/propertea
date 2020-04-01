@@ -226,15 +226,16 @@
             text-align: center;
         }
 
-        .btn-circle {
-            width: 30px;
-            height: 30px;
-            padding: 6px 0px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.42857;
-            float: right;
+        .right {
+            text-align: right;
+            vertical-align: center;
+        }
+
+        .wordformat {
+            vertical-align: center;
+            justify-content: center;
+            height: 100%;
+
         }
 
 
@@ -390,17 +391,22 @@ Licensed under MIT
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for favourite in favourites %}
-                                        {% if favourite %}
+                                    {% for favourite in results %}
+                                        {% if favourite.name %}
                                             <tr class='clickable-row'
                                                 data-href="/propertyinfo?name={{ favourite }}&postal=&keyword=">
                                                 <td></td>
-                                                <td>{{ favourite }}</td>
-                                                <td>
-                                                    <!--
-                                <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
-                                </button>
-                                -->
+                                                <td class="wordformat">
+                                                    <div class="wordformat">
+                                                        {{ favourite }}
+                                                    </div>
+                                                </td>
+                                                <td class="right">
+                                                    <a href="/propertyinfo?name={{ favourite }}&postal=nil&keyword={{ keyword }}"
+                                                       class="btn btn-secondary active btn btn-info"
+                                                       role="button"
+                                                       aria-pressed="true">Spill the Tea</a>
+
                                                 </td>
                                             </tr>
                                         {% endif %}

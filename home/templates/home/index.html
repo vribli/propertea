@@ -112,10 +112,11 @@
 <script>
     function validateForm() {
         var x = document.forms["searchbar"]["keyword"].value;
-        if (x == "") {
+        if (x === "") {
             alert("Please enter property name, address or postal code");
             return false;
         }
+
     }
 </script>
 
