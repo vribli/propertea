@@ -226,6 +226,17 @@
             text-align: center;
         }
 
+        .btn-circle {
+            width: 30px;
+            height: 30px;
+            padding: 6px 0px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.42857;
+            float: right;
+        }
+
 
     </style>
     <!------ Include the above in your HEAD tag ---------->
@@ -240,6 +251,8 @@
             crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 </head>
 <!--
 User Profile Sidebar by @keenthemes
@@ -302,21 +315,19 @@ Licensed under MIT
                             </td>
                             <td>|</td>
                             <td class="small">
-                                <a href="/users/logout">
+                                <a href="/users/logout?next_url={{ request.get_full_path }}">
                                     <div>LOGOUT</div>
                                 </a>
                             </td>
                         </tr>
                     </table>
                 {% else %}
-                    <form action="{% url 'login' %}?next={{ next_url }}">
+                    <form action="{% url 'login' %}" method="GET">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
                                 <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                                <script>document.getElementById('next_url').value = window.location.href;</script>
-                                <input type="hidden" name="next_url" id="next_url" value="{{ next_url }}"/>
                             </li>
-                            <input type="hidden" name="next_url" value="{{ next_url }}"/>
+                            <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
                     </form>
                 {% endif %}
                 </ul>
@@ -381,12 +392,17 @@ Licensed under MIT
                                     <tbody>
                                     {% for favourite in favourites %}
                                         {% if favourite %}
-                                        <tr class='clickable-row'
-                                            data-href="/propertyinfo?name={{ favourite }}&postal=&keyword=">
-                                            <td></td>
-                                            <td>{{ favourite }}</td>
-
-                                        </tr>
+                                            <tr class='clickable-row'
+                                                data-href="/propertyinfo?name={{ favourite }}&postal=&keyword=">
+                                                <td></td>
+                                                <td>{{ favourite }}</td>
+                                                <td>
+                                                    <!--
+                                <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                </button>
+                                -->
+                                                </td>
+                                            </tr>
                                         {% endif %}
                                     {% endfor %}
                                     </tbody>

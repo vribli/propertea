@@ -130,6 +130,7 @@ class SearchController:
             'res': self.search(),
             'district': self.district,
             'favourite': self.favourite(),
+            'next_url': self.request.build_absolute_uri()
         }
         return render(self.request, "search/index.html", context)
 
