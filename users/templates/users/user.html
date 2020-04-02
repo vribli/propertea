@@ -143,7 +143,7 @@
 
         tr, td {
             height: 100%;
-            vertical-align: top;
+            vertical-align: center;
             pad: 5px;
         }
 
@@ -167,27 +167,6 @@
 
         .Header {
             margin-bottom: 10px;
-        }
-
-        .Footer {
-            margin-top: 10px;
-        }
-
-        .Content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .Content:after {
-            content: '';
-            clear: both;
-            display: block;
-        }
-
-        .Wrapper {
-            position: absolute;
-            width: 100%;
-            height: 100%;
         }
 
         .Wrapper > div {
@@ -226,15 +205,9 @@
             text-align: center;
         }
 
-        .btn-circle {
-            width: 30px;
-            height: 30px;
-            padding: 6px 0px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.42857;
-            float: right;
+        .right {
+            text-align: right;
+            vertical-align: center;
         }
 
 
@@ -382,25 +355,29 @@ Licensed under MIT
                             <br>
                             <br>
                             <div class="table-responsive">
-                                <table class="table table-striped table-sm listfav">
+                                <table class="table-striped table-sm listfav" style="width: 650px">
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th> Name</th>
+                                        <th colspan="2"> Name</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for favourite in favourites %}
-                                        {% if favourite %}
+                                    {% for r in result %}
+                                        {% if r.name %}
                                             <tr class='clickable-row'
-                                                data-href="/propertyinfo?name={{ favourite }}&postal=&keyword=">
+                                                data-href="/propertyinfo?name={{ r.name }}&postal=&keyword=">
                                                 <td></td>
-                                                <td>{{ favourite }}</td>
                                                 <td>
-                                                    <!--
-                                <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
-                                </button>
-                                -->
+                                                    <div style="vertical-align: center">
+                                                        {{ r.name }}
+                                                    </div>
+                                                </td>
+                                                <td class="right">
+                                                    <a href="/propertyinfo?name={{ r.name }}&postal=nil&keyword={{ keyword }}"
+                                                       class="btn btn-secondary active btn-sm btn-info"
+                                                       role="button"
+                                                       aria-pressed="true">Spill the Tea</a>
                                                 </td>
                                             </tr>
                                         {% endif %}
