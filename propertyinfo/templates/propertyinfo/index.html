@@ -265,23 +265,6 @@
     <script src="//www.squarefoot.com.sg/component/sqftapi?token=krsq4yuwi8tldbp6vn9fxhc2o3m5170e&task=js"></script>
     <script>
         $(document).ready(function () {
-            squarefoot.load("sqftmain", {
-                task: "project",
-                name: " {{ name }}",
-                type: "r",
-                subtype: "abc",
-                summary: "1",
-                pricechart: "1",
-                rangechart: "1",
-                map: "1",
-                amenities: "1,1,500,ckl"
-            });
-            $("#sqftmain").iFrameResize();
-        });
-
-    </script>
-    <script>
-        $(document).ready(function () {
             squarefoot.load("pinfo", {
                 task: "project",
                 name: " {{ name }}",
