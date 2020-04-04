@@ -30,7 +30,7 @@ class LoginController():
         """
         context = {
             "user": self.request.user,
-            "favourites": [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
+            "result": [{"name": x[0]} for x in list(self.request.user.favouriteproperty_set.order_by('name').values_list('name'))],
         }
         return render(self.request, "users/user.html", context)
 
@@ -50,20 +50,29 @@ class LoginController():
                 login(self.request, user)
                 next_url = self.request.POST.get('next_url')
                 if next_url is None:
-                    return HttpResponseRedirect("/")
+                    return HttpResponseRedirect("/users/")
                 if next_url != "/users/login":
                     return HttpResponseRedirect(next_url)
                 else:
                     context = {
                         "user": self.request.user,
-                        "favourites": [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]
-                    }
+                        "result": [{"name": x[0]} for x in
+                                   list(
+                                       self.request.user.favouriteproperty_set.order_by('name').values_list('name'))], }
                     return HttpResponseRedirect("/users")
             else:
                 messages.error(self.request, "Invalid Credentials")
                 return render(self.request, "users/login.html")
         else:
-            return render(self.request, "users/login.html")
+            try:
+                context = {
+                    'next_url': self.request.GET['next_url']
+                }
+            except:
+                context = {
+                    'next_url': "/"
+                }
+            return render(self.request, "users/login.html", context)
 
     def logoutResponse(self):
         """
@@ -73,7 +82,7 @@ class LoginController():
         """
         logout(self.request)
         messages.success(self.request, "Logged Out.")
-        return HttpResponseRedirect("/users/login")
+        return HttpResponseRedirect("/users/login?next_url=" + self.request.GET['next_url'])
 
     def createAccountResponse(self):
         """

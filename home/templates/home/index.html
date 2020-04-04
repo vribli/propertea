@@ -62,17 +62,16 @@
                 </td>
                 <td>|</td>
                 <td class="small">
-                    <a href="/users/logout">
+                    <a href="/users/logout?next_url={{ request.get_full_path }}">
                         <div>LOGOUT</div>
                     </a>
                 </td>
             </tr>
         </table>
     {% else %}
-        <form action="{% url 'login' %}?next={{ next_url }}">
+        <form action="{% url 'login' %}" method="GET">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-            <script>document.getElementById('next_url').value = window.location.href;</script>
-            <input type="hidden" name="next_url" id="next_url" value="{{ next_url }}"/>
+            <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
         </form>
     {% endif %}
 </nav>
@@ -113,10 +112,11 @@
 <script>
     function validateForm() {
         var x = document.forms["searchbar"]["keyword"].value;
-        if (x == "") {
+        if (x === "") {
             alert("Please enter property name, address or postal code");
             return false;
         }
+
     }
 </script>
 
