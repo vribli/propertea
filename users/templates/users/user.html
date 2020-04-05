@@ -143,7 +143,7 @@
 
         tr, td {
             height: 100%;
-            vertical-align: center;
+            vertical-align: top;
             pad: 5px;
         }
 
@@ -301,6 +301,7 @@ Licensed under MIT
                                 <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
                             </li>
                             <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
+                        </ul>
                     </form>
                 {% endif %}
                 </ul>
@@ -355,35 +356,23 @@ Licensed under MIT
                             <br>
                             <br>
                             <div class="table-responsive">
-                                <table class="table-striped table-sm listfav" style="width: 650px">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th colspan="2"> Name</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for r in result %}
-                                        {% if r.name %}
-                                            <tr class='clickable-row'
-                                                data-href="/propertyinfo?name={{ r.name }}&postal=&keyword=">
-                                                <td></td>
+                                {% if result %}
+                                    <table class="table table-striped table table-hover">
+                                        {% for r in result %}
+                                            <tr>
+                                                <td>r.name</td>
                                                 <td>
-                                                    <div style="vertical-align: center">
-                                                        {{ r.name }}
-                                                    </div>
-                                                </td>
-                                                <td class="right">
-                                                    <a href="/propertyinfo?name={{ r.name }}&postal=nil&keyword={{ keyword }}"
-                                                       class="btn btn-secondary active btn-sm btn-info"
+                                                    <a href="/propertyinfo?name={{ r.name }}&postal=nil&keyword=nil"
+                                                       class="btn btn-lg active btn btn-info"
                                                        role="button"
                                                        aria-pressed="true">Spill the Tea</a>
                                                 </td>
                                             </tr>
-                                        {% endif %}
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                        {% endfor %}
+                                    </table>
+                                {% else %}
+                                    Yes
+                                {% endif %}
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
