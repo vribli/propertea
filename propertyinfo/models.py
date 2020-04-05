@@ -235,7 +235,7 @@ class BusData(TransportData):
             )
 
         fig.update_layout(
-            height=len(tableData) * 220,
+            height=max([len(tableData) * 220, 400]),
             showlegend=True,
             title_text="BUS SERVICES AT THIS STOP",
         )
