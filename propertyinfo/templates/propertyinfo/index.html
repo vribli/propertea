@@ -324,6 +324,21 @@
         });
 
     </script>
+
+    <script>
+        $(document).ready(function () {
+            squarefoot.load("compare",{
+                task: "project",
+                name: "{{ name }}",
+                type: "r",
+                subtype: "abc",
+                {#summary: "1",#}
+                nearby: "1,1,500,"
+        });
+            $("#compare").iFrameResize();
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             squarefoot.load("nmap", {
@@ -453,6 +468,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" href="#compare">
+                                            <img src="{% static "file-text.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
+                                            Price Comparison
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="#nmap">
                                             <img src="{% static "map.svg" %}" width="20" height="20">
                                             <i class="fa fa-reply"></i>
@@ -517,6 +539,10 @@
                 </div>
                 <div style="width: 100%; overflow: hidden" name="rchart">
                     <iframe id="rchart" frameborder="0" width="100%"
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
+                </div>
+                <div style="width: 100%; overflow: hidden" name="compare">
+                    <iframe id="compare" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
                 <div style="width: 100%; overflow: hidden" name="nmap">
