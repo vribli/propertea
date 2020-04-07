@@ -58,6 +58,14 @@
             float: left;
         }
 
+        .Header {
+            width: 100%;
+            table-layout: auto;
+            border-collapse: collapse;
+            margin-bottom: 100px;
+            position: fixed;
+        }
+
         .Footer {
             margin-top: 10px;
         }
@@ -102,7 +110,6 @@
             text-align: center;
             vertical-align: center;
             padding-bottom: 30px;
-
         }
 
         .Header {
@@ -159,6 +166,11 @@
 
         a {
             text-decoration: none;
+            color: black;
+        }
+
+        body {
+            font-size: .875rem;
         }
 
         .svnty {
@@ -166,8 +178,8 @@
         }
 
         .shrink {
-            width: 90%;
-            height: 90%;
+            width: 95%;
+            height: 95%;
         }
 
         /*
@@ -181,7 +193,7 @@
             left: 0;
             z-index: 100; /* Behind the navbar */
             padding: 48px 0 0; /* Height of navbar */
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1)
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
         }
 
         .sidebar-sticky {
@@ -191,7 +203,6 @@
             padding-top: .5rem;
             overflow-x: hidden;
             overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-            background-color: #EEEEEE;
         }
 
         @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -204,6 +215,11 @@
         .sidebar .nav-link {
             font-weight: 500;
             color: #333;
+        }
+
+        .sidebar .nav-link .feather {
+            margin-right: 4px;
+            color: #999;
             cursor: pointer;
         }
 
@@ -225,26 +241,14 @@
             padding-top: 48px; /* Space for fixed navbar */
         }
 
-        /*FOR THE USER LOGIN*/
+        /*
+         * Navbar
+         */
 
-        .toprighttable {
-            float: right;
-            width: 17%;
-            height: 10%;
-            border-color: #00A000 1px;
-
-        }
-
-
-        td.big {
-            text-align: center;
-            font-size: 100%;
-        }
-
-        td.small {
-            font-size: 70%;
-            vertical-align: middle;
-            text-align: center;
+        .navbar .form-control {
+            padding: .75rem 1rem;
+            border-width: 0;
+            border-radius: 0;
         }
 
     </style>
@@ -259,10 +263,11 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="//www.squarefoot.com.sg/js/iframeresizer.min.js"></script>
     <!-- Replace j93b541us62ngpax78dqefm0rzocythi in the following line with token issued for your domain -->
     <script src="//www.squarefoot.com.sg/component/sqftapi?token=krsq4yuwi8tldbp6vn9fxhc2o3m5170e&task=js"></script>
+
     <script>
         $(document).ready(function () {
             squarefoot.load("pinfo", {
@@ -302,6 +307,20 @@
         });
 
     </script>
+
+    <script>
+        $(document).ready(function () {
+            squarefoot.load("compare",{
+                task: "project",
+                name: "{{ name }}",
+                type: "r",
+                subtype: "abc",
+                nearby: "1,1,500,"
+        });
+            $("#compare").iFrameResize();
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             squarefoot.load("nmap", {
@@ -310,7 +329,7 @@
                 type: "r",
                 subtype: "abc",
                 map: "1",
-                amenities: "1,0,500,abdefghijmnpqr"
+                amenities: "1,0,500,abdefghijmnpqr",
             });
             $("#nmap").iFrameResize();
         });
@@ -324,7 +343,7 @@
                 name: " {{ name }}",
                 type: "r",
                 subtype: "abc",
-                amenities: "1,1,500,abdefghijmnpqr"
+                amenities: "1,1,500,abdefghijmnpqr",
             });
             $("#amenities").iFrameResize();
         }).scrollIntoView({behavior: "smooth"});
@@ -334,81 +353,68 @@
 
 <body>
 
+<div class="Header" style="z-index: 2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand mr-sm-6" href="/">
+            <img src="{% static "logo.png" %}" height=30px/>
+            <a class="navbar-brand" href="/">Propertea </a>
+        </a>
 
-<div class="Container">
-    <div class="Header" style="z-index:2">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-            <a class="navbar-brand mr-sm-6" href="/">
-                <img src="{% static "logo.png" %}" height=30px/>
-                <a class="navbar-brand" href="/">Propertea </a>
-            </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <form class="form-inline my-2 my-lg-0" action="/search" method="get">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <form class="form-inline my-2 my-lg-0" action="/search" method="get" name="searchbar"
-                          onsubmit="return validateForm()"
-                          method="post" required>
+                    <li class="nav-item">
+                        <div>
+                            <label for="keyword"></label>
+                            {% if keyword == "nil" %}
+                                <input class="form-control mr-sm-2" type="search" name="keyword" id="keyword"
+                                       aria-label="Search" size=75%>
+                            {% else %}
+                                <input class="form-control mr-sm-2" type="search" value="{{ keyword }}"
+                                       name="keyword" id="keyword" aria-label="Search" size=75%>
+                            {% endif %}
+                            <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
+                            <input type="hidden" name="filterby" id="filterby" value="nil">
+                            <input type="hidden" name="district" id="district" value="nil">
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
+                    </li>
+                </form>
+            </ul>
+            {% if user.is_authenticated %}
+                <a>Welcome, {{ user.username }}</a>
 
+            {% else %}
+                <form action="/users" class="form-inline">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                </form>
+            {% endif %}
+            <!--
+                <form action="/users">
+                    <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <div>
-                                <label for="keyword"></label>
-                                {% if keyword == "nil" %}
-                                    <input class="form-control mr-sm-2" type="search" name="keyword" id="keyword"
-                                           aria-label="Search" size=75%>
-                                {% else %}
-                                    <input class="form-control mr-sm-2" type="search" value="{{ keyword }}"
-                                           name="keyword" id="keyword" aria-label="Search" size=75%>
-                                {% endif %}
-                                <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
-                                <input type="hidden" name="filterby" id="filterby" value="nil">
-                                <input type="hidden" name="district" id="district" value="nil">
-                            </div>
+                            <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
                         </li>
 
-
-                        <li class="nav-item">
-                            <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
-
-                        </li>
                 </ul>
                 </form>
-                <a></a>
-                {% if user.is_authenticated %}
-                    <table class="toprighttable">
-                        <tr>
-                            <td class="big" colspan="3">Welcome, {{ user.username }}</td>
-                            <td rowspan="2"><img src="{% static "Profile.png" %}" height=50px/></td>
-                        </tr>
-                        <tr>
-                            <td class="small">
-                                <a href="/users">
-                                    <div>VIEW FAVOURITES</div>
-                                </a>
-                            </td>
-                            <td>|</td>
-                            <td class="small">
-                                <a href="/users/logout?next_url={{ request.get_full_path }}">
-                                    <div>LOGOUT</div>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-                {% else %}
-                    <form action="{% url 'login' %}" method="GET">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-                        <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
-                    </form>
-                {% endif %}
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="Content" style="z-index:0">
+                -->
+        </div>
+    </nav>
+</div>
+
+<div class="Container" style="z-index:0">
+
+    <div class="Content">
         <div class="Wrapper">
             <div class="LeftContent">
                 <div class="container-fluid">
@@ -438,6 +444,13 @@
                                             <img src="{% static "activity.svg" %}" width="20" height="20">
                                             <i class="fa fa-reply"></i>
                                             Monthly Price Range
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#compare">
+                                            <img src="{% static "file-text.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
+                                            Price Comparison
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -479,27 +492,8 @@
                 <table>
                     <tr>
                         <td width=50%>
-                            <form class="form-inline" action='/search/favourites' method=post>
-                                {% csrf_token %}
-                                <input type="hidden" name="propertyname" id="propertyname"
-                                       value="{{ name }}"/>
-                                <h3> {{ name }} </h3>
-                                {% if name in favourite %}
-                                    <button class="btn" type="submit">
-                                        <a style="color: orange; font-size: large">★</a>
-                                    </button>
-                                {% else %}
-                                    <button class="btn" type="submit">
-                                        <a style="color: orange; font-size: large">☆</a>
-                                    </button>
-                                {% endif %}
-                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                            </form>
-                            <a>{{ address }}</a>
-                            <br/>
-
-                            <br/>
-                            {#Fill address here#}
+                            <h3> {{ name }}</h3>
+                            {#                            Fill address here#}
                             {% for link in links %}
                                 <img src="{{ link }}" width=150px height=150px>
                             {% endfor %}<br/>
@@ -514,7 +508,6 @@
                         </td>
                     </tr>
                 </table>
-                <br/>
                 <div style="width: 100%; overflow: hidden" name="pinfo">
                     <iframe id="pinfo" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
@@ -525,6 +518,10 @@
                 </div>
                 <div style="width: 100%; overflow: hidden" name="rchart">
                     <iframe id="rchart" frameborder="0" width="100%"
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
+                </div>
+                <div style="width: 100%; overflow: hidden" name="compare">
+                    <iframe id="compare" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
                 <div style="width: 100%; overflow: hidden" name="nmap">
@@ -545,7 +542,7 @@
 
                     <table>
                         <tr>
-                            <td width="70%">
+                            <td>
                                 <div class="svnty">{{ mrt_lrt_plot|safe }}</div>
                             </td>
                             <td width="30%">
@@ -596,19 +593,14 @@
                     </table>
 
                     <div class="center">
-                        <a>
+                        <a href="https://www.propertyguru.com.sg/">
                             <center>
                                 <font size="3">Search for Listing on Property Guru</font>
+                                <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
                             </center>
-                        </a>
-                        <a href="https://www.propertyguru.com.sg/property-for-sale?freetext={{ name }}&market=residential">
-                            <p><img src="{% static "propertyguru.jpg" %}" height="40" width="120"></p>
-
                         </a>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -616,19 +608,10 @@
 
 <div class="Footer">
     <nav class="navbar navbar-light bg-light fixed-bottom">
-        <a></a>
+        <a href="/"></a>
         <a>© 2020 Propertea</a>
     </nav>
 </div>
-<script>
-    function validateForm() {
-        var x = document.forms["searchbar"]["keyword"].value;
-        if (x == "") {
-            alert("Please enter property name, address or postal code");
-            return false;
-        }
-    }
-</script>
 </body>
 
 </html>
