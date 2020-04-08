@@ -80,9 +80,10 @@ class LoginController():
 
         :return: Redirect back to the login page.
         """
+        next_url = self.request.GET['next_url']
         logout(self.request)
         messages.success(self.request, "Logged Out.")
-        return HttpResponseRedirect("/users/login?next_url=" + self.request.GET['next_url'])
+        return HttpResponseRedirect("/users/login?next_url=" + next_url)
 
     def createAccountResponse(self):
         """
