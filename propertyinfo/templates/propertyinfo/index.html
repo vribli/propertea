@@ -160,14 +160,13 @@
         a {
             text-decoration: none;
         }
-
         .svnty {
             width: 70%;
         }
 
         .shrink {
-            width: 90%;
-            height: 90%;
+            width: 95%;
+            height: 95%;
         }
 
         /*
@@ -225,14 +224,21 @@
             padding-top: 48px; /* Space for fixed navbar */
         }
 
-        /*FOR THE USER LOGIN*/
+        /*
+         * Navbar
+         */
+
+        .navbar .form-control {
+            padding: .75rem 1rem;
+            border-width: 0;
+            border-radius: 0;
+        }
 
         .toprighttable {
             float: right;
             width: 17%;
             height: 10%;
-            border-color: #00A000 1px;
-
+            text-align: center;
         }
 
 
@@ -263,6 +269,7 @@
     <script src="//www.squarefoot.com.sg/js/iframeresizer.min.js"></script>
     <!-- Replace j93b541us62ngpax78dqefm0rzocythi in the following line with token issued for your domain -->
     <script src="//www.squarefoot.com.sg/component/sqftapi?token=krsq4yuwi8tldbp6vn9fxhc2o3m5170e&task=js"></script>
+
     <script>
         $(document).ready(function () {
             squarefoot.load("pinfo", {
@@ -370,10 +377,11 @@
                 <a class="navbar-brand" href="/">Propertea </a>
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
@@ -555,7 +563,6 @@
                         </td>
                     </tr>
                 </table>
-                <br/>
                 <div style="width: 100%; overflow: hidden" name="pinfo">
                     <iframe id="pinfo" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
@@ -656,8 +663,6 @@
                         </a>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
