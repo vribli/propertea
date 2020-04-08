@@ -309,6 +309,19 @@
     </script>
 
     <script>
+    $(document).ready(function(){
+        squarefoot.load("rent",{
+            task: "project",
+            name: "Compass Heights",
+            type: "r",
+            subtype: "abc",
+            rental: "1"
+        });
+        $("#rent").iFrameResize();
+    });
+    </script>
+
+    <script>
         $(document).ready(function () {
             squarefoot.load("compare",{
                 task: "project",
@@ -460,6 +473,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" href="#rent">
+                                            <img src="{% static "file-text.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
+                                            Rental Contracts
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="#compare">
                                             <img src="{% static "file-text.svg" %}" width="20" height="20">
                                             <i class="fa fa-reply"></i>
@@ -538,6 +558,10 @@
                 </div>
                 <div style="width: 100%; overflow: hidden" name="rchart">
                     <iframe id="rchart" frameborder="0" width="100%"
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
+                </div>
+                <div style="width: 100%; overflow: hidden" name="rent">
+                    <iframe id="rent" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
                 <div style="width: 100%; overflow: hidden" name="compare">
