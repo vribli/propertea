@@ -349,6 +349,19 @@
         }).scrollIntoView({behavior: "smooth"});
     </script>
 
+    <script>
+        $(document).ready(function () {
+            squarefoot.load("transaction", {
+                task: "project",
+                name: "{{ name }}",
+                type: "r",
+                subtype: "abc",
+                transaction: "1"
+            });
+            $("#transaction").iFrameResize();
+        }).scrollIntoView({behavior: "smooth"});
+    </script>
+
 </head>
 
 <body>
@@ -454,6 +467,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" href="#transaction">
+                                            <img src="{% static "file-text.svg" %}" width="20" height="20">
+                                            <i class="fa fa-reply"></i>
+                                            Past Transaction
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="#nmap">
                                             <img src="{% static "map.svg" %}" width="20" height="20">
                                             <i class="fa fa-reply"></i>
@@ -522,6 +542,10 @@
                 </div>
                 <div style="width: 100%; overflow: hidden" name="compare">
                     <iframe id="compare" frameborder="0" width="100%"
+                            style="background-color:#ffffff; position: relative; top: -125px"></iframe>
+                </div>
+                <div style="width: 100%; overflow: hidden" name="transaction">
+                    <iframe id="transaction" frameborder="0" width="100%"
                             style="background-color:#ffffff; position: relative; top: -125px"></iframe>
                 </div>
                 <div style="width: 100%; overflow: hidden" name="nmap">
