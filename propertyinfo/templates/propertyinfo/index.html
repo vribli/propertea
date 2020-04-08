@@ -166,13 +166,7 @@
 
         a {
             text-decoration: none;
-            color: black;
         }
-
-        body {
-            font-size: .875rem;
-        }
-
         .svnty {
             width: 70%;
         }
@@ -249,6 +243,25 @@
             padding: .75rem 1rem;
             border-width: 0;
             border-radius: 0;
+        }
+
+        .toprighttable {
+            float: right;
+            width: 17%;
+            height: 10%;
+            text-align: center;
+        }
+
+
+        td.big {
+            text-align: center;
+            font-size: 100%;
+        }
+
+        td.small {
+            font-size: 70%;
+            vertical-align: middle;
+            text-align: center;
         }
 
     </style>
@@ -417,23 +430,34 @@
                 </form>
             </ul>
             {% if user.is_authenticated %}
-                <a>Welcome, {{ user.username }}</a>
-
+                <table class="toprighttable">
+                    <tr>
+                        <td class="big" colspan="3">Welcome, {{ user.username }}</td>
+                        <td rowspan="2"><img src="{% static "Profile.png" %}" height=50px/></td>
+                    </tr>
+                    <tr>
+                        <td class="small">
+                            <a href="/users">
+                                <div>VIEW FAVOURITES</div>
+                            </a>
+                        </td>
+                        <td>|</td>
+                        <td class="small">
+                            <a href="/users/logout?next_url={{ request.get_full_path }}">
+                                <div>LOGOUT</div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
             {% else %}
-                <form action="/users" class="form-inline">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-                </form>
-            {% endif %}
-            <!--
-                <form action="/users">
+                <form action="{% url 'login' %}" method="GET">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
                         </li>
-
-                </ul>
+                        <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
                 </form>
-                -->
+            {% endif %}
         </div>
     </nav>
 </div>
