@@ -19,7 +19,7 @@
     {#<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Propertea</title>
+
 
     <style>
         body {
@@ -143,7 +143,7 @@
 
         tr, td {
             height: 100%;
-            vertical-align: top;
+            vertical-align: center;
             pad: 5px;
         }
 
@@ -301,7 +301,6 @@ Licensed under MIT
                                 <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
                             </li>
                             <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
-                        </ul>
                     </form>
                 {% endif %}
                 </ul>
@@ -321,7 +320,7 @@ Licensed under MIT
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
-                            {{ user.first_name }} {{ user.username }}
+                            Welcome {{ user.first_name }}!
                         </div>
                         <div class="profile-usertitle-job">
                             <i>propertea</i> user
@@ -376,7 +375,8 @@ Licensed under MIT
                                                 </td>
                                                 <td class="right">
                                                     <a href="/propertyinfo?name={{ r.name }}&postal=nil&keyword={{ keyword }}"
-                                                       class="btn btn-secondary active btn-sm btn-info" role="button"
+                                                       class="btn btn-secondary active btn-sm btn-info"
+                                                       role="button"
                                                        aria-pressed="true">Spill the Tea</a>
                                                 </td>
                                             </tr>
