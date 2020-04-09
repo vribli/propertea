@@ -13,6 +13,7 @@ class SearchController:
     """
     This controller class executes the logic for the 'Search' sub-application
 
+    :ivar request: The HTTP request at that instance.
     :ivar keyword: The search keyword used.
     :ivar filterby: The filter variable used, if present.
     :ivar district: The district used to search, if used.
