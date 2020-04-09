@@ -22,7 +22,7 @@ class PropertyInfoController:
     :ivar MRT_LRT_Data: Data of the nearest MRT/LRT.
     :ivar Bus_Data: Data of the nearest Bus Stop.
     :ivar images: Data from Google Images.
-    :ivar request: The HTTP Request at that instance.
+    :ivar request: The HTTP request at that instance.
     """
     def __init__(self, request):
         self.name = request.GET['name']
