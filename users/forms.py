@@ -5,6 +5,13 @@ from django.utils.safestring import mark_safe
 
 
 class SignUpForm(UserCreationForm):
+    """
+    This class defines the Sign-Up form for Users.
+
+    :ivar first_name: The first name of the user.
+    :ivar last_name: The last name of the user.
+    :ivar email: The email of the user.
+    """
     first_name = forms.CharField(max_length=400)
     last_name = forms.CharField(max_length=400)
     email = forms.EmailField(max_length=400)
@@ -18,16 +25,15 @@ class SignUpForm(UserCreationForm):
         self.fields['username'].help_text = mark_safe(
             'Your username should:'
             '<span class="fake-ul">'
-            '<span class="fake-li">Be Unique</span>'
-            '<span class="fake-li">Have a Maximum of 150 characters</span>'
+            '<span class="fake-li">Be unique</span>'
+            '<span class="fake-li">Have a maximum of 150 characters</span>'
         )
         self.fields['password1'].help_text = mark_safe(
-            'Your password should not:'
+            'Your password should:'
             '<span class="fake-ul">'
-            '<span class="fake-li">Be less than 8 characters</span>'
-            '<span class="fake-li">Contain any personal information</span>'
-            '<span class="fake-li">Be Commonly Used</span>'
-            '<span class="fake-li">Be Entirely Numeric</span>'
+            '<span class="fake-li">Have at least 8 characters</span>'
+            '<span class="fake-li">Not contain any personal information</span>'
+            '<span class="fake-li">Not be entirely numeric</span>'
             '</span>'
         )
         self.fields['password2'].help_text = "Enter your password again for verification."

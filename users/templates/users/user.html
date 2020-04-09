@@ -23,7 +23,7 @@
 
     <style>
         body {
-            background: #F1F3FA;
+            background: white;
             width: 100%;
             font-family: 'Karla', sans-serif;
         }
@@ -128,7 +128,6 @@
         /* Profile Content */
         .profile-content {
             padding: 20px;
-            background: #fff;
             min-height: 460px;
         }
 
@@ -144,7 +143,7 @@
 
         tr, td {
             height: 100%;
-            vertical-align: top;
+            vertical-align: center;
             pad: 5px;
         }
 
@@ -170,27 +169,6 @@
             margin-bottom: 10px;
         }
 
-        .Footer {
-            margin-top: 10px;
-        }
-
-        .Content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .Content:after {
-            content: '';
-            clear: both;
-            display: block;
-        }
-
-        .Wrapper {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
         .Wrapper > div {
             height: 100%;
         }
@@ -199,9 +177,37 @@
             counter-reset: Serial; /* Set the Serial counter to 0 */
         }
 
-        tr td:first-child:before {
+        .listfav tr td:first-child:before {
             counter-increment: Serial; /* Increment the Serial counter */
             content: counter(Serial); /* Display the counter */
+        }
+
+        .listfav tr {
+            cursor: pointer;
+        }
+
+        .toprighttable {
+            float: right;
+            width: 17%;
+            height: 10%;
+
+        }
+
+
+        td.big {
+            text-align: center;
+            font-size: 100%;
+        }
+
+        td.small {
+            font-size: 70%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+            vertical-align: center;
         }
 
 
@@ -218,6 +224,8 @@
             crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 </head>
 <!--
 User Profile Sidebar by @keenthemes
@@ -240,12 +248,24 @@ Licensed under MIT
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <form class="form-inline my-2 my-lg-0" action="/search" method="get">
+                    <form class="form-inline my-2 my-lg-0" action="/search" method="get" name="searchbar"
+                          onsubmit="return validateForm()"
+                          method="post" required>
 
                         <li class="nav-item">
-                            <input class="form-control mr-sm-2" type="search" value="{{ keyword }}" name="keyword"
-                                   id="keyword" aria-label="Search" size=75%>
-
+                            <div>
+                                <label for="keyword"></label>
+                                {% if keyword == "nil" %}
+                                    <input class="form-control mr-sm-2" type="search" name="keyword" id="keyword"
+                                           aria-label="Search" size=75%>
+                                {% else %}
+                                    <input class="form-control mr-sm-2" type="search" value="{{ keyword }}"
+                                           name="keyword" id="keyword" aria-label="Search" size=75%>
+                                {% endif %}
+                                <input type="hidden" name="sortby" id="sortby" value="mostrelevant">
+                                <input type="hidden" name="filterby" id="filterby" value="nil">
+                                <input type="hidden" name="district" id="district" value="nil">
+                            </div>
                         </li>
 
                         <li class="nav-item">
@@ -254,12 +274,35 @@ Licensed under MIT
                         </li>
                 </ul>
                 </form>
-                <form action="/users">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                        </li>
-                </form>
+                {% if user.is_authenticated %}
+                    <table class="toprighttable">
+                        <tr>
+                            <td class="big" colspan="3">Welcome, {{ user.username }}</td>
+                            <td rowspan="2"><img src="{% static "Profile.png" %}" height=50px/></td>
+                        </tr>
+                        <tr>
+                            <td class="small">
+                                <a href="/users">
+                                    <div>VIEW FAVOURITES</div>
+                                </a>
+                            </td>
+                            <td>|</td>
+                            <td class="small">
+                                <a href="/users/logout?next_url={{ request.get_full_path }}">
+                                    <div>LOGOUT</div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <form action="{% url 'login' %}" method="GET">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
+                            </li>
+                            <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
+                    </form>
+                {% endif %}
                 </ul>
             </div>
         </nav>
@@ -277,7 +320,7 @@ Licensed under MIT
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
-                            {{ user.first_name }} {{ user.username }}
+                            Welcome {{ user.first_name }}!
                         </div>
                         <div class="profile-usertitle-job">
                             <i>propertea</i> user
@@ -298,8 +341,6 @@ Licensed under MIT
                            role="tab" aria-controls="v-pills-home" aria-selected="true">Favourites</a>
                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
                            role="tab" aria-controls="v-pills-profile" aria-selected="false">Account Details</a>
-                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages"
-                           role="tab" aria-controls="v-pills-messages" aria-selected="false">About</a>
                     </div>
                     <!-- END MENU -->
                 </div>
@@ -314,20 +355,32 @@ Licensed under MIT
                             <br>
                             <br>
                             <div class="table-responsive">
-                                <table class="table table-striped table-sm">
+                                <table class="table-striped table-sm listfav" style="width: 650px">
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th> Name</th>
+                                        <th colspan="2"> Name</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for favourite in favourites %}
-                                        <tr>
-                                            <td></td>
-                                            <td>{{ favourite }}</td>
-
-                                        </tr>
+                                    {% for r in result %}
+                                        {% if r.name %}
+                                            <tr class='clickable-row'
+                                                data-href="/propertyinfo?name={{ r.name }}&postal=&keyword=">
+                                                <td></td>
+                                                <td>
+                                                    <div style="vertical-align: center">
+                                                        {{ r.name }}
+                                                    </div>
+                                                </td>
+                                                <td class="right">
+                                                    <a href="/propertyinfo?name={{ r.name }}&postal=nil&keyword={{ keyword }}"
+                                                       class="btn btn-secondary active btn-sm btn-info"
+                                                       role="button"
+                                                       aria-pressed="true">Spill the Tea</a>
+                                                </td>
+                                            </tr>
+                                        {% endif %}
                                     {% endfor %}
                                     </tbody>
                                 </table>
@@ -364,44 +417,32 @@ Licensed under MIT
                             <hr>
                             {{ user.last_login }}
                         </div>
-                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                             aria-labelledby="v-pills-messages-tab">
-                            <h2 id="the-_propertea_-project">The <em>propertea</em> Project</h2>
-                            <p>Welcome! You&#39;ve landed on the git repository for our <em>CZ2006 (Software
-                                Engineering)</em> project. We&#39;re proud to bring you our first foray into web
-                                programming with Python! :fire::fire:</p>
-                            <p>This project tries to bring you a comprehensive view of any residential property in
-                                Singapore, by bringing together data from various government sources and private
-                                sources.</p>
-                            <p>Essentially, we <strong><em>spill the tea</em></strong> on these properties :wink::wink:
-                            </p>
-                            <p>Feel free to look around and enjoy our amazing work :stuck_out_tongue_winking_eye:</p>
-                            <p>Our project consists of these sub-applications:</p>
-                            <ul>
-                                <li><code>Home</code></li>
-                                <li><code>Search</code></li>
-                                <li><code>Listing</code></li>
-                                <li><code>PropertyInformation</code></li>
-                                <li><code>Users</code></li>
-                            </ul>
-                            <p>
-                                <del>Other groups coding this project, go away please</del>
-                                . :unamused::unamused:
-                            </p>
-                            <p><em>Team NACHOS</em> :taco: :taco:</p>
-                            <p>Johnson, Vincent, Tanay, Alice, Josephine, Raymond</p>
-                            <p>👩🏻‍💻👩🏻‍💻👨🏻‍💻👨🏻‍💻👨🏽‍💻👨🏻‍💻</p>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<center>
-    <strong>Powered by <a href="github.com/vribli/propertea" target="_blank">Team Nachos</a> 2020</strong>
-</center>
+<nav class="navbar navbar-light bg-light fixed-bottom">
+    <a></a>
+    <a>© 2020 Propertea</a>
+</nav>
 <br>
 <br>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });
+
+    function validateForm() {
+        var x = document.forms["searchbar"]["keyword"].value;
+        if (x == "") {
+            alert("Please enter property name, address or postal code");
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

@@ -62,7 +62,7 @@
         .Content {
             position: relative;
             z-index: 1;
-              margin: auto;
+            margin: auto;
             max-height: 89%;
         }
 
@@ -135,7 +135,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    <script src = "https://http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 </head>
@@ -157,8 +157,9 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <form class="form-inline my-2 my-lg-0" action="/search" method="get" name="searchbar" onsubmit="return validateForm()"
-                              method="post" required>
+                    <form class="form-inline my-2 my-lg-0" action="/search" method="get" name="searchbar"
+                          onsubmit="return validateForm()"
+                          method="post" required>
 
                         <li class="nav-item">
                             <div>
@@ -219,24 +220,22 @@
                             </td>
                             <td>|</td>
                             <td class="small">
-                                <a href="/users/logout">
+                                <a href="/users/logout?next_url={{ request.get_full_path }}">
                                     <div>LOGOUT</div>
                                 </a>
                             </td>
                         </tr>
                     </table>
                 {% else %}
-                    <form action="{% url 'login' %}?next={{ next_url }}">
+                    <form action="{% url 'login' %}" method="GET">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
                                 <button class="btn btn-outline-success my-2 my-sm-0">Login</button>
-                                <script>document.getElementById('next_url').value = window.location.href;</script>
-                                <input type="hidden" name="next_url" id="next_url" value="{{ next_url }}"/>
                             </li>
-                            <input type="hidden" name="next_url" value="{{ next_url }}"/>
+                            <input type="hidden" name="next_url" id="next_url" value="{{ request.get_full_path }}"/>
+                        </ul>
                     </form>
                 {% endif %}
-                </ul>
             </div>
         </nav>
     </div>
@@ -275,7 +274,7 @@
                                     <br><a> Property Type: {{ r.TYPE }}</a>
                                 </td>
                                 <td class="right">
-                                    <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}"
+                                    <a href="/propertyinfo?name={{ r.BUILDING }}&postal={{ r.POSTAL }}&keyword={{ keyword }}"
                                        class="btn btn-secondary btn-lg active btn btn-info" role="button"
                                        aria-pressed="true">Spill the Tea</a>
 
@@ -301,14 +300,20 @@
     </div>
 </div>
 <script>
-function refreshIframe(LAT, LONG) {
-    var ifr = document.getElementsByName('Right')[0];
-    var link = "https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:" + LAT + "," + LONG + "!colour:red&popupWidth=200";
-    if (ifr.src !== link) ifr.src = link;
-}
+    function refreshIframe(LAT, LONG) {
+        var ifr = document.getElementsByName('Right')[0];
+        var link = "https://www.onemap.sg/amm/amm.html?mapStyle=Default&zoomLevel=15&marker=latLng:" + LAT + "," + LONG + "!colour:red&popupWidth=200";
+        if (ifr.src !== link) ifr.src = link;
+    }
+
+    function validateForm() {
+        var x = document.forms["searchbar"]["keyword"].value;
+        if (x == "") {
+            alert("Please enter property name, address or postal code");
+            return false;
+        }
+    }
 </script>
-
-
 
 
 </body>
