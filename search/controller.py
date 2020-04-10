@@ -13,6 +13,7 @@ class SearchController:
     """
     This controller class executes the logic for the 'Search' sub-application
 
+    :ivar request: The HTTP request at that instance.
     :ivar keyword: The search keyword used.
     :ivar filterby: The filter variable used, if present.
     :ivar district: The district used to search, if used.
@@ -30,7 +31,7 @@ class SearchController:
         """
         This function implements logic for the 'Search Results' page.
 
-        :return: Calls the relavant functions based on user request.
+        :return: Calls the relavant functions based on user request and return the filtered result.
         """
         if (self.keyword == 'nil') & (self.district != 'nil'):
             result = self.searchByDistrict()
@@ -42,7 +43,7 @@ class SearchController:
         """
         This function implements logic for searching by district.
 
-        :return: List of Properties in the district based on the CSV.
+        :return: List of Properties in the district based on user district selection obtained from the CSV.
         """
         xls = ExcelFile("propertea/static/propertea.xlsx")
         data = xls.parse(xls.sheet_names[0])
@@ -104,7 +105,7 @@ class SearchController:
         This function implements logic for filtering the results obtained.
 
         :param result: The result obtained via Search.
-        :return: The filtered result based on the initial result.
+        :return: The filtered result based on the filter selected.
         """
         if self.filterby == "nonlanded":
             final = [i for i in result if (i['TYPE'] == "Non-Landed Residential")]
@@ -116,7 +117,7 @@ class SearchController:
 
     def favourite(self):
         """
-        This function implements logic for toggling the favourites button.
+        This function implements logic for toggling the view favourites button.
 
         :return: The list of Favourite Properties in the database for a particular user.
         """

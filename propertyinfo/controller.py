@@ -22,7 +22,7 @@ class PropertyInfoController:
     :ivar MRT_LRT_Data: Data of the nearest MRT/LRT.
     :ivar Bus_Data: Data of the nearest Bus Stop.
     :ivar images: Data from Google Images.
-    :ivar request: The HTTP Request at that instance.
+    :ivar request: The HTTP request at that instance.
     """
     def __init__(self, request):
         self.name = request.GET['name']
@@ -67,7 +67,12 @@ class PropertyInfoController:
         }
         return render(self.request, "propertyinfo/index.html", context)
 
-    def favouriteResponse(self):
+    def favouriteResponse(self):       
+        """
+        This function implements logic for toggling the favourites button.
+
+        :return: Redirect back to the search page.
+        """
         if self.request.POST:
             user = self.request.user
             if user is not None:
@@ -89,6 +94,11 @@ class PropertyInfoController:
             return HttpResponseRedirect(self.request)
 
     def favourite(self):
+        """
+        This function implements logic for toggling the view favourites button.
+
+        :return: The list of Favourite Properties in the database for a particular user.
+        """
         favourite = []
         if self.request.user.is_authenticated:
             favourite = [i[0] for i in list(self.request.user.favouriteproperty_set.values_list('name'))]

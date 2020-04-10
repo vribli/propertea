@@ -1,6 +1,6 @@
 Home
 ====================
-This page seeks to explain the methods and classes involved in the Home sub-application of the *propertea* Application.
+This page seeks to explain the methods and classes involved in the Home sub-application of the *Propertea* application.
 
 
 urls.py Methods
