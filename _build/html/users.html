@@ -29,8 +29,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="propertea 1.0 documentation" href="index.html"/>
-        <link rel="next" title="Search" href="searchapplication.html"/>
-        <link rel="prev" title="Welcome to propertea’s documentation!" href="index.html"/> 
+        <link rel="prev" title="PropertyInfo" href="propertyinfo.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -56,18 +55,14 @@
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation" style="padding-left: 20px">
         
         
             <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Users</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-users.models">models.py Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-users.forms">forms.py Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-users.controller">controller.py Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-users.tokens">tokens.py Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#urls-py-methods">urls.py Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-users.views">views.py Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Home</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#module-home.views">views.py Methods</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="searchapplication.html">Search</a><ul>
@@ -77,15 +72,19 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="propertyinfo.html">PropertyInfo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#module-propertyinfo.models">models.py Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#module-propertyinfo.controller">controller.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#module-propertyinfo.models">models.py Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#urls-py-methods">urls.py Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="propertyinfo.html#module-propertyinfo.views">views.py Methods</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="home.html">Home</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="home.html#urls-py-methods">urls.py Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="home.html#module-home.views">views.py Methods</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-users.controller">controller.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-users.forms">forms.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-users.models">models.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-users.tokens">tokens.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#urls-py-methods">urls.py Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-users.views">views.py Methods</a></li>
 </ul>
 </li>
 </ul>
@@ -124,100 +123,10 @@
             
   <div class="section" id="users">
 <h1>Users<a class="headerlink" href="#users" title="Permalink to this headline">¶</a></h1>
-<p>This page seeks to explain the methods and classes involved in the Users sub-application of the <em>propertea</em> Application.</p>
-<div class="admonition danger">
-<p class="admonition-title">Danger</p>
-<p>Please note that the uses of these classes and functions are heavily dependent on the provision of the database that stores the user data and other related information.</p>
-</div>
-<div class="section" id="module-users.models">
-<span id="models-py-methods"></span><h2>models.py Methods<a class="headerlink" href="#module-users.models" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="users.models.FavouriteProperty">
-<em class="property">class </em><code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">FavouriteProperty</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.FavouriteProperty" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class seeks to save the User’s favourite properties in a one-to-one relationship.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> – The User object of the selected user.</p></li>
-<li><p><strong>name</strong> – The Name of the property saved.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="exception">
-<dt id="users.models.FavouriteProperty.DoesNotExist">
-<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#users.models.FavouriteProperty.DoesNotExist" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="exception">
-<dt id="users.models.FavouriteProperty.MultipleObjectsReturned">
-<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#users.models.FavouriteProperty.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="users.models.Profile">
-<em class="property">class </em><code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">Profile</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.Profile" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class seeks to create a separate class to ensure the activation is needed for account usage.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> – The User object of the selected user.</p></li>
-<li><p><strong>signup_confirmation</strong> – A boolean value of the activation status of the user.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="exception">
-<dt id="users.models.Profile.DoesNotExist">
-<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#users.models.Profile.DoesNotExist" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="exception">
-<dt id="users.models.Profile.MultipleObjectsReturned">
-<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#users.models.Profile.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="users.models.create_user_profile">
-<code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">create_user_profile</code><span class="sig-paren">(</span><em class="sig-param">sender</em>, <em class="sig-param">instance</em>, <em class="sig-param">created</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.create_user_profile" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method seeks to assist in the creation of new user profiles.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="users.models.save_user_profile">
-<code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">save_user_profile</code><span class="sig-paren">(</span><em class="sig-param">sender</em>, <em class="sig-param">instance</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.save_user_profile" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method seeks to assist in the saving of user profiles.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>sender</strong> – The user in charge of the request.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="module-users.forms">
-<span id="forms-py-methods"></span><h2>forms.py Methods<a class="headerlink" href="#module-users.forms" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="users.forms.SignUpForm">
-<em class="property">class </em><code class="sig-prename descclassname">users.forms.</code><code class="sig-name descname">SignUpForm</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.forms.SignUpForm" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class defines the Sign-Up form for Users.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>first_name</strong> – The first name of the user.</p></li>
-<li><p><strong>last_name</strong> – The last name of the user.</p></li>
-<li><p><strong>email</strong> – The email of the user.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+<p>This page seeks to explain the methods and classes involved in the Users sub-application of the <em>Propertea</em> application.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Please note that we have separated view logic into controller and views in order to comply with the MVC framework.</p>
-</div>
+<p>Please note that the uses of these classes and functions are heavily dependent on the provision of the database that stores the user data and other related information.</p>
 </div>
 <div class="section" id="module-users.controller">
 <span id="controller-py-methods"></span><h2>controller.py Methods<a class="headerlink" href="#module-users.controller" title="Permalink to this headline">¶</a></h2>
@@ -296,6 +205,96 @@
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="module-users.forms">
+<span id="forms-py-methods"></span><h2>forms.py Methods<a class="headerlink" href="#module-users.forms" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="users.forms.SignUpForm">
+<em class="property">class </em><code class="sig-prename descclassname">users.forms.</code><code class="sig-name descname">SignUpForm</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.forms.SignUpForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class defines the Sign-Up form for Users.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first_name</strong> – The first name of the user.</p></li>
+<li><p><strong>last_name</strong> – The last name of the user.</p></li>
+<li><p><strong>email</strong> – The email of the user.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that we have separated view logic into controller and views in order to comply with the MVC framework.</p>
+</div>
+</div>
+<div class="section" id="module-users.models">
+<span id="models-py-methods"></span><h2>models.py Methods<a class="headerlink" href="#module-users.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="users.models.FavouriteProperty">
+<em class="property">class </em><code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">FavouriteProperty</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.FavouriteProperty" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class seeks to save the User’s favourite properties in a one-to-one relationship.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> – The User object of the selected user.</p></li>
+<li><p><strong>name</strong> – The Name of the property saved.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="exception">
+<dt id="users.models.FavouriteProperty.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#users.models.FavouriteProperty.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="users.models.FavouriteProperty.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#users.models.FavouriteProperty.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="users.models.Profile">
+<em class="property">class </em><code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">Profile</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.Profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class seeks to create a separate class to ensure the activation is needed for account usage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> – The User object of the selected user.</p></li>
+<li><p><strong>signup_confirmation</strong> – A boolean value of the activation status of the user.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="exception">
+<dt id="users.models.Profile.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#users.models.Profile.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="users.models.Profile.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#users.models.Profile.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="users.models.create_user_profile">
+<code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">create_user_profile</code><span class="sig-paren">(</span><em class="sig-param">sender</em>, <em class="sig-param">instance</em>, <em class="sig-param">created</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.create_user_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method seeks to assist in the creation of new user profiles.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="users.models.save_user_profile">
+<code class="sig-prename descclassname">users.models.</code><code class="sig-name descname">save_user_profile</code><span class="sig-paren">(</span><em class="sig-param">sender</em>, <em class="sig-param">instance</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#users.models.save_user_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method seeks to assist in the saving of user profiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sender</strong> – The user in charge of the request.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -446,10 +445,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="searchapplication.html" class="btn btn-neutral float-right" title="Search">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="index.html" class="btn btn-neutral" title="Welcome to propertea’s documentation!"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="propertyinfo.html" class="btn btn-neutral" title="PropertyInfo"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

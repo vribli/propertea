@@ -8,7 +8,7 @@ Welcome to Propertea's documentation!
 .. note::
    This project was created by Alice, Johnson, Josephine, Tanay and Vincent as part of our CZ2006 - Software Engineering Project. We're proud to bring you our first foray into web programming with Python!
 
-   This project brings you a comprehensive view of any residential property in Singapore, by bringing together data from various government sources and private sources.
+   This project is a one-stop hub for property information in Singapore, by bringing together data from various government sources and private sources, in line with the Smart Nation Initiative.
 
 Our project consists of these sub-applications:
 

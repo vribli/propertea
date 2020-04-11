@@ -31,7 +31,7 @@ class SearchController:
         """
         This function implements logic for the 'Search Results' page.
 
-        :return: Calls the relavant functions based on user request and return the filtered result.
+        :return: Calls the relevant functions based on user request and return the filtered result.
         """
         if (self.keyword == 'nil') & (self.district != 'nil'):
             result = self.searchByDistrict()

@@ -168,7 +168,7 @@ class MRTLRTData(TransportData):
 
 class BusData(TransportData):
     """
-    This class aims to facilitate storing and retrieving Bus Stop data, while being an extention of Transport Data.
+    This class aims to facilitate storing and retrieving Bus Stop data, while being an extension of Transport Data.
     """
     def __init__(self, X, Y):
         directory = "propertea/static/Bus_Stop_Data.csv"
@@ -180,9 +180,9 @@ class BusData(TransportData):
 
     def table(self):
         """
-        This function aims to create the tables for the first and last bus services arrving at the selected bus stop.
+        This function aims to create the tables for the first and last bus services arriving at the selected bus stop.
 
-        :return: A plot of the table of the first and last bus services arrving at the selected bus stop.
+        :return: A plot of the table of the first and last bus services arriving at the selected bus stop.
         """
         routeData = pd.DataFrame(pd.read_csv(self.routeDir))
         tableData = routeData[routeData['BUSSTOPCODE'] == str(self.number)]
@@ -244,7 +244,7 @@ class BusData(TransportData):
 
 class PropertyImages:
     """
-    This class aims to facilitate storing and retrieving property image information.
+    This class aims to facilitate storing and retrieving property images.
 
     :ivar name: Google Image Search Keyword
     """

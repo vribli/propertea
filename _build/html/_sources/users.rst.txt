@@ -1,25 +1,10 @@
 Users
 ====================
-This page seeks to explain the methods and classes involved in the Users sub-application of the *propertea* Application.
-
-.. danger::
-    Please note that the uses of these classes and functions are heavily dependent on the provision of the database that stores the user data and other related information.
-
-models.py Methods
----------------------
-
-.. automodule:: users.models
-    :members:
-
-
-forms.py Methods
-----------------------
-
-.. automodule:: users.forms
-    :members:
+This page seeks to explain the methods and classes involved in the Users sub-application of the *Propertea* application.
 
 .. important::
-    Please note that we have separated view logic into controller and views in order to comply with the MVC framework.
+    Please note that the uses of these classes and functions are heavily dependent on the provision of the database that stores the user data and other related information.
+
 
 controller.py Methods
 ---------------------------
@@ -28,6 +13,20 @@ controller.py Methods
     :members:
     :undoc-members:
 
+forms.py Methods
+----------------------
+
+.. automodule:: users.forms
+    :members:
+
+.. note::
+    Please note that we have separated view logic into controller and views in order to comply with the MVC framework.
+
+models.py Methods
+---------------------
+
+.. automodule:: users.models
+    :members:
 
 tokens.py Methods
 -------------------------
