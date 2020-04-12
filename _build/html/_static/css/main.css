@@ -7,7 +7,7 @@
 
 @import url("theme.css");
 
-@import url(http://fonts.googleapis.com/css?family=Quicksand:400,700);
+@import url(https://fonts.googleapis.com/css?family=Karla&display=swap);
 
 @font-face {
 	font-family: 'logo';
@@ -92,7 +92,7 @@ footer .nnlogo {
 .wy-nav-content .rst-content .document [id^="module"] h2 {
 	border-left:3px solid #090f2e;
 	padding:4px;
-	font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
+	font-family: Karla;
 	background:#dadada;
 }
 
@@ -126,7 +126,7 @@ code, .rst-content tt { border:none; background:none; }
 .wy-nav-top i { padding-top:8px; }
 
 h1, h2, h3, h4, h5, h6, legend {
-	font-family: "Quicksand","Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+	font-family: Karla;
 }
 
 p { font-size:18px; }
